@@ -9,7 +9,7 @@ from PyQt5.QtGui import *
 import openpyxl as op
 
 
-form_class = uic.loadUiType("exam.ui")[0]
+form_class = uic.loadUiType("exam_2.ui")[0]
 
 
 #해상도 고정 함수 추가
@@ -54,7 +54,7 @@ class MyWindow(QMainWindow, form_class):
         self.pushButton_5.clicked.connect(self.trade_start)
         self.pushButton_2.clicked.connect(self.delete_row)
         self.pushButton_4.clicked.connect(self.ready_trade)
-
+        self.pushButton_6.clicked.connect(self.kiwoom.get_condition_load)
 
         self.row_count = 0 #tableWidget_3 에서 행 카운트하는용
         self.window_count = 0 #tableWidget_3 화면번호 만드는용
