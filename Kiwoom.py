@@ -154,12 +154,23 @@ class Kiwoom(QAxWidget):
             except IndexError:
                 pass
             
+        condition_name = str(condition_list['name'][0])
+        nindex = str(condition_list['index'][0])
+       
+        print(condition_name)
+        print(nindex)
         
+        a = self.dynamicCall("SendCondition(QString, QString, int, int)", "0156", str(condition_name), nindex, 0)
+        if a==1:
+            print("조건검색 조회요청 성공")
+        elif a!=1:
+            print("조건검색 조회요청 실패")
         
-        
-        
-            
-                
+    #조건검색 조회 응답
+    def _on_receive_tr_condition(self, scrno, codelist, conditionname, nnext):
+        self.code_list = []
+        self.code_list.append(codelist)
+        print(self.code_list)
         
 
 ####
