@@ -42,8 +42,9 @@ class Kiwoom(QAxWidget):
         self.OnReceiveTrData.connect(self._receive_tr_data) # 트랜잭션 요청 관련 이벤트
         self.OnReceiveChejanData.connect(self._receive_chejan_data) #체결잔고 요청 이벤트
         self.OnReceiveRealData.connect(self._handler_real_data) #실시간 데이터 처리
-        self.OnReceiveTrCondition.connect(self._on_receive_tr_condition) # 조건검색 조회 응답 이벤트
+        self.OnReceiveRealCondition.connect(self._handler_real_condition) # 실시간 조건검색 조회 응답 이벤트
         self.OnReceiveConditionVer.connect(self._on_receive_condition_ver) # 로컬 사용자 조건식 저장 성공여부 응답 이벤트
+        self.OnReceiveTrCondition.connect(self._on_receive_tr_condition) #조건검색 조회응답 이벤트
         
 
     #로그인
@@ -160,7 +161,7 @@ class Kiwoom(QAxWidget):
         print(condition_name)
         print(nindex)
         
-        a = self.dynamicCall("SendCondition(QString, QString, int, int)", "0156", str(condition_name), nindex, 0)
+        a = self.dynamicCall("SendCondition(QString, QString, int, int)", "0156", str(condition_name), nindex, 1)
         if a==1:
             print("조건검색 조회요청 성공")
         elif a!=1:
@@ -170,7 +171,12 @@ class Kiwoom(QAxWidget):
     def _on_receive_tr_condition(self, scrno, codelist, conditionname, nnext):
         self.code_list = []
         self.code_list.append(codelist)
-        print(self.code_list)
+        print("실시간x:" , self.code_list)
+        
+    
+    #실시간 조건검색 응답(실시간으로 들어왔을때 전략에 들어가게끔만들기)
+    def _handler_real_condition(self, code, type, cond_name, cond_index):
+        print("실시간o: " , cond_name, code, type) 
         
 
 ####
