@@ -125,6 +125,7 @@ class MyWindow(QMainWindow, form_class):
     def present_price(self):
         price = self.kiwoom.price
         self.lineEdit_3.setText(str(price))
+        0.
      
     #주식 잔고 
     def check_balance(self):
