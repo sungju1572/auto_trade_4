@@ -157,11 +157,17 @@ class Kiwoom(QAxWidget):
             
         condition_name = str(condition_list['name'][0])
         nindex = str(condition_list['index'][0])
+        
+        
+        condition_name2 = str(condition_list['name'][1])
+        nindex2 = str(condition_list['index'][1])
        
         print(condition_name)
+        print(condition_name2)
         print(nindex)
+        print(nindex2)
         
-        a = self.dynamicCall("SendCondition(QString, QString, int, int)", "0156", str(condition_name), nindex, 1)
+        a = self.dynamicCall("SendCondition(QString, QString, int, int)", "0156", str(condition_name), nindex, 0)
         if a==1:
             print("조건검색 조회요청 성공")
         elif a!=1:
@@ -170,19 +176,42 @@ class Kiwoom(QAxWidget):
     #조건검색 조회 응답
     def _on_receive_tr_condition(self, scrno, codelist, conditionname, nnext):
         self.code_list = []
-        self.code_list.append(codelist)
+        codelist_split = codelist.split(';')
+        for i in codelist_split:
+            self.code_list.append(i)
+            self.ui.trade_start(i)
+            
         print("실시간x:" , self.code_list)
+
         
+        '''
+        for i in self.code_list:
+            if i != '':
+                name = self.get_master_code_name(i)
+                self.dic[name + '_ticker'] = i
+                self.dic[name + '_status'] = '초기상태'
+                self.dic[name + '_buy_count'] = 0
+                self.dic[name + '_sell_price'] = 0
+                self.dic[name + '_rebuy_count'] = 0
+                
+                
+        print(self.dic)
+        '''
     
     #실시간 조건검색 응답(실시간으로 들어왔을때 전략에 들어가게끔만들기)
     def _handler_real_condition(self, code, type, cond_name, cond_index):
-        print("실시간o: " , cond_name, code, type) 
-        
+        self.ui.textEdit.append("실시간o: " + str(cond_name) +  str(code) + str(type)) 
+        print("실시간o: " + str(cond_name) +  str(code) + str(type)) 
+        name = self.get_master_code_name(code)
+        #self.dic[name + '_ticker'] = code
+        print("실시간 dic : ", self.dic)
+        self.ui.trade_start(code)
 
 ####
     #실시간 조회관련 핸들
     def _handler_real_data(self, trcode, real_type, data):
         
+    
         # 체결 시간 
         if real_type == "주식체결":
             time =  self.get_comm_real_data(trcode, 20)
@@ -209,10 +238,10 @@ class Kiwoom(QAxWidget):
         start_price = self.get_comm_real_data(trcode, 16)
 
        
-        
+        """
         for i in range(len(self.ui.stock_list)):
             if trcode == self.ui.stock_list[i][4]:
-                print(i, "번째 :", self.ui.stock_list[i])
+                #print(i, "번째 :", self.ui.stock_list[i])
                 
                 if self.ui.stock_list[i][6] == "3개":
                     start_price = self.get_comm_real_data(trcode, 16)
@@ -245,7 +274,7 @@ class Kiwoom(QAxWidget):
                         self.dic[self.ui.stock_list[i][0] + '_buy_total'] = buy_total_price
                         self.dic[self.ui.stock_list[i][0] + '_compare'] = compare
                         
-                        print("3개 list", self.dic)
+                        #print("3개 list", self.dic)
                         
                         
                         self.strategy(name, time)
@@ -284,11 +313,11 @@ class Kiwoom(QAxWidget):
                         self.dic[self.ui.stock_list[i][0] + '_compare'] = compare
                         
                       
-                        print("2개 list", self.dic)
+                        #print("2개 list", self.dic)
 
                         self.strategy_2(name, time)
                        
-        
+        """
       
 
     #실시간 데이터 가져오기
@@ -472,7 +501,7 @@ class Kiwoom(QAxWidget):
         
         list_1 = [k for k in self.dic.keys() if name in k ]
         
-        print(list_1)
+        #print(list_1)
         
         list_1[list_1.index(name+'_status')]
         
@@ -1101,7 +1130,7 @@ class Kiwoom(QAxWidget):
         
         list_1 = [k for k in self.dic.keys() if name in k ]
         
-        print(list_1)
+        #print(list_1)
         
 
         
