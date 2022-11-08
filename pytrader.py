@@ -51,7 +51,7 @@ class MyWindow(QMainWindow, form_class):
         self.lineEdit.textChanged.connect(self.code_changed)
         self.pushButton.clicked.connect(self.check_balance)
         self.pushButton_3.clicked.connect(self.check_stock)
-        self.pushButton_5.clicked.connect(self.trade_start)
+        self.pushButton_5.clicked.connect(self.kiwoom.get_condition_load)
         self.pushButton_2.clicked.connect(self.delete_row)
         self.pushButton_4.clicked.connect(self.ready_trade)
         self.pushButton_6.clicked.connect(self.kiwoom.get_condition_load)
@@ -65,7 +65,7 @@ class MyWindow(QMainWindow, form_class):
         
         self.pushButton_3.setDisabled(True)
         self.pushButton_4.setDisabled(True)
-        self.pushButton_5.setDisabled(True)
+        
         self.fileSave.setDisabled(True)
         
         #엑셀 불러오는 버튼
@@ -391,52 +391,54 @@ class MyWindow(QMainWindow, form_class):
     
     
     
-    def ready_trade(self):
+    def ready_trade(self, ticker):
+        
+        name = self.kiwoom.get_master_code_name(ticker)
+        
         self.account_number = self.comboBox.currentText()
-        self.stock_list = self.get_label()
         
-        for i in range(len(self.stock_list)):
-            self.kiwoom.dic[self.stock_list[i][0] + '_status'] = '초기상태' 
-            self.kiwoom.dic[self.stock_list[i][0] + '_rebuy'] = 1  
-            self.kiwoom.dic[self.stock_list[i][0] + '_initial'] = 0 
-            self.kiwoom.dic[self.stock_list[i][0] + '_buy_count'] = 0 
-            self.kiwoom.dic[self.stock_list[i][0] + '_sell_price'] = 0 
-            self.kiwoom.dic[self.stock_list[i][0] + '_rebuy_count'] = 0
-            self.kiwoom.dic[self.stock_list[i][0] + '_buy_line'] = ""
-            self.kiwoom.dic[self.stock_list[i][0] + '_line_status'] = ""
+        
+        self.kiwoom.dic[name + '_status'] = '초기상태' 
+        self.kiwoom.dic[name + '_rebuy'] = 1  
+        self.kiwoom.dic[name + '_initial'] = 0 
+        self.kiwoom.dic[name + '_buy_count'] = 0 
+        self.kiwoom.dic[name + '_sell_price'] = 0 
+        self.kiwoom.dic[name + '_rebuy_count'] = 0
+        self.kiwoom.dic[name + '_buy_line'] = ""
+        self.kiwoom.dic[name + '_line_status'] = ""
             
             
-            """
-            self.get_hoga(self.stock_list[i][4])
-            self.kiwoom.dic[self.stock_list[i][0] + '_hoga'] = self.kiwoom.hoga
-            time.sleep(0.5)
-            """
+        """
+        self.get_hoga(self.stock_list[i][4])
+        self.kiwoom.dic[name + '_hoga'] = self.kiwoom.hoga
+        time.sleep(0.5)
+        """
             
-            self.get_last_close(self.stock_list[i][4])
-            self.kiwoom.dic[self.stock_list[i][0] + '_last_close'] = self.kiwoom.last_close 
-            time.sleep(0.5)
+        self.get_last_close(ticker)
+        self.kiwoom.dic[name + '_last_close'] = self.kiwoom.last_close 
+        #time.sleep(0.5)
 
             
-            #매도조건 상태 2가지
-            self.kiwoom.dic[self.stock_list[i][0] + '_sell_status1'] = '초기상태'
-            self.kiwoom.dic[self.stock_list[i][0] + '_sell_status2'] = '초기상태'
+        #매도조건 상태 2가지
+        self.kiwoom.dic[name + '_sell_status1'] = '초기상태'
+        self.kiwoom.dic[name + '_sell_status2'] = '초기상태'
             
-            #재매수시 비율
-            self.kiwoom.dic[self.stock_list[i][0] + '_sec_percent'] = 0
+        #재매수시 비율
+        self.kiwoom.dic[name + '_sec_percent'] = 0
             
-            #각 시점 최고가
-            self.kiwoom.dic[self.stock_list[i][0] + '_high_price'] = 0 
+        #각 시점 최고가
+        self.kiwoom.dic[name + '_high_price'] = 0 
         
         
-            #self.plainTextEdit.appendPlainText("거래준비완료 | 종목 :" + self.stock_list[i][0] )
-            self.textEdit.append("거래준비완료 | 종목 :" + self.stock_list[i][0])
+        #self.plainTextEdit.appendPlainText("거래준비완료 | 종목 :" + name )
+        self.textEdit.append("거래준비완료 | 종목 :" + name)
             
-            #2%도달 여부(1매수용) (0도달x / 1 도달o )
-            self.kiwoom.dic[self.stock_list[i][0] + '_reach_two_per'] = 0 
+        #2%도달 여부(1매수용) (0도달x / 1 도달o )
+        self.kiwoom.dic[name + '_reach_two_per'] = 0 
 
             
-            #2%도달 여부(2매수용) (0도달x / 1 도달o )
-            self.kiwoom.dic[self.stock_list[i][0] + '_reach_two_per2'] = 0 
+        #2%도달 여부(2매수용) (0도달x / 1 도달o )
+        self.kiwoom.dic[name + '_reach_two_per2'] = 0 
 
         self.pushButton_5.setEnabled(True)
 
@@ -445,17 +447,22 @@ class MyWindow(QMainWindow, form_class):
 
 
     #거래시작 버튼눌렀을때 주시 종목별 구독
-    def trade_start(self):
+    def trade_start(self,ticker):
         self.account_number = self.comboBox.currentText()
-        self.stock_list = self.get_label()
+
+        self.ready_trade(ticker)
         
+        print(self.kiwoom.dic)
         #self.plainTextEdit.appendPlainText("-------------거래 시작----------------")
-        self.textEdit.append("-------------거래 시작----------------")
+        #self.textEdit.append("-------------거래 시작----------------")
         
+        self.kiwoom.SetRealReg(1000, ticker, "20;10", "0")
+        #self.stock_ticker_list.append(self.stock_list[i][4]) 
+        """
         for i in range(len(self.stock_list)):
             
             if i ==0:
-                self.kiwoom.SetRealReg(self.stock_list[i][7], self.stock_list[i][4], "20;10", "0")
+                self.kiwoom.SetRealReg(1000, ticker, "20;10", "0")
                 self.stock_ticker_list.append(self.stock_list[i][4]) 
                 print(self.stock_list[i][7])
             else: 
@@ -463,7 +470,7 @@ class MyWindow(QMainWindow, form_class):
                 self.stock_ticker_list.append(self.stock_list[i][4])
                 print(self.stock_list[i][7])
 
-
+        """
 
 
 
