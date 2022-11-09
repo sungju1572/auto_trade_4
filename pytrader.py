@@ -60,7 +60,7 @@ class MyWindow(QMainWindow, form_class):
         self.window_count = 0 #tableWidget_3 화면번호 만드는용
         self.stock_list = [] #주시종목 담은 리스트
         self.stock_ticker_list = [] #주시종목 티커 리스트 
-        self.account_number ="" #계좌
+        self.account_number = self.comboBox.currentText() #계좌
         self.take_profit = 0 #익절기준
         
         self.pushButton_3.setDisabled(True)
@@ -72,7 +72,11 @@ class MyWindow(QMainWindow, form_class):
         self.fileSelect.clicked.connect(self.selectFunction)
         #엑셀 파일 주시종목 저장하는 버튼
         self.fileSave.clicked.connect(self.fileSaveFunction)
-
+        
+        
+        
+        self.gudoc_status = 0
+        self.ticker_list = []
         
         
         
@@ -398,26 +402,17 @@ class MyWindow(QMainWindow, form_class):
         self.account_number = self.comboBox.currentText()
         
         
+        self.kiwoom.dic[name + '_name'] = name
+        self.kiwoom.dic[name + '_ticker'] = ticker
         self.kiwoom.dic[name + '_status'] = '초기상태' 
         self.kiwoom.dic[name + '_rebuy'] = 1  
         self.kiwoom.dic[name + '_initial'] = 0 
         self.kiwoom.dic[name + '_buy_count'] = 0 
         self.kiwoom.dic[name + '_sell_price'] = 0 
         self.kiwoom.dic[name + '_rebuy_count'] = 0
-        self.kiwoom.dic[name + '_buy_line'] = ""
-        self.kiwoom.dic[name + '_line_status'] = ""
+        self.kiwoom.dic[name + '_buy_total'] = int(self.lineEdit_9.text())
+        
             
-            
-        """
-        self.get_hoga(self.stock_list[i][4])
-        self.kiwoom.dic[name + '_hoga'] = self.kiwoom.hoga
-        time.sleep(0.5)
-        """
-            
-        self.get_last_close(ticker)
-        self.kiwoom.dic[name + '_last_close'] = self.kiwoom.last_close 
-        #time.sleep(0.5)
-
             
         #매도조건 상태 2가지
         self.kiwoom.dic[name + '_sell_status1'] = '초기상태'
@@ -427,7 +422,7 @@ class MyWindow(QMainWindow, form_class):
         self.kiwoom.dic[name + '_sec_percent'] = 0
             
         #각 시점 최고가
-        self.kiwoom.dic[name + '_high_price'] = 0 
+        self.kiwoom.dic[name + '_init_under'] = 0 
         
         
         #self.plainTextEdit.appendPlainText("거래준비완료 | 종목 :" + name )
@@ -440,9 +435,11 @@ class MyWindow(QMainWindow, form_class):
         #2%도달 여부(2매수용) (0도달x / 1 도달o )
         self.kiwoom.dic[name + '_reach_two_per2'] = 0 
 
-        self.pushButton_5.setEnabled(True)
+        #self.pushButton_5.setEnabled(True)
 
-        print(self.kiwoom.dic)
+        
+
+        print("ready_trade")
     
 
 
@@ -450,28 +447,27 @@ class MyWindow(QMainWindow, form_class):
     def trade_start(self,ticker):
         self.account_number = self.comboBox.currentText()
 
-        self.ready_trade(ticker)
+        if ticker not in self.ticker_list:
+            self.ticker_list.append(ticker)
+
+        if ticker not in self.kiwoom.dic.values() and ticker != "":
+            self.ready_trade(ticker)
         
         print(self.kiwoom.dic)
         #self.plainTextEdit.appendPlainText("-------------거래 시작----------------")
-        #self.textEdit.append("-------------거래 시작----------------")
+        self.textEdit.append("-------------종목 검색 시작----------------")
         
-        self.kiwoom.SetRealReg(1000, ticker, "20;10", "0")
-        #self.stock_ticker_list.append(self.stock_list[i][4]) 
-        """
-        for i in range(len(self.stock_list)):
+        if self.gudoc_status == 0:
+            self.kiwoom.SetRealReg(1000 +self.window_count , ticker, "20;10", "0")
+            self.window_count += 1
+            self.gudoc_status = 1
+            print('구독성공')
+        elif self.gudoc_status != 0 :
+            self.kiwoom.SetRealReg(1000 +self.window_count , ticker, "20;10", "1")
+            self.window_count += 1
+            print('구독성공2')
             
-            if i ==0:
-                self.kiwoom.SetRealReg(1000, ticker, "20;10", "0")
-                self.stock_ticker_list.append(self.stock_list[i][4]) 
-                print(self.stock_list[i][7])
-            else: 
-                self.kiwoom.SetRealReg(self.stock_list[i][7], self.stock_list[i][4], "20;10", "1")
-                self.stock_ticker_list.append(self.stock_list[i][4])
-                print(self.stock_list[i][7])
-
-        """
-
+        #self.stock_ticker_list.append(self.stock_list[i][4]) 
 
 
     #익절기준 변경점
