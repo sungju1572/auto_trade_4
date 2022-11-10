@@ -48,13 +48,10 @@ class MyWindow(QMainWindow, form_class):
         
         
         self.comboBox.addItems(accounts_list) #콤보박스 1에 계좌목록 추가
-        self.lineEdit.textChanged.connect(self.code_changed)
+        #self.lineEdit.textChanged.connect(self.code_changed)
         self.pushButton.clicked.connect(self.check_balance)
-        self.pushButton_3.clicked.connect(self.check_stock)
+
         self.pushButton_5.clicked.connect(self.kiwoom.get_condition_load)
-        self.pushButton_2.clicked.connect(self.delete_row)
-        self.pushButton_4.clicked.connect(self.ready_trade)
-        self.pushButton_6.clicked.connect(self.kiwoom.get_condition_load)
 
         self.row_count = 0 #tableWidget_3 에서 행 카운트하는용
         self.window_count = 0 #tableWidget_3 화면번호 만드는용
@@ -63,16 +60,9 @@ class MyWindow(QMainWindow, form_class):
         self.account_number = self.comboBox.currentText() #계좌
         self.take_profit = 0 #익절기준
         
-        self.pushButton_3.setDisabled(True)
-        self.pushButton_4.setDisabled(True)
         
-        self.fileSave.setDisabled(True)
-        
-        #엑셀 불러오는 버튼
-        self.fileSelect.clicked.connect(self.selectFunction)
-        #엑셀 파일 주시종목 저장하는 버튼
-        self.fileSave.clicked.connect(self.fileSaveFunction)
-        
+        self.pushButton_5.setDisabled(True)
+        self.lineEdit_9.textChanged.connect(self.price_change)
         
         
         self.gudoc_status = 0
@@ -83,7 +73,8 @@ class MyWindow(QMainWindow, form_class):
         #self.lineEdit_8.textChanged.connect(self.profit_percent)# 익절 기준
         
     
-
+    def price_change(self):
+        self.pushButton_5.setEnabled(True)
 
     #종목 ui에 띄우기
     def code_changed(self):
