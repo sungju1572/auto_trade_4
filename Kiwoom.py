@@ -1097,6 +1097,7 @@ class Kiwoom(QAxWidget):
             self.ui.textEdit.append("거래종료 | 종목 : " + name )
             self.ui.textEdit.append(" ")
             self.dic[list_1[list_1.index(name+'_status')]] = ""
+
             
 
   
