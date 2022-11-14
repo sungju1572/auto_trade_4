@@ -769,21 +769,7 @@ class Kiwoom(QAxWidget):
                         self.ui.textEdit.append("매도가격 :" + format_price + " 원 " + str(compare)   + " 매도수량 : 50% " + str(buy_count) + "주")
                         self.ui.textEdit.append(" ")
                         
-                    #다시 3% 찍으면 50% 매도
-                    if compare >= sec_percent + 3 : #기준봉매매 라인의 합이 3% 되었을 때)
-                        self.send_order('send_order', "0101", self.ui.account_number, 2, trcode, buy_count,  0 ,"03", "" )
-                        self.dic[list_1[list_1.index(name+'_sell_price')]] +=  buy_count *price  #남은 잔고 
-                        self.dic[list_1[list_1.index(name+'_sell_status1')]] = "초기상태"
-                        self.dic[list_1[list_1.index(name+'_status')]] = "거래끝"
-                        self.ui.textEdit.setFontPointSize(13)
-                        self.ui.textEdit.setTextColor(QColor(255,102,255))
-                        self.ui.textEdit.append("매도 ▶ : 3%익절구간 도달")   
-                        self.ui.textEdit.setFontPointSize(9)
-                        self.ui.textEdit.setTextColor(QColor(0,0,0))
-                        self.ui.textEdit.append("->시간 : " + str(time) + " | " + "1매도 | "+ name +" | 3%익절구간 도달 ")
-                        self.ui.textEdit.append("매도가격 :" + format_price + " 원 " + str( compare )   + " 매도수량 : 50% " + str(buy_count) + "주")
-                        self.ui.textEdit.append(" ")
-   
+                   
                         
                 elif sell_status_1 == "50익절상태2":
                     if price <= initial - 0.008*initial :
@@ -800,20 +786,6 @@ class Kiwoom(QAxWidget):
                         self.ui.textEdit.append("매도가격 :" + format_price + " 원 " + str(compare)   + " 매도수량 : 50% " + str(buy_count) + "주")
                         self.ui.textEdit.append(" ")
                         
-                    #다시 3% 찍으면 50% 매도
-                    if compare >= sec_percent + 3 : #기준봉매매 라인의 합이 3% 되었을 때)
-                        self.send_order('send_order', "0101", self.ui.account_number, 2, trcode, buy_count,  0 ,"03", "" )
-                        self.dic[list_1[list_1.index(name+'_sell_price')]] +=  buy_count *price  #남은 잔고 
-                        self.dic[list_1[list_1.index(name+'_sell_status1')]] = "초기상태"
-                        self.dic[list_1[list_1.index(name+'_status')]] = "거래끝"
-                        self.ui.textEdit.setFontPointSize(13)
-                        self.ui.textEdit.setTextColor(QColor(255,102,255))
-                        self.ui.textEdit.append("매도 ▶ : 3%익절구간 도달")   
-                        self.ui.textEdit.setFontPointSize(9)
-                        self.ui.textEdit.setTextColor(QColor(0,0,0))
-                        self.ui.textEdit.append("->시간 : " + str(time) + " | " + "1매도 | "+ name +" | 3%익절구간 도달 ")
-                        self.ui.textEdit.append("매도가격 :" + format_price + " 원 " + str( compare )   + " 매도수량 : 50% " + str(buy_count) + "주")
-                        self.ui.textEdit.append(" ")
 
                     
         
@@ -1040,21 +1012,7 @@ class Kiwoom(QAxWidget):
                         self.ui.textEdit.append("->시간 : " + str(time) + " | " + "1매도 | "+ name + " | 매수가 밑 1.2%지점 도달")
                         self.ui.textEdit.append("매도가격 :" + format_price + " 원 " + str(compare)   + " 매도수량 : 50% " + str(rebuy_count) + "주")
                         self.ui.textEdit.append(" ")
-                        
-                    #다시 3% 찍으면 50% 매도
-                    if compare >= sec_percent + 3 : #기준봉매매 라인의 합이 3% 되었을 때)
-                        self.send_order('send_order', "0101", self.ui.account_number, 2, trcode, rebuy_count,  0 ,"03", "" )
-                        self.dic[list_1[list_1.index(name+'_sell_price')]] +=  rebuy_count *price  #남은 잔고 
-                        self.dic[list_1[list_1.index(name+'_sell_status1')]] = "초기상태"
-                        self.dic[list_1[list_1.index(name+'_status')]] = "거래끝"
-                        self.ui.textEdit.setFontPointSize(13)
-                        self.ui.textEdit.setTextColor(QColor(255,102,255))
-                        self.ui.textEdit.append("매도 ▶ : 3%익절구간 도달")   
-                        self.ui.textEdit.setFontPointSize(9)
-                        self.ui.textEdit.setTextColor(QColor(0,0,0))
-                        self.ui.textEdit.append("->시간 : " + str(time) + " | " + "1매도 | "+ name +" | 3%익절구간 도달 ")
-                        self.ui.textEdit.append("매도가격 :" + format_price + " 원 " + str( compare )   + " 매도수량 : 50% " + str(rebuy_count) + "주")
-                        self.ui.textEdit.append(" ")
+
    
                         
                 elif sell_status_1 == "50익절상태2":
@@ -1072,22 +1030,7 @@ class Kiwoom(QAxWidget):
                         self.ui.textEdit.append("매도가격 :" + format_price + " 원 " + str(compare)   + " 매도수량 : 50% " + str(rebuy_count) + "주")
                         self.ui.textEdit.append(" ")
                         
-                    #다시 3% 찍으면 50% 매도
-                    if compare >= sec_percent + 3 : #기준봉매매 라인의 합이 3% 되었을 때)
-                        self.send_order('send_order', "0101", self.ui.account_number, 2, trcode, rebuy_count,  0 ,"03", "" )
-                        self.dic[list_1[list_1.index(name+'_sell_price')]] +=  rebuy_count *price  #남은 잔고 
-                        self.dic[list_1[list_1.index(name+'_sell_status1')]] = "초기상태"
-                        self.dic[list_1[list_1.index(name+'_status')]] = "거래끝"
-                        self.ui.textEdit.setFontPointSize(13)
-                        self.ui.textEdit.setTextColor(QColor(255,102,255))
-                        self.ui.textEdit.append("매도 ▶ : 3%익절구간 도달")   
-                        self.ui.textEdit.setFontPointSize(9)
-                        self.ui.textEdit.setTextColor(QColor(0,0,0))
-                        self.ui.textEdit.append("->시간 : " + str(time) + " | " + "1매도 | "+ name +" | 3%익절구간 도달 ")
-                        self.ui.textEdit.append("매도가격 :" + format_price + " 원 " + str( compare )   + " 매도수량 : 50% " + str(rebuy_count) + "주")
-                        self.ui.textEdit.append(" ")
 
-                    
         
 
 
