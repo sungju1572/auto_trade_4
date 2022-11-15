@@ -147,6 +147,7 @@ class Kiwoom(QAxWidget):
         temporary_condition_list = self.dynamicCall("GetConditionNameList()").split(";")
         print(temporary_condition_list)
     
+        
         for data in temporary_condition_list :
             try:
                 a = data.split("^")
@@ -154,10 +155,17 @@ class Kiwoom(QAxWidget):
                 condition_list['name'].append(str(a[1]))
             except IndexError:
                 pass
-            
+        
+        self.ui.comboBox_2.addItems(condition_list['name'])
+        
+        self.ui.pushButton_2.setEnabled(True)
+        self.ui.pushButton_3.setEnabled(True)
+        
         condition_name = str(condition_list['name'][0])
         nindex = str(condition_list['index'][0])
         
+        self.ui.pushButton_2.clicked.connect(self.ui.check_port)
+        self.ui.pushButton_3.clicked.connect(self.ui.delete_row)
         
         condition_name2 = str(condition_list['name'][1])
         nindex2 = str(condition_list['index'][1])
@@ -184,20 +192,6 @@ class Kiwoom(QAxWidget):
         print("실시간x:" , self.code_list)
         
 
-        
-        '''
-        for i in self.code_list:
-            if i != '':
-                name = self.get_master_code_name(i)
-                self.dic[name + '_ticker'] = i
-                self.dic[name + '_status'] = '초기상태'
-                self.dic[name + '_buy_count'] = 0
-                self.dic[name + '_sell_price'] = 0
-                self.dic[name + '_rebuy_count'] = 0
-                
-                
-        print(self.dic)
-        '''
     
     #실시간 조건검색 응답(실시간으로 들어왔을때 전략에 들어가게끔만들기)
     def _handler_real_condition(self, code, type, cond_name, cond_index):
@@ -703,7 +697,7 @@ class Kiwoom(QAxWidget):
                         self.ui.textEdit.append(" ")
                         
                     
-                    if compare >= sec_percent + 3 : #기준봉매매 라인의 합이 3% 되었을 때)
+                    if compare >= sec_percent + 3 and reach_two_per == 2 : #기준봉매매 라인의 합이 3% 되었을 때)
                         per_count7 = int(round(buy_count * 0.5, 0))
                         self.send_order('send_order', "0101", self.ui.account_number, 2, trcode, per_count7,  0 ,"03", "" )
                         self.dic[list_1[list_1.index(name+'_buy_count')]] = buy_count - per_count7 #남은 수량
@@ -760,6 +754,7 @@ class Kiwoom(QAxWidget):
                         self.dic[list_1[list_1.index(name+'_status')]] = "재매수대기상태"
                         self.dic[list_1[list_1.index(name+'_sell_price')]] = price * buy_count
                         self.dic[list_1[list_1.index(name+'_sell_status1')]] = "초기상태"
+                        self.dic[list_1[list_1.index(name+'_reach_two_per')]] = 0
                         self.ui.textEdit.setFontPointSize(13)
                         self.ui.textEdit.setTextColor(QColor(0,0,255))
                         self.ui.textEdit.append("◀ 매도 : 매수가 밑 1.2%")
@@ -777,6 +772,7 @@ class Kiwoom(QAxWidget):
                         self.dic[list_1[list_1.index(name+'_status')]] = "재매수대기상태"
                         self.dic[list_1[list_1.index(name+'_sell_price')]] = price * buy_count
                         self.dic[list_1[list_1.index(name+'_sell_status1')]] = "초기상태"
+                        self.dic[list_1[list_1.index(name+'_reach_two_per')]] = 0
                         self.ui.textEdit.setFontPointSize(13)
                         self.ui.textEdit.setTextColor(QColor(0,0,255))
                         self.ui.textEdit.append("◀ 매도 : 매수가 밑 0.8%")
@@ -947,7 +943,7 @@ class Kiwoom(QAxWidget):
                         self.ui.textEdit.append(" ")
                         
                     
-                    if compare >= sec_percent + 3 : #기준봉매매 라인의 합이 3% 되었을 때)
+                    if compare >= sec_percent + 3 and reach_two_per2 == 2 : #기준봉매매 라인의 합이 3% 되었을 때)
                         per_count7 = int(round(rebuy_count * 0.5, 0))
                         self.send_order('send_order', "0101", self.ui.account_number, 2, trcode, per_count7,  0 ,"03", "" )
                         self.dic[list_1[list_1.index(name+'_rebuy_count')]] = rebuy_count - per_count7 #남은 수량
@@ -1001,9 +997,10 @@ class Kiwoom(QAxWidget):
                     #하단선 밑 1.8%
                     if price <= initial - 0.012*initial :
                         self.send_order('send_order', "0101", self.ui.account_number, 2, trcode, rebuy_count,  0 ,"03", "" )
-                        self.dic[list_1[list_1.index(name+'_status')]] = "재매수대기상태"
+                        self.dic[list_1[list_1.index(name+'_status')]] = "거래끝"
                         self.dic[list_1[list_1.index(name+'_sell_price')]] = price * rebuy_count
                         self.dic[list_1[list_1.index(name+'_sell_status1')]] = "초기상태"
+                        self.dic[list_1[list_1.index(name+'_reach_two_per2')]] = 0
                         self.ui.textEdit.setFontPointSize(13)
                         self.ui.textEdit.setTextColor(QColor(0,0,255))
                         self.ui.textEdit.append("◀ 매도 : 매수가 밑 1.2%")
@@ -1018,9 +1015,10 @@ class Kiwoom(QAxWidget):
                 elif sell_status_1 == "50익절상태2":
                     if price <= initial - 0.008*initial :
                         self.send_order('send_order', "0101", self.ui.account_number, 2, trcode, rebuy_count,  0 ,"03", "" )
-                        self.dic[list_1[list_1.index(name+'_status')]] = "재매수대기상태"
+                        self.dic[list_1[list_1.index(name+'_status')]] = "거래끝"
                         self.dic[list_1[list_1.index(name+'_sell_price')]] = price * rebuy_count
                         self.dic[list_1[list_1.index(name+'_sell_status1')]] = "초기상태"
+                        self.dic[list_1[list_1.index(name+'_reach_two_per2')]] = 0
                         self.ui.textEdit.setFontPointSize(13)
                         self.ui.textEdit.setTextColor(QColor(0,0,255))
                         self.ui.textEdit.append("◀ 매도 : 매수가 밑 0.8%")
