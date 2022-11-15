@@ -833,7 +833,7 @@ class Kiwoom(QAxWidget):
                     self.ui.textEdit.append("◀ 매도 : 매수가 밑 1.2%")
                     self.ui.textEdit.setFontPointSize(9)
                     self.ui.textEdit.setTextColor(QColor(0,0,0))
-                    self.ui.textEdit.append("->시간 : " + str(time) + " | " + "1매도 | "+ name + " | 매수가 밑 1.2%지점 도달")
+                    self.ui.textEdit.append("->시간 : " + str(time) + " | " + "2매도 | "+ name + " | 매수가 밑 1.2%지점 도달")
                     self.ui.textEdit.append("매도가격 :" + format_price + " 원 " + str(compare)   + " 매도수량 : 100% " + str(rebuy_count) + "주")
                     self.ui.textEdit.append(" ")
                     
@@ -852,7 +852,7 @@ class Kiwoom(QAxWidget):
                     self.ui.textEdit.append("매도 ■ : 매수가 매도(회귀)")
                     self.ui.textEdit.setFontPointSize(9)
                     self.ui.textEdit.setTextColor(QColor(0,0,0))
-                    self.ui.textEdit.append("->시간 : " + str(time) + " | " + "1매수가 매도 | "+ name + " | 매수가 매도(회귀)")
+                    self.ui.textEdit.append("->시간 : " + str(time) + " | " + "2매수가 매도 | "+ name + " | 매수가 매도(회귀)")
                     self.ui.textEdit.append("매도가격 :" + format_price + " 원 " + str(compare)   + " 매도수량 : 50% " + str(per_count50) + "주")
             
                     
@@ -870,7 +870,7 @@ class Kiwoom(QAxWidget):
                     self.ui.textEdit.append("매도 ■ : 매수가 매도(회귀)")
                     self.ui.textEdit.setFontPointSize(9)
                     self.ui.textEdit.setTextColor(QColor(0,0,0))
-                    self.ui.textEdit.append("->시간 : " + str(time) + " | " + "1매수 | "+ name + " | 매수가 매도(회귀)")
+                    self.ui.textEdit.append("->시간 : " + str(time) + " | " + "2매수 | "+ name + " | 매수가 매도(회귀)")
                     self.ui.textEdit.append("매도가격 :" + format_price + " 원 " + str(compare)   + " 매도수량 : 50% " + str(per_count50) + "주")
                     self.ui.textEdit.append(" ")
             
@@ -886,7 +886,7 @@ class Kiwoom(QAxWidget):
                     self.ui.textEdit.append("매도 ■ : 매수가 매도(회귀)")
                     self.ui.textEdit.setFontPointSize(9)
                     self.ui.textEdit.setTextColor(QColor(0,0,0))
-                    self.ui.textEdit.append("->시간 : " + str(time) + " | " + "1매수 | "+ name + " | 매수가 매도(회귀)")
+                    self.ui.textEdit.append("->시간 : " + str(time) + " | " + "2매수 | "+ name + " | 매수가 매도(회귀)")
                     self.ui.textEdit.append("매도가격 :" + format_price + " 원 " + str(compare)   + " 매도수량 : 50% " + str(rebuy_count) + "주")
                     self.ui.textEdit.append(" ")
                 
@@ -903,7 +903,7 @@ class Kiwoom(QAxWidget):
                     self.ui.textEdit.append("매도 ■ : 3% 익절구간 하락")
                     self.ui.textEdit.setFontPointSize(9)
                     self.ui.textEdit.setTextColor(QColor(0,0,0))
-                    self.ui.textEdit.append("->시간 : " + str(time) + " | " + "1매수| "+ name + " | 3% 익절구간 하락")
+                    self.ui.textEdit.append("->시간 : " + str(time) + " | " + "2매수| "+ name + " | 3% 익절구간 하락")
                     self.ui.textEdit.append("매도가격 :" + format_price + " 원 " + str(compare)   + " 매도수량 : 50% " + str(rebuy_count) + "주")
                     self.ui.textEdit.append(" ")
                     
@@ -919,7 +919,7 @@ class Kiwoom(QAxWidget):
                     self.ui.textEdit.append("매도 ▶ : 3%익절구간 도달")   
                     self.ui.textEdit.setFontPointSize(9)
                     self.ui.textEdit.setTextColor(QColor(0,0,0))
-                    self.ui.textEdit.append("->시간 : " + str(time) + " | " + "1매수 | "+ name + " | 3%익절구간 도달")
+                    self.ui.textEdit.append("->시간 : " + str(time) + " | " + "2매수 | "+ name + " | 3%익절구간 도달")
                     self.ui.textEdit.append("매도가격 :" + format_price + " 원 " + str(compare)   + " 매도수량 : 50% " + str(rebuy_count) + "주")
                     self.ui.textEdit.append(" ")
                 
@@ -959,7 +959,7 @@ class Kiwoom(QAxWidget):
                         self.ui.textEdit.append("매도 ▶ : 3%익절구간 도달")   
                         self.ui.textEdit.setFontPointSize(9)
                         self.ui.textEdit.setTextColor(QColor(0,0,0))
-                        self.ui.textEdit.append("->시간 : " + str(time) + " | " + "1매도 | "+ name +" | 3%익절구간 도달 ")
+                        self.ui.textEdit.append("->시간 : " + str(time) + " | " + "2매도 | "+ name +" | 3%익절구간 도달 ")
                         self.ui.textEdit.append("매도가격 :" + format_price + " 원 " + str( compare )   + " 매도수량 : 50% " + str(per_count7) + "주")
                         self.ui.textEdit.append(" ")
 
@@ -985,7 +985,7 @@ class Kiwoom(QAxWidget):
                         self.ui.textEdit.append("매도 ▶ : 7%익절구간 도달")  
                         self.ui.textEdit.setFontPointSize(9)
                         self.ui.textEdit.setTextColor(QColor(0,0,0))
-                        self.ui.textEdit.append("->시간 : " + str(time) + " | " + "1매도 | "+ name +" | 7%익절구간 도달  ")
+                        self.ui.textEdit.append("->시간 : " + str(time) + " | " + "2매도 | "+ name +" | 7%익절구간 도달  ")
                         self.ui.textEdit.append("매도가격 :" + format_price + " 원 " + str( compare )   + " 매도수량 : 50% " + str(rebuy_count) + "주")
                         self.ui.textEdit.append(" ")
 
@@ -1009,7 +1009,7 @@ class Kiwoom(QAxWidget):
                         self.ui.textEdit.append("◀ 매도 : 매수가 밑 1.2%")
                         self.ui.textEdit.setFontPointSize(9)
                         self.ui.textEdit.setTextColor(QColor(0,0,0))
-                        self.ui.textEdit.append("->시간 : " + str(time) + " | " + "1매도 | "+ name + " | 매수가 밑 1.2%지점 도달")
+                        self.ui.textEdit.append("->시간 : " + str(time) + " | " + "2매도 | "+ name + " | 매수가 밑 1.2%지점 도달")
                         self.ui.textEdit.append("매도가격 :" + format_price + " 원 " + str(compare)   + " 매도수량 : 50% " + str(rebuy_count) + "주")
                         self.ui.textEdit.append(" ")
 
@@ -1026,7 +1026,7 @@ class Kiwoom(QAxWidget):
                         self.ui.textEdit.append("◀ 매도 : 매수가 밑 0.8%")
                         self.ui.textEdit.setFontPointSize(9)
                         self.ui.textEdit.setTextColor(QColor(0,0,0))
-                        self.ui.textEdit.append("->시간 : " + str(time) + " | " + "1매도 | "+ name + " | 매수가 밑 0.8%지점 도달")
+                        self.ui.textEdit.append("->시간 : " + str(time) + " | " + "2매도 | "+ name + " | 매수가 밑 0.8%지점 도달")
                         self.ui.textEdit.append("매도가격 :" + format_price + " 원 " + str(compare)   + " 매도수량 : 50% " + str(rebuy_count) + "주")
                         self.ui.textEdit.append(" ")
                         
