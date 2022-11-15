@@ -62,6 +62,8 @@ class MyWindow(QMainWindow, form_class):
         
         
         self.pushButton_5.setDisabled(True)
+        self.pushButton_2.setDisabled(True)
+        self.pushButton_3.setDisabled(True)
         self.lineEdit_9.textChanged.connect(self.price_change)
         
         
@@ -265,7 +267,13 @@ class MyWindow(QMainWindow, form_class):
             self.pushButton_4.setEnabled(True)
                     
                 
-            
+    #port 이름넣기
+    def check_port(self):
+        port_name = self.comboBox_2.currentText()
+        self.tableWidget_3.setRowCount(self.row_count+1)
+        self.tableWidget_3.setColumnCount(1)
+        self.tableWidget_3.setItem(self.row_count,0,QTableWidgetItem(port_name))
+        self.row_count+=1
 
     #주시 종목에 설정한 종목 넣기
     def check_stock(self):
@@ -345,15 +353,11 @@ class MyWindow(QMainWindow, form_class):
         for i in select:
             row = i.row()
         
-            
-            print(self.tableWidget_3.item(row,7).text())
         
-            self.kiwoom.DisConnectRealData(str(self.tableWidget_3.item(row,7).text())) #만약 구독해있으면 구독해지
-            
             self.tableWidget_3.removeRow(row)
             self.row_count-=1
             #self.plainTextEdit.appendPlainText("선택 종목삭제")
-            self.textEdit.append("선택 종목삭제")
+            self.textEdit.append("선택 port 삭제")
             
             
             
