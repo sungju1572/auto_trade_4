@@ -180,6 +180,7 @@ class Kiwoom(QAxWidget):
             self.ui.textEdit.append("조건검색 조회요청 성공")
         elif a!=1:
             self.ui.textEdit.append("조건검색 조회요청 실패")
+
         
     #조건검색 조회 응답
     def _on_receive_tr_condition(self, scrno, codelist, conditionname, nnext):
