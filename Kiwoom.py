@@ -180,6 +180,12 @@ class Kiwoom(QAxWidget):
             self.ui.textEdit.append("조건검색 조회요청 성공")
         elif a!=1:
             self.ui.textEdit.append("조건검색 조회요청 실패")
+            
+        b = self.dynamicCall("SendCondition(QString, QString, int, int)", "0156", str(condition_name2), nindex2, 1)
+        if b==1:
+            self.ui.textEdit.append("조건검색 조회요청 성공")
+        elif b!=1:
+            self.ui.textEdit.append("조건검색 조회요청 실패")
 
         
     #조건검색 조회 응답
