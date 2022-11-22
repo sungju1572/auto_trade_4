@@ -242,11 +242,7 @@ class MyWindow(QMainWindow, form_class):
                     self.textEdit.append("중단선이 하단선보다 작거나 같음 : "+ row_dic["종목이름"])
                     continue
                 
-            
-            
-       
-            
-            
+
                 
             self.tableWidget_3.setRowCount(self.row_count+1)
             self.tableWidget_3.setColumnCount(8)
@@ -301,8 +297,7 @@ class MyWindow(QMainWindow, form_class):
             self.tableWidget_3.setItem(self.row_count,7,QTableWidgetItem(str(1000+self.window_count)))
             self.row_count+=1
             self.window_count+=1
-            
-            #self.plainTextEdit.appendPlainText("종목추가 : "+ name)
+
             self.textEdit.append("종목추가 : "+ name)    
 
             self.lineEdit.clear()
@@ -331,10 +326,8 @@ class MyWindow(QMainWindow, form_class):
             self.tableWidget_3.setItem(self.row_count,7,QTableWidgetItem(str(1000+self.window_count)))
             self.row_count+=1
             self.window_count+=1
-            #self.plainTextEdit.appendPlainText("종목추가 : "+ name)
             self.textEdit.append("종목추가 : "+ name)
-            #self.textEdit.append("종목추가 : "+ name)
-            #self.textEdit.setTextColor("종목추가 : "+ name)
+
             
             self.lineEdit.clear()
             self.lineEdit_3.clear()
@@ -430,7 +423,7 @@ class MyWindow(QMainWindow, form_class):
         #2%도달 여부(2매수용) (0도달x / 1 도달o )
         self.kiwoom.dic[name + '_reach_two_per2'] = 0 
 
-        #self.pushButton_5.setEnabled(True)
+
 
         
 
