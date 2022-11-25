@@ -65,6 +65,7 @@ class MyWindow(QMainWindow, form_class):
         self.pushButton_2.setDisabled(True)
         self.pushButton_3.setDisabled(True)
         self.lineEdit_9.textChanged.connect(self.price_change)
+        self.pushButton_6.clicked.connect(self.kiwoom._condition_search)
         
         
         self.gudoc_status = 0
