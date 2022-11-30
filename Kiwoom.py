@@ -216,6 +216,7 @@ class Kiwoom(QAxWidget):
     def _handler_real_condition(self, code, type, cond_name, cond_index):
         #self.ui.textEdit.append("실시간o: " + str(cond_name) +  str(code) + str(type)) 
         print("실시간o: " + str(cond_name) +  str(code) + str(type)) 
+        print("윈도우 카운트 : " , self.ui.window_count)
 
         
         for i in self.sec_list:
@@ -535,7 +536,7 @@ class Kiwoom(QAxWidget):
     #실시간 조회관련 핸들
     def _handler_real_data(self, trcode, real_type, data):
         
-        print("_handler_real_data")
+        
         
         # 체결 시간 
         if real_type == "주식체결":
@@ -546,7 +547,7 @@ class Kiwoom(QAxWidget):
 
             
             
-            print("체결시간 :", time)
+            #print("체결시간 :", time)
 
 
         #전일대비
@@ -589,6 +590,7 @@ class Kiwoom(QAxWidget):
                         
                     #print("3개 list", self.dic)
                         
+                    print("_handler_real_data :" , name)
                         
                     self.strategy(name, time)
                         
