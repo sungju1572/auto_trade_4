@@ -271,6 +271,8 @@ class MyWindow(QMainWindow, form_class):
         self.tableWidget_3.setColumnCount(1)
         self.tableWidget_3.setItem(self.row_count,0,QTableWidgetItem(port_name))
         self.row_count+=1
+        #self.tableWidget_3.resizeRowsToContents()
+        self.tableWidget_3.resizeColumnsToContents()
 
     #주시 종목에 설정한 종목 넣기
     def check_stock(self):
