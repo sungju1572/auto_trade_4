@@ -32,6 +32,8 @@ class Kiwoom(QAxWidget):
         self.hoga = 0
         self.last_close = 0
         
+        self.gudoc_count = 0 #종목 구독시 개수
+        
     #COM오브젝트 생성
     def _create_kiwoom_instance(self):
         self.setControl("KHOPENAPI.KHOpenAPICtrl.1") #고유 식별자 가져옴
@@ -217,6 +219,11 @@ class Kiwoom(QAxWidget):
         #self.ui.textEdit.append("실시간o: " + str(cond_name) +  str(code) + str(type)) 
         print("실시간o: " + str(cond_name) +  str(code) + str(type)) 
         print("윈도우 카운트 : " , self.ui.window_count)
+        print("구독종목 : ", self.gudoc_count)
+        #구독한 종목 50개 넘어가면 윈도우 카운트 변경
+        if self.gudoc_count == 100:
+            self.ui.window_count +=1
+            self.gudoc_count = 0
 
         
         for i in self.sec_list:
@@ -233,13 +240,14 @@ class Kiwoom(QAxWidget):
                     
                     if self.ui.gudoc_status == 0:
                         self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
-                        self.ui.window_count += 1
+                        self.gudoc_count += 1
                         self.ui.gudoc_status = 1
                         print('구독성공')
                     elif self.ui.gudoc_status != 0 :
                         self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
-                        self.ui.window_count += 1
+                        self.gudoc_count += 1
                         print('구독성공2')
+
             elif len(self.sec_list) == 2:
                 if str(cond_name) == str(i) == self.sec_list[0] and self.ui.checkBox_2.isChecked():
                    self.ui.textEdit_2.append("실시간o: " + str(code))
@@ -253,13 +261,14 @@ class Kiwoom(QAxWidget):
                    
                    if self.ui.gudoc_status == 0:
                        self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
-                       self.ui.window_count += 1
+                       self.gudoc_count += 1
                        self.ui.gudoc_status = 1
                        print('구독성공')
                    elif self.ui.gudoc_status != 0 :
                        self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
-                       self.ui.window_count += 1
+                       self.gudoc_count += 1
                        print('구독성공2')
+
                        
                 elif str(cond_name) == str(i) == self.sec_list[1] and self.ui.checkBox_3.isChecked():
                    self.ui.textEdit_2.append("실시간o: " + str(code))
@@ -273,13 +282,14 @@ class Kiwoom(QAxWidget):
                          
                    if self.ui.gudoc_status == 0:
                        self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
-                       self.ui.window_count += 1
+                       self.gudoc_count += 1
                        self.ui.gudoc_status = 1
                        print('구독성공')
                    elif self.ui.gudoc_status != 0 :
                        self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
-                       self.ui.window_count += 1
-                   print('구독성공2')
+                       self.gudoc_count += 1
+                       print('구독성공2')
+             
 
                 
             elif len(self.sec_list) == 3:
@@ -295,13 +305,14 @@ class Kiwoom(QAxWidget):
                    
                    if self.ui.gudoc_status == 0:
                        self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
-                       self.ui.window_count += 1
+                       self.gudoc_count += 1
                        self.ui.gudoc_status = 1
                        print('구독성공')
                    elif self.ui.gudoc_status != 0 :
                        self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
-                       self.ui.window_count += 1
+                       self.gudoc_count += 1
                        print('구독성공2')
+
                        
                 elif str(cond_name) == str(i) == self.sec_list[1] and self.ui.checkBox_3.isChecked():
                    self.ui.textEdit_2.append("실시간o: " + str(code))
@@ -315,13 +326,14 @@ class Kiwoom(QAxWidget):
                          
                    if self.ui.gudoc_status == 0:
                        self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
-                       self.ui.window_count += 1
+                       self.gudoc_count += 1
                        self.ui.gudoc_status = 1
                        print('구독성공')
                    elif self.ui.gudoc_status != 0 :
                        self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
-                       self.ui.window_count += 1
+                       self.gudoc_count += 1
                        print('구독성공2')
+
                        
                 elif str(cond_name) == str(i) == self.sec_list[2] and self.ui.checkBox_4.isChecked():
                    self.ui.textEdit_2.append("실시간o: " + str(code))
@@ -335,14 +347,15 @@ class Kiwoom(QAxWidget):
                              
                    if self.ui.gudoc_status == 0:
                        self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
-                       self.ui.window_count += 1
+                       self.gudoc_count += 1
                        self.ui.gudoc_status = 1
                        print('구독성공')
                    elif self.ui.gudoc_status != 0 :
                        self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
-                       self.ui.window_count += 1
+                       self.gudoc_count += 1
                        print('구독성공2')
 
+                   
             elif len(self.sec_list) == 4:
                 if str(cond_name) == str(i) == self.sec_list[0] and self.ui.checkBox_2.isChecked():
                    self.ui.textEdit_2.append("실시간o: " + str(code))
@@ -356,13 +369,14 @@ class Kiwoom(QAxWidget):
                    
                    if self.ui.gudoc_status == 0:
                        self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
-                       self.ui.window_count += 1
+                       self.gudoc_count += 1
                        self.ui.gudoc_status = 1
                        print('구독성공')
                    elif self.ui.gudoc_status != 0 :
                        self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
-                       self.ui.window_count += 1
+                       self.gudoc_count += 1
                        print('구독성공2')
+
                        
                 elif str(cond_name) == str(i) == self.sec_list[1] and self.ui.checkBox_3.isChecked():
                    self.ui.textEdit_2.append("실시간o: " + str(code))
@@ -376,12 +390,12 @@ class Kiwoom(QAxWidget):
                          
                    if self.ui.gudoc_status == 0:
                        self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
-                       self.ui.window_count += 1
+                       self.gudoc_count += 1
                        self.ui.gudoc_status = 1
                        print('구독성공')
                    elif self.ui.gudoc_status != 0 :
                        self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
-                       self.ui.window_count += 1
+                       self.gudoc_count += 1
                        print('구독성공2')
                        
                 elif str(cond_name) == str(i) == self.sec_list[2] and self.ui.checkBox_4.isChecked():
@@ -396,12 +410,12 @@ class Kiwoom(QAxWidget):
                              
                    if self.ui.gudoc_status == 0:
                        self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
-                       self.ui.window_count += 1
+                       self.gudoc_count += 1
                        self.ui.gudoc_status = 1
                        print('구독성공')
                    elif self.ui.gudoc_status != 0 :
                        self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
-                       self.ui.window_count += 1
+                       self.gudoc_count += 1
                        print('구독성공2')
     
                 elif str(cond_name) == str(i) == self.sec_list[3] and self.ui.checkBox_5.isChecked():
@@ -417,12 +431,12 @@ class Kiwoom(QAxWidget):
              
                    if self.ui.gudoc_status == 0:
                        self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
-                       self.ui.window_count += 1
+                       self.gudoc_count += 1
                        self.ui.gudoc_status = 1
                        print('구독성공')
                    elif self.ui.gudoc_status != 0 :
                        self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
-                       self.ui.window_count += 1
+                       self.gudoc_count += 1
                        print('구독성공2')
 
             elif len(self.sec_list) == 5:
@@ -438,12 +452,12 @@ class Kiwoom(QAxWidget):
                    
                    if self.ui.gudoc_status == 0:
                        self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
-                       self.ui.window_count += 1
+                       self.gudoc_count += 1
                        self.ui.gudoc_status = 1
                        print('구독성공')
                    elif self.ui.gudoc_status != 0 :
                        self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
-                       self.ui.window_count += 1
+                       self.gudoc_count += 1
                        print('구독성공2')
                        
                 elif str(cond_name) == str(i) == self.sec_list[1] and self.ui.checkBox_3.isChecked():
@@ -458,12 +472,12 @@ class Kiwoom(QAxWidget):
                          
                    if self.ui.gudoc_status == 0:
                        self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
-                       self.ui.window_count += 1
+                       self.gudoc_count += 1
                        self.ui.gudoc_status = 1
                        print('구독성공')
                    elif self.ui.gudoc_status != 0 :
                        self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
-                       self.ui.window_count += 1
+                       self.gudoc_count += 1
                        print('구독성공2')
                        
                 elif str(cond_name) == str(i) == self.sec_list[2] and self.ui.checkBox_4.isChecked():
@@ -478,12 +492,12 @@ class Kiwoom(QAxWidget):
                              
                    if self.ui.gudoc_status == 0:
                        self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
-                       self.ui.window_count += 1
+                       self.gudoc_count += 1
                        self.ui.gudoc_status = 1
                        print('구독성공')
                    elif self.ui.gudoc_status != 0 :
                        self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
-                       self.ui.window_count += 1
+                       self.gudoc_count += 1
                        print('구독성공2')
     
                 elif str(cond_name) == str(i) == self.sec_list[3] and self.ui.checkBox_5.isChecked():
@@ -499,12 +513,12 @@ class Kiwoom(QAxWidget):
              
                    if self.ui.gudoc_status == 0:
                        self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
-                       self.ui.window_count += 1
+                       self.gudoc_count += 1
                        self.ui.gudoc_status = 1
                        print('구독성공')
                    elif self.ui.gudoc_status != 0 :
                        self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
-                       self.ui.window_count += 1
+                       self.gudoc_count += 1
                        print('구독성공2')
                 elif str(cond_name) == str(i) == self.sec_list[4] and self.ui.checkBox_6.isChecked():
                    self.ui.textEdit_2.append("실시간o: " + str(code))
@@ -518,12 +532,12 @@ class Kiwoom(QAxWidget):
           
                    if self.ui.gudoc_status == 0:
                        self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
-                       self.ui.window_count += 1
+                       self.gudoc_count += 1
                        self.ui.gudoc_status = 1
                        print('구독성공')
                    elif self.ui.gudoc_status != 0 :
                        self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
-                       self.ui.window_count += 1
+                       self.gudoc_count += 1
                        print('구독성공2')
 
                 
