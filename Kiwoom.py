@@ -34,6 +34,8 @@ class Kiwoom(QAxWidget):
         
         self.gudoc_count = 0 #종목 구독시 개수
         
+        self.port_name = "" #포트 이름 저장변수
+        
     #COM오브젝트 생성
     def _create_kiwoom_instance(self):
         self.setControl("KHOPENAPI.KHOpenAPICtrl.1") #고유 식별자 가져옴
