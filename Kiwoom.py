@@ -233,7 +233,8 @@ class Kiwoom(QAxWidget):
                 if str(cond_name) == str(i) == self.sec_list[0] and self.ui.checkBox_2.isChecked():
                     self.ui.textEdit_2.append("실시간o: " + str(code))
                     self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
-            
+                    self.port_name = str(cond_name)
+                    
                     if code not in self.ui.ticker_list:
                         self.ui.ticker_list.append(code)
             
@@ -254,6 +255,7 @@ class Kiwoom(QAxWidget):
                 if str(cond_name) == str(i) == self.sec_list[0] and self.ui.checkBox_2.isChecked():
                    self.ui.textEdit_2.append("실시간o: " + str(code))
                    self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
+                   self.port_name = str(cond_name)
            
                    if code not in self.ui.ticker_list:
                        self.ui.ticker_list.append(code)
@@ -275,6 +277,7 @@ class Kiwoom(QAxWidget):
                 elif str(cond_name) == str(i) == self.sec_list[1] and self.ui.checkBox_3.isChecked():
                    self.ui.textEdit_2.append("실시간o: " + str(code))
                    self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
+                   self.port_name = str(cond_name)
            
                    if code not in self.ui.ticker_list:
                        self.ui.ticker_list.append(code)
@@ -298,6 +301,7 @@ class Kiwoom(QAxWidget):
                 if str(cond_name) == str(i) == self.sec_list[0] and self.ui.checkBox_2.isChecked():
                    self.ui.textEdit_2.append("실시간o: " + str(code))
                    self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
+                   self.port_name = str(cond_name)
            
                    if code not in self.ui.ticker_list:
                        self.ui.ticker_list.append(code)
@@ -319,6 +323,7 @@ class Kiwoom(QAxWidget):
                 elif str(cond_name) == str(i) == self.sec_list[1] and self.ui.checkBox_3.isChecked():
                    self.ui.textEdit_2.append("실시간o: " + str(code))
                    self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
+                   self.port_name = str(cond_name)
            
                    if code not in self.ui.ticker_list:
                        self.ui.ticker_list.append(code)
@@ -340,6 +345,7 @@ class Kiwoom(QAxWidget):
                 elif str(cond_name) == str(i) == self.sec_list[2] and self.ui.checkBox_4.isChecked():
                    self.ui.textEdit_2.append("실시간o: " + str(code))
                    self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
+                   self.port_name = str(cond_name)
            
                    if code not in self.ui.ticker_list:
                        self.ui.ticker_list.append(code)
@@ -362,6 +368,7 @@ class Kiwoom(QAxWidget):
                 if str(cond_name) == str(i) == self.sec_list[0] and self.ui.checkBox_2.isChecked():
                    self.ui.textEdit_2.append("실시간o: " + str(code))
                    self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
+                   self.port_name = str(cond_name)
            
                    if code not in self.ui.ticker_list:
                        self.ui.ticker_list.append(code)
@@ -383,6 +390,7 @@ class Kiwoom(QAxWidget):
                 elif str(cond_name) == str(i) == self.sec_list[1] and self.ui.checkBox_3.isChecked():
                    self.ui.textEdit_2.append("실시간o: " + str(code))
                    self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
+                   self.port_name = str(cond_name)
            
                    if code not in self.ui.ticker_list:
                        self.ui.ticker_list.append(code)
@@ -403,6 +411,7 @@ class Kiwoom(QAxWidget):
                 elif str(cond_name) == str(i) == self.sec_list[2] and self.ui.checkBox_4.isChecked():
                    self.ui.textEdit_2.append("실시간o: " + str(code))
                    self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
+                   self.port_name = str(cond_name)
            
                    if code not in self.ui.ticker_list:
                        self.ui.ticker_list.append(code)
@@ -423,6 +432,7 @@ class Kiwoom(QAxWidget):
                 elif str(cond_name) == str(i) == self.sec_list[3] and self.ui.checkBox_5.isChecked():
                    self.ui.textEdit_2.append("실시간o: " + str(code))
                    self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
+                   self.port_name = str(cond_name)
            
                    if code not in self.ui.ticker_list:
                        self.ui.ticker_list.append(code)
@@ -445,6 +455,7 @@ class Kiwoom(QAxWidget):
                 if str(cond_name) == str(i) == self.sec_list[0] and self.ui.checkBox_2.isChecked():
                    self.ui.textEdit_2.append("실시간o: " + str(code))
                    self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
+                   self.port_name = str(cond_name)
            
                    if code not in self.ui.ticker_list:
                        self.ui.ticker_list.append(code)
@@ -465,6 +476,7 @@ class Kiwoom(QAxWidget):
                 elif str(cond_name) == str(i) == self.sec_list[1] and self.ui.checkBox_3.isChecked():
                    self.ui.textEdit_2.append("실시간o: " + str(code))
                    self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
+                   self.port_name = str(cond_name)
            
                    if code not in self.ui.ticker_list:
                        self.ui.ticker_list.append(code)
@@ -485,6 +497,7 @@ class Kiwoom(QAxWidget):
                 elif str(cond_name) == str(i) == self.sec_list[2] and self.ui.checkBox_4.isChecked():
                    self.ui.textEdit_2.append("실시간o: " + str(code))
                    self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
+                   self.port_name = str(cond_name)
            
                    if code not in self.ui.ticker_list:
                        self.ui.ticker_list.append(code)
@@ -505,6 +518,7 @@ class Kiwoom(QAxWidget):
                 elif str(cond_name) == str(i) == self.sec_list[3] and self.ui.checkBox_5.isChecked():
                    self.ui.textEdit_2.append("실시간o: " + str(code))
                    self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
+                   self.port_name = str(cond_name)
            
                    if code not in self.ui.ticker_list:
                        self.ui.ticker_list.append(code)
@@ -525,6 +539,7 @@ class Kiwoom(QAxWidget):
                 elif str(cond_name) == str(i) == self.sec_list[4] and self.ui.checkBox_6.isChecked():
                    self.ui.textEdit_2.append("실시간o: " + str(code))
                    self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
+                   self.port_name = str(cond_name)
            
                    if code not in self.ui.ticker_list:
                        self.ui.ticker_list.append(code)
@@ -882,7 +897,7 @@ class Kiwoom(QAxWidget):
             self.ui.textEdit.append("매수")
             self.ui.textEdit.setFontPointSize(9)
             self.ui.textEdit.setTextColor(QColor(0,0,0))
-            self.ui.textEdit.append("시간 : " + str(time) + " | " + "1매수  :"+ name + " 매수가격 :" + format_price + "원 "+ str(compare) + " 매수수량 : " + str(buy_number))
+            self.ui.textEdit.append("시간 : " + str(time) + " | " + "1매수  :"+ name + " 매수가격 :" + format_price + "원 "+ str(compare) + " 매수수량 : " + str(buy_number) + "포트번호 : " + str(self.port_name))
             self.ui.textEdit.append("-------------------------------")
             self.ui.textEdit.append("도달지점 | 3% => " + str(round((price + price *0.03), 1)) + " 7% => "+ str(round((price + price *0.07), 1)) + " 14% => "+ str(round((price + price *0.14), 1)) )
             self.ui.textEdit.append(" ")
@@ -1133,7 +1148,7 @@ class Kiwoom(QAxWidget):
                 self.ui.textEdit.append("매수")
                 self.ui.textEdit.setFontPointSize(9)
                 self.ui.textEdit.setTextColor(QColor(0,0,0))
-                self.ui.textEdit.append("시간 : " + str(time) + " | " + "2매수 :"+ name + " 2매수가격 :" + format_price + "원 "+ str(compare) + " 2매수수량 : " + str(sell_count))
+                self.ui.textEdit.append("시간 : " + str(time) + " | " + "2매수 :"+ name + " 2매수가격 :" + format_price + "원 "+ str(compare) + " 2매수수량 : " + str(sell_count) )
                 self.ui.textEdit.append("-------------------------------")
                 self.ui.textEdit.append("도달지점 | 3% => " + str(round((price + price *0.03), 1)) + " 7% => "+ str(round((price + price *0.07), 1)) + " 14% => "+ str(round((price + price *0.14), 1)) )
                 self.ui.textEdit.append(" ")
