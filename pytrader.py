@@ -7,7 +7,7 @@ import time
 from os import environ
 from PyQt5.QtGui import *
 import openpyxl as op
-
+import re
 
 form_class = uic.loadUiType("exam_2.ui")[0]
 
@@ -401,7 +401,7 @@ class MyWindow(QMainWindow, form_class):
         self.kiwoom.dic[name + '_buy_count'] = 0 
         self.kiwoom.dic[name + '_sell_price'] = 0 
         self.kiwoom.dic[name + '_rebuy_count'] = 0
-        self.kiwoom.dic[name + '_buy_total'] = int(self.lineEdit_9.text())
+        self.kiwoom.dic[name + '_buy_total'] = int(re.sub(r"[^0-9]", "", self.lineEdit_9.text()))
         
             
             
@@ -478,4 +478,5 @@ if __name__ == "__main__":
     myWindow = MyWindow()
     myWindow.show()
     app.exec_()
+
 
