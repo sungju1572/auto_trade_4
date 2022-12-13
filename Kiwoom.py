@@ -8,6 +8,7 @@ import pandas as pd
 import sqlite3
 import datetime
 import numpy as np
+import re
 
 TR_REQ_TIME_INTERVAL = 0.2
 
@@ -145,6 +146,9 @@ class Kiwoom(QAxWidget):
         elif result != 1 :
             self.ui.textEdit.append("조건검색식 조회중 오류가 발생했습니다.")
             
+        price = format(int(self.ui.lineEdit_9.text()), ",")    
+        self.ui.lineEdit_10.setText(str(price))   
+        
     #로컬에 사용자 조건식 저장 성공 여부 확인
     def _on_receive_condition_ver(self):
         self.condition_list = {"index": [], "name": []}
@@ -192,6 +196,9 @@ class Kiwoom(QAxWidget):
             self.sec_list.append(self.ui.tableWidget_3.item(i,0).text())
         
         print(self.sec_list)
+
+        
+        
         
         for i in range(len(self.condition_list['name'])):
             for j in self.sec_list:
