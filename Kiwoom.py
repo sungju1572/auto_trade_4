@@ -587,6 +587,14 @@ class Kiwoom(QAxWidget):
             
             #print("체결시간 :", time)
 
+        #호가
+        hoga_1 = self.get_comm_real_data(trcode, 27)
+        hoga_2 = self.get_comm_real_data(trcode, 28)
+        
+        
+        if hoga_1 != "" and hoga_2 != "":
+            hoga = float(hoga_1[1:]) - float(hoga_2[1:]) 
+            
 
         #전일대비
         compare = self.get_comm_real_data(trcode, 12)
@@ -625,8 +633,8 @@ class Kiwoom(QAxWidget):
                     self.dic[name + '_start_price'] = start_price  
                     self.dic[name + '_price'] = price
                     self.dic[name + '_compare'] = compare
-                        
-                    #print("3개 list", self.dic)
+                    self.dic[name + '_hoga'] = hoga
+                    
                         
                     print("_handler_real_data :" , name)
                         
@@ -648,7 +656,8 @@ class Kiwoom(QAxWidget):
         self.dic[name + '_rebuy_count'] = 0
         self.dic[name + '_buy_total'] = int(self.ui.lineEdit_9.text())
         
-            
+
+        
         #매도조건 상태 2가지
         self.dic[name + '_sell_status1'] = '초기상태'
         self.dic[name + '_sell_status2'] = '초기상태'
@@ -672,7 +681,6 @@ class Kiwoom(QAxWidget):
 
         #self.pushButton_5.setEnabled(True)
 
-        
 
         print("ready_trade")
         
