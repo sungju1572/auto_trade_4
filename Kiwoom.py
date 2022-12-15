@@ -879,7 +879,7 @@ class Kiwoom(QAxWidget):
         buy_total_price = self.dic[list_1[list_1.index(name+'_buy_total')]]   #입력 총금액
         
 
-        #hoga = self.dic[list_1[list_1.index(name+'_hoga')]]                   #호가
+        hoga = self.dic[list_1[list_1.index(name+'_hoga')]]                   #호가
         start_price = self.dic[list_1[list_1.index(name+'_start_price')]]     #시가
         price = self.dic[list_1[list_1.index(name+'_price')]]                 #현재가
         compare = self.dic[list_1[list_1.index(name+'_compare')]]             #현재가 전일대비
@@ -902,7 +902,6 @@ class Kiwoom(QAxWidget):
         
         #초기상태
         if status == "초기상태":
-
             self.send_order('send_order', "0101", self.ui.account_number, 1, trcode, buy_number,  0 ,"03", "" )
             self.dic[list_1[list_1.index(name+'_status')]] = "매수상태"
             self.dic[list_1[list_1.index(name+'_initial')]] = price
