@@ -950,7 +950,7 @@ class Kiwoom(QAxWidget):
             #안떨어지고 상승시 매수상태로 전환
             elif price >= initial:
                 #2익절구간 도달시 표시
-                if compare >= sum(compare_list)/len(compare_list) + 2 and reach_two_per == 0 :
+                if price >= price_avg + price_avg *0.02 and reach_two_per == 0 :
                     self.dic[list_1[list_1.index(name+'_reach_two_per')]] = 1
                     self.ui.textEdit.setFontPointSize(13)
                     self.ui.textEdit.setTextColor(QColor(0,128,0))
@@ -963,7 +963,7 @@ class Kiwoom(QAxWidget):
                     self.ui.textEdit_2.append("대기중 | 종목 : " + name + " " + str( compare))
                 
                 #3% 찍었을때(상승x)
-                if compare >= sum(compare_list)/len(compare_list) + 3 :
+                if price >= price_avg + price_avg *0.03 :
                     self.send_order('send_order', "0101", self.ui.account_number, 2, trcode, rebuy_count,  0 ,"03", "" )
                     self.dic[list_1[list_1.index(name+'_sell_price')]] = price * rebuy_count
                     self.dic[list_1[list_1.index(name+'_sell_status1')]] = "초기상태"
@@ -1150,7 +1150,7 @@ class Kiwoom(QAxWidget):
         #매수 상태
         elif status == "매수상태":
             #2익절구간 도달시 표시
-            if compare >= sum(compare_list)/len(compare_list) + 2 and reach_two_per == 0 :
+            if price >= price_avg + price_avg *0.02 and reach_two_per == 0 :
                 self.dic[list_1[list_1.index(name+'_reach_two_per')]] = 1
                 self.ui.textEdit.setFontPointSize(13)
                 self.ui.textEdit.setTextColor(QColor(0,128,0))
@@ -1163,7 +1163,7 @@ class Kiwoom(QAxWidget):
                 self.ui.textEdit_2.append("대기중 | 종목 : " + name + " " + str( compare))
             
             #3% 찍었을때(상승x)
-            if compare >= sum(compare_list)/len(compare_list) + 3 :
+            if price >= price_avg + price_avg *0.03 :
                 self.send_order('send_order', "0101", self.ui.account_number, 2, trcode, rebuy_count,  0 ,"03", "" )
                 self.dic[list_1[list_1.index(name+'_sell_price')]] = price * rebuy_count
                 self.dic[list_1[list_1.index(name+'_sell_status1')]] = "초기상태"
@@ -1177,7 +1177,7 @@ class Kiwoom(QAxWidget):
                 self.ui.textEdit.append("매도가격 :" + format_price + " 원 " + str(compare)   + " 매도수량 " + str(rebuy_count) + "주")
                 self.ui.textEdit.append(" ")
                 
-            if compare <= sum(compare_list)/len(compare_list) - 3 :
+            if price <= price_avg *0.97 :
                 self.send_order('send_order', "0101", self.ui.account_number, 2, trcode, rebuy_count,  0 ,"03", "" )
                 self.dic[list_1[list_1.index(name+'_sell_price')]] = price * rebuy_count
                 self.dic[list_1[list_1.index(name+'_sell_status1')]] = "초기상태"
