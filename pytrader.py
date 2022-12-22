@@ -403,6 +403,7 @@ class MyWindow(QMainWindow, form_class):
         self.kiwoom.dic[name + '_rebuy_count'] = 0
         self.kiwoom.dic[name + '_buy_total'] = int(re.sub(r"[^0-9]", "", self.lineEdit_9.text()))
         
+        
             
             
         #매도조건 상태 2가지
@@ -425,7 +426,6 @@ class MyWindow(QMainWindow, form_class):
             
         #2%도달 여부(2매수용) (0도달x / 1 도달o )
         self.kiwoom.dic[name + '_reach_two_per2'] = 0 
-
 
 
         
