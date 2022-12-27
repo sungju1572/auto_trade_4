@@ -573,7 +573,34 @@ class Kiwoom(QAxWidget):
                        self.gudoc_count += 1
                        print('구독성공2')
 
-        #if cond_name == self.sell_list[0]:
+        if cond_name == self.sell_list[0]:
+            print("매도1ㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐ")
+            name = self.get_master_code_name(code)
+            
+            list_1 = [k for k in self.dic.keys() if name in k ]
+            print(list_1)
+            if list_1 != []:
+                trcode = self.dic[list_1[list_1.index(name+'_ticker')]]
+                rebuy_count = self.dic[list_1[list_1.index(name+'_rebuy_count')]]
+                status = self.dic[list_1[list_1.index(name+'_status')]] 
+                self.send_order('send_order', "0101", self.ui.account_number, 2, trcode, rebuy_count,  0 ,"03", "" )
+                self.dic[list_1[list_1.index(name+'_status')]] = "거래끝"
+                self.ui.textEdit.setFontPointSize(13)
+                self.ui.textEdit.setTextColor(QColor(0,0,255))
+                self.ui.textEdit.append("매도 ■ : 조건식 매도")
+                self.ui.textEdit.setFontPointSize(9)
+                self.ui.textEdit.setTextColor(QColor(0,0,0))
+                self.ui.textEdit.append("->시간 : " + str(time) + " | " + "1매도 | "+ name + " | 3%익절매도")
+                self.ui.textEdit.append(" 매도수량 " + str(rebuy_count) + "주")
+                self.ui.textEdit.append(" ")
+            
+            
+            
+            
+            
+            
+            
+            
             
                 
                         
@@ -647,7 +674,7 @@ class Kiwoom(QAxWidget):
                     self.dic[name + '_hoga'] = hoga
                     
                         
-                    print("_handler_real_data :" , name)
+                    #print("_handler_real_data :" , name)
                         
                     self.strategy(name, time)
                         
@@ -889,8 +916,6 @@ class Kiwoom(QAxWidget):
         sell_price = self.dic[list_1[list_1.index(name+'_sell_price')]]       #판매 가격
         rebuy_count = self.dic[list_1[list_1.index(name+'_rebuy_count')]]     #얼마만큼살지
         buy_total_price = self.dic[list_1[list_1.index(name+'_buy_total')]]   #입력 총금액
-        
-
         hoga = self.dic[list_1[list_1.index(name+'_hoga')]]                   #호가
         start_price = self.dic[list_1[list_1.index(name+'_start_price')]]     #시가
         price = self.dic[list_1[list_1.index(name+'_price')]]                 #현재가
@@ -916,10 +941,11 @@ class Kiwoom(QAxWidget):
         reach_two_per2 = self.dic[list_1[list_1.index(name+'_reach_two_per2')]]  
         
         
+        print("이름: " +str(name) + "가격 :" + str(initial))
         
         #초기상태
-        if status == "초기상태":
-            self.send_order('send_order', "0101", self.ui.account_number, 1, trcode, div_count,  0 ,"03", "" )
+        if status == "초기상태" :
+            self.send_order('send_order', "0101", self.ui.account_number, 1, trcode, div_count,  price ,"00", "" )
             self.dic[list_1[list_1.index(name+'_status')]] = "1매수상태"
             self.dic[list_1[list_1.index(name+'_initial')]] = price
             self.dic[list_1[list_1.index(name+'_buy_count')]] = buy_number - div_count
@@ -943,7 +969,7 @@ class Kiwoom(QAxWidget):
             
         elif status == "1매수상태":
             #4호가 진입시 매수
-            if price <= initial - hoga :
+            if price == initial - hoga :
                 self.send_order('send_order', "0101", self.ui.account_number, 1, trcode, div_count,  initial - hoga ,"00", "" )
                 self.dic[list_1[list_1.index(name+'_status')]] = "2매수상태"
                 self.dic[list_1[list_1.index(name+'_buy_count')]] = buy_number - div_count
@@ -959,7 +985,7 @@ class Kiwoom(QAxWidget):
                 self.ui.textEdit.append("시간 : " + str(time) + " | " + "1매수  :"+ name + " 매수가격 :" + str(initial - hoga) + "원 "+ str(compare) + " 매수수량 : " + str(div_count) + " 포트번호 : " + str(self.port_name) + " 평단가(%) : " + str(sum(compare_list)/len(compare_list)))
                 self.ui.textEdit.append("-------------------------------")
                 self.ui.textEdit.append(" ")
-                
+            """    
             #안떨어지고 상승시 매수상태로 전환
             elif price >= initial:
                 #2익절구간 도달시 표시
@@ -989,10 +1015,11 @@ class Kiwoom(QAxWidget):
                     self.ui.textEdit.append("->시간 : " + str(time) + " | " + "1매도 | "+ name + " | 3%익절매도")
                     self.ui.textEdit.append("매도가격 :" + format_price + " 원 " + str(compare)   + " 매도수량 " + str(rebuy_count) + "주")
                     self.ui.textEdit.append(" ")
-                
+            """
+            
         elif status == "2매수상태":
             #3호가 진입시 매수
-            if price <= initial - 2*hoga:
+            if price == initial - 2*hoga:
                 self.send_order('send_order', "0101", self.ui.account_number, 1, trcode, div_count,  initial - 2*hoga ,"00", "" )
                 self.dic[list_1[list_1.index(name+'_status')]] = "3매수상태"
                 self.dic[list_1[list_1.index(name+'_buy_count')]] = buy_number - div_count
@@ -1035,7 +1062,7 @@ class Kiwoom(QAxWidget):
             
         elif status == "3매수상태":
             #2호가 진입시 매수
-            if price <= initial - 3*hoga:
+            if price == initial - 3*hoga:
                 self.send_order('send_order', "0101", self.ui.account_number, 1, trcode, div_count,  initial - 3*hoga ,"00", "" )
                 self.dic[list_1[list_1.index(name+'_status')]] = "4매수상태"
                 self.dic[list_1[list_1.index(name+'_buy_count')]] = buy_number - div_count
@@ -1076,7 +1103,7 @@ class Kiwoom(QAxWidget):
                 
         elif status == "4매수상태":
             #1호가 진입시 매수
-            if price <= initial - 4*hoga:
+            if price == initial - 4*hoga:
                 self.send_order('send_order', "0101", self.ui.account_number, 1, trcode, div_count,  initial - 4*hoga ,"00", "" )
                 self.dic[list_1[list_1.index(name+'_status')]] = "매수상태"
                 self.dic[list_1[list_1.index(name+'_buy_count')]] = buy_number - div_count
@@ -1115,11 +1142,15 @@ class Kiwoom(QAxWidget):
                 self.ui.textEdit.append("평단가 : " + str(price_avg) + " | 도달지점 : 3% => " + str(round((price_avg + price_avg *0.03), 1)) + "| 7% => "+ str(round((price_avg + price_avg *0.07), 1)) + "| 14% => "+ str(round((price_avg + price_avg*0.14), 1)) )
                 self.ui.textEdit.append(" ")
   
+        elif status == "거래끝":
+            self.ui.textEdit.append("거래종료 | 종목 : " + name )
+            self.ui.textEdit.append(" ")
+            self.dic[list_1[list_1.index(name+'_status')]] = ""
+
   
+
     
-  
-    
-  
+        """
         #매수 상태
         elif status == "매수상태":
             #2익절구간 도달시 표시
@@ -1163,18 +1194,9 @@ class Kiwoom(QAxWidget):
                 self.ui.textEdit.append("->시간 : " + str(time) + " | " + "1매수 | "+ name + " | 강제청산")
                 self.ui.textEdit.append("매도가격 :" + format_price + " 원 " + str(compare)   + " 매도수량 " + str(rebuy_count) + "주")
                 self.ui.textEdit.append(" ")
+        """
 
 
-  
-   
-        elif status == "거래끝":
-            self.ui.textEdit.append("거래종료 | 종목 : " + name )
-            self.ui.textEdit.append(" ")
-            self.dic[list_1[list_1.index(name+'_status')]] = ""
-
-            
-
-  
                  
   
             
