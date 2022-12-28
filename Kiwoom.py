@@ -1123,9 +1123,7 @@ class Kiwoom(QAxWidget):
                 self.ui.textEdit.append("매수(2호가->5호가)")
                 self.ui.textEdit.setFontPointSize(9)
                 self.ui.textEdit.setTextColor(QColor(0,0,0))
-                self.ui.textEdit.append("시간 : " + str(time) + " | " + "1매수  :"+ name + " 매수가격 :" + str(initial) + "원 "+ str(compare) + " 매수수량 : " + str(div_count) + " 포트번호 : " + str(self.port_name) + " 평단가(%) : " + str(sum(compare_list)/len(compare_list)))
-                self.ui.textEdit.append("-------------------------------")
-                self.ui.textEdit.append("평단가 : " + str(price_avg) + " | 도달지점 : 3% => " + str(round((price_avg + price_avg *0.03), 1)) + "| 7% => "+ str(round((price_avg + price_avg *0.07), 1)) + "| 14% => "+ str(round((price_avg + price_avg*0.14), 1)) )
+                self.ui.textEdit.append("시간 : " + str(time) + " | " + "1매수  :"+ name + " 매수가격 :" + str(initial) + "원 "+ str(compare) + " 매수수량 : " + str(div_count) + " 포트번호 : " + str(self.port_name) )
                 self.ui.textEdit.append(" ")
   
         elif status == "거래끝":
