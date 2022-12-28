@@ -37,6 +37,8 @@ class Kiwoom(QAxWidget):
         
         self.port_name = "" #포트 이름 저장변수
         
+        self.stock_held = [] #보유종목리스트
+        
     #COM오브젝트 생성
     def _create_kiwoom_instance(self):
         self.setControl("KHOPENAPI.KHOpenAPICtrl.1") #고유 식별자 가져옴
@@ -574,12 +576,14 @@ class Kiwoom(QAxWidget):
                        print('구독성공2')
 
         if cond_name == self.sell_list[0]:
-            print("매도1ㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐ")
-            name = self.get_master_code_name(code)
             
-            list_1 = [k for k in self.dic.keys() if name in k ]
-            print(list_1)
-            if list_1 != []:
+            print("code : ", code)
+            print("stock_list : ", self.stock_held)
+            if code in self.stock_held:
+
+                name = self.get_master_code_name(code)      
+                list_1 = [k for k in self.dic.keys() if name in k ]
+                
                 trcode = self.dic[list_1[list_1.index(name+'_ticker')]]
                 rebuy_count = self.dic[list_1[list_1.index(name+'_rebuy_count')]]
                 status = self.dic[list_1[list_1.index(name+'_status')]] 
@@ -590,22 +594,11 @@ class Kiwoom(QAxWidget):
                 self.ui.textEdit.append("매도 ■ : 조건식 매도")
                 self.ui.textEdit.setFontPointSize(9)
                 self.ui.textEdit.setTextColor(QColor(0,0,0))
-                self.ui.textEdit.append("->시간 : " + str(time) + " | " + "1매도 | "+ name + " | 3%익절매도")
+                self.ui.textEdit.append("->시간 : " + str(time) + " | " + "1매도 | "+ name + " | 조건식매도")
                 self.ui.textEdit.append(" 매도수량 " + str(rebuy_count) + "주")
                 self.ui.textEdit.append(" ")
-            
-            
-            
-            
-            
-            
-            
-            
-            
+                self.stock_held.remove(code)
                 
-                        
-                        
-       
 
 
 ####
@@ -665,8 +658,6 @@ class Kiwoom(QAxWidget):
                     start_price  = float(start_price[1:])
                     price = float(price[1:])
                     compare = float(compare)
-                    
-                    
                     
                     self.dic[name + '_start_price'] = start_price  
                     self.dic[name + '_price'] = price
@@ -741,16 +732,12 @@ class Kiwoom(QAxWidget):
         return ret
 
     def _receive_chejan_data(self, gubun, item_cnt, fid_list):
-        
-        name = str(self.get_chejan_data(302)).strip()
-        
-        list_1 = [k for k in self.dic.keys() if name in k ]
-  
-        print(gubun)
-        print(self.get_chejan_data(9203))
-        print(self.get_chejan_data(302))
-        print(self.get_chejan_data(900))
-        print(self.get_chejan_data(901))
+         
+        if gubun == "0":
+            stock_ticker = self.get_chejan_data(9001)
+            
+            if stock_ticker[1:] not in self.stock_held:
+                self.stock_held.append(stock_ticker[1:])   
 
 
     #받은 tr데이터가 무엇인지, 연속조회 할수있는지
@@ -907,6 +894,7 @@ class Kiwoom(QAxWidget):
 
         list_1 = [k for k in self.dic.keys() if name in k ]
 
+        
         name = self.dic[list_1[list_1.index(name+'_name')]]                   #종목 이름
         trcode = self.dic[list_1[list_1.index(name+'_ticker')]]               #티커 6자리
         status = self.dic[list_1[list_1.index(name+'_status')]]               #현재상태
@@ -941,7 +929,7 @@ class Kiwoom(QAxWidget):
         reach_two_per2 = self.dic[list_1[list_1.index(name+'_reach_two_per2')]]  
         
         
-        print("이름: " +str(name) + "가격 :" + str(initial))
+        #print("이름: " +str(name) + "가격 :" + str(initial))
         
         #초기상태
         if status == "초기상태" :
@@ -1075,7 +1063,7 @@ class Kiwoom(QAxWidget):
                 self.ui.textEdit.append("매수(2호가)")
                 self.ui.textEdit.setFontPointSize(9)
                 self.ui.textEdit.setTextColor(QColor(0,0,0))
-                self.ui.textEdit.append("시간 : " + str(time) + " | " + "1매수  :"+ name + " 매수가격 :" + str(initial - 3*hoga) + "원 "+ str(compare) + " 매수수량 : " + str(div_count) + " 포트번호 : " + str(self.port_name) + " 평단가(%) : " + str(sum(compare_list)/len(compare_list)))
+                self.ui.textEdit.append("시간 : " + str(time) + " | " + "1매수  :"+ name + " 매수가격 :" + str(initial - 3*hoga) + "원 "+ str(compare) + " 매수수량 : " + str(div_count) + " 포트번호 : " + str(self.port_name))
                 self.ui.textEdit.append("-------------------------------")
                 self.ui.textEdit.append(" ")
                 
@@ -1096,9 +1084,7 @@ class Kiwoom(QAxWidget):
                 self.ui.textEdit.append("매수(3호가->5호가)")
                 self.ui.textEdit.setFontPointSize(9)
                 self.ui.textEdit.setTextColor(QColor(0,0,0))
-                self.ui.textEdit.append("시간 : " + str(time) + " | " + "1매수  :"+ name + " 매수가격 :" + str(initial) + "원 "+ str(compare) + " 매수수량 : " + str(div_count) + " 포트번호 : " + str(self.port_name) + " 평단가(%) : " + str(sum(compare_list)/len(compare_list)))
-                self.ui.textEdit.append("-------------------------------")
-                self.ui.textEdit.append("평단가 : " + str(price_avg) + " | 도달지점 : 3% => " + str(round((price_avg + price_avg *0.03), 1)) + "| 7% => "+ str(round((price_avg + price_avg *0.07), 1)) + "| 14% => "+ str(round((price_avg + price_avg*0.14), 1)) )
+                self.ui.textEdit.append("시간 : " + str(time) + " | " + "1매수  :"+ name + " 매수가격 :" + str(initial) + "원 "+ str(compare) + " 매수수량 : " + str(div_count) + " 포트번호 : " + str(self.port_name))
                 self.ui.textEdit.append(" ")
                 
         elif status == "4매수상태":
@@ -1116,7 +1102,7 @@ class Kiwoom(QAxWidget):
                 self.ui.textEdit.append("매수(1호가)")
                 self.ui.textEdit.setFontPointSize(9)
                 self.ui.textEdit.setTextColor(QColor(0,0,0))
-                self.ui.textEdit.append("시간 : " + str(time) + " | " + "1매수  :"+ name + " 매수가격 :" + str(initial - 4*hoga) + "원 "+ str(compare) + " 매수수량 : " + str(div_count) + " 포트번호 : " + str(self.port_name) + " 평단가(%) : " + str(sum(compare_list)/len(compare_list)))
+                self.ui.textEdit.append("시간 : " + str(time) + " | " + "1매수  :"+ name + " 매수가격 :" + str(initial - 4*hoga) + "원 "+ str(compare) + " 매수수량 : " + str(div_count) + " 포트번호 : " + str(self.port_name))
                 self.ui.textEdit.append("-------------------------------")
                 self.ui.textEdit.append(" ")
                 
