@@ -21,10 +21,10 @@
    <widget class="QGroupBox" name="groupBox_2">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>540</y>
+      <x>20</x>
+      <y>590</y>
       <width>611</width>
-      <height>351</height>
+      <height>281</height>
      </rect>
     </property>
     <property name="title">
@@ -78,9 +78,9 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>90</y>
+       <y>100</y>
        <width>591</width>
-       <height>211</height>
+       <height>141</height>
       </rect>
      </property>
      <column>
@@ -118,7 +118,7 @@
      <property name="geometry">
       <rect>
        <x>520</x>
-       <y>310</y>
+       <y>250</y>
        <width>75</width>
        <height>23</height>
       </rect>
@@ -131,7 +131,7 @@
      <property name="geometry">
       <rect>
        <x>420</x>
-       <y>310</y>
+       <y>250</y>
        <width>81</width>
        <height>16</height>
       </rect>
@@ -281,7 +281,7 @@
       <x>660</x>
       <y>10</y>
       <width>541</width>
-      <height>881</height>
+      <height>861</height>
      </rect>
     </property>
     <property name="title">
@@ -358,7 +358,7 @@
     <property name="geometry">
      <rect>
       <x>60</x>
-      <y>330</y>
+      <y>340</y>
       <width>21</width>
       <height>16</height>
      </rect>
@@ -371,7 +371,7 @@
     <property name="geometry">
      <rect>
       <x>60</x>
-      <y>360</y>
+      <y>370</y>
       <width>21</width>
       <height>16</height>
      </rect>
@@ -384,7 +384,7 @@
     <property name="geometry">
      <rect>
       <x>60</x>
-      <y>390</y>
+      <y>400</y>
       <width>21</width>
       <height>16</height>
      </rect>
@@ -410,7 +410,7 @@
     <property name="geometry">
      <rect>
       <x>190</x>
-      <y>250</y>
+      <y>240</y>
       <width>431</width>
       <height>31</height>
      </rect>
@@ -438,8 +438,8 @@
     <property name="geometry">
      <rect>
       <x>390</x>
-      <y>390</y>
-      <width>231</width>
+      <y>370</y>
+      <width>221</width>
       <height>41</height>
      </rect>
     </property>
@@ -456,9 +456,9 @@
    <widget class="QLabel" name="label_5">
     <property name="geometry">
      <rect>
-      <x>90</x>
-      <y>260</y>
-      <width>71</width>
+      <x>80</x>
+      <y>240</y>
+      <width>91</width>
       <height>21</height>
      </rect>
     </property>
@@ -475,7 +475,7 @@
     <property name="geometry">
      <rect>
       <x>60</x>
-      <y>420</y>
+      <y>430</y>
       <width>21</width>
       <height>16</height>
      </rect>
@@ -488,13 +488,59 @@
     <property name="geometry">
      <rect>
       <x>60</x>
-      <y>450</y>
+      <y>460</y>
       <width>21</width>
       <height>16</height>
      </rect>
     </property>
     <property name="text">
      <string/>
+    </property>
+   </widget>
+   <widget class="QTableWidget" name="tableWidget_4">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>520</y>
+      <width>271</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <column>
+     <property name="text">
+      <string>port 이름</string>
+     </property>
+    </column>
+   </widget>
+   <widget class="QPushButton" name="pushButton_4">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>530</y>
+      <width>101</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>port 추가</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_7">
+    <property name="geometry">
+     <rect>
+      <x>510</x>
+      <y>530</y>
+      <width>101</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>선택port 삭제</string>
     </property>
    </widget>
   </widget>
