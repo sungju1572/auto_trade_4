@@ -64,6 +64,10 @@ class MyWindow(QMainWindow, form_class):
         self.pushButton_5.setDisabled(True)
         self.pushButton_2.setDisabled(True)
         self.pushButton_3.setDisabled(True)
+        self.pushButton_4.setDisabled(True)
+        self.pushButton_7.setDisabled(True)
+        self.pushButton_6.setDisabled(True)
+        
         self.lineEdit_9.textChanged.connect(self.price_change)
         self.pushButton_6.clicked.connect(self.kiwoom._condition_search)
         
@@ -264,7 +268,7 @@ class MyWindow(QMainWindow, form_class):
             self.pushButton_4.setEnabled(True)
                     
                 
-    #port 이름넣기
+    #port 이름넣기(매도)
     def check_port(self):
         port_name = self.comboBox_2.currentText()
         self.tableWidget_3.setRowCount(self.row_count+1)
@@ -273,6 +277,16 @@ class MyWindow(QMainWindow, form_class):
         self.row_count+=1
         #self.tableWidget_3.resizeRowsToContents()
         self.tableWidget_3.resizeColumnsToContents()
+
+    #port 이름넣기(매도)
+    def check_port2(self):
+        port_name = self.comboBox_2.currentText()
+        self.tableWidget_4.setRowCount(1)
+        self.tableWidget_4.setColumnCount(1)
+        self.tableWidget_4.setItem(0,0,QTableWidgetItem(port_name))
+        self.tableWidget_3.resizeColumnsToContents()
+        self.pushButton_6.setEnabled(True)
+
 
     #주시 종목에 설정한 종목 넣기
     def check_stock(self):
@@ -343,7 +357,7 @@ class MyWindow(QMainWindow, form_class):
 
             
             
-    #제거 버튼 눌렀을때 테이블에서 행삭제        
+    #제거 버튼 눌렀을때 테이블에서 행삭제(매수)      
     def delete_row(self):
         select = self.tableWidget_3.selectedItems()
         for i in select:
@@ -354,7 +368,15 @@ class MyWindow(QMainWindow, form_class):
             self.row_count-=1
             #self.plainTextEdit.appendPlainText("선택 종목삭제")
             self.textEdit.append("선택 port 삭제")
-            
+           
+    #제거 버튼 눌렀을때 테이블에서 행삭제(매도)      
+    def delete_row2(self):
+        select = self.tableWidget_4.selectedItems()
+        for i in select:
+            row = i.row()
+            self.tableWidget_4.removeRow(row)
+            #self.plainTextEdit.appendPlainText("선택 종목삭제")
+            self.textEdit.append("선택 port 삭제")
             
             
 
@@ -402,9 +424,7 @@ class MyWindow(QMainWindow, form_class):
         self.kiwoom.dic[name + '_sell_price'] = 0 
         self.kiwoom.dic[name + '_rebuy_count'] = 0
         self.kiwoom.dic[name + '_buy_total'] = int(re.sub(r"[^0-9]", "", self.lineEdit_9.text()))
-        
-        
-            
+
             
         #매도조건 상태 2가지
         self.kiwoom.dic[name + '_sell_status1'] = '초기상태'
