@@ -38,8 +38,13 @@ class MyWindow(QMainWindow, form_class):
 
 
         self.timer2 = QTimer(self)
-        self.timer2.start(1000 *10)
+        self.timer2.start(1000 *10) #10초
         self.timer2.timeout.connect(self.timeout2)
+
+        self.timer3 = QTimer(self)
+        self.timer3.start(15000)
+        self.timer3.timeout.connect(self.timeout3)
+
 
         accouns_num = int(self.kiwoom.get_login_info("ACCOUNT_CNT"))
         accounts = self.kiwoom.get_login_info("ACCNO")
@@ -123,11 +128,50 @@ class MyWindow(QMainWindow, form_class):
             self.check_balance()
 
 
+    def timeout3(self):
+        if self.lineEdit_11.text() != "":
+            
+            print(self.lineEdit_11)
+            
+            trcode = self.lineEdit_11.text()
+            
+            
+            
+            self.kiwoom.set_input_value("종목코드", trcode)
+            self.kiwoom.comm_rq_data("opt10002_req", "opt10002", 0, "3000")
+            
+            print("ddddddddddddddddddddd:" +str(self.kiwoom.last_close))
+            
+            """
+            
+            account_number = self.lineEdit_11.text()
+            
+            
+            self.kiwoom.reset_opw00018_output()
+    
+            self.kiwoom.set_input_value("계좌번호", account_number)
+            self.kiwoom.comm_rq_data("opw00018_req", "opw00018", 0, "2000")
+    
+            while self.kiwoom.remained_data:
+                time.sleep(0.2)
+                self.kiwoom.set_input_value("계좌번호", account_number)
+                self.kiwoom.comm_rq_data("opw00018_req", "opw00018", 2, "2000")
+    
+            # opw00001
+            self.kiwoom.set_input_value("계좌번호", account_number)
+            self.kiwoom.comm_rq_data("opw00001_req", "opw00001", 0, "2000")
+    
+            # balance
+            item = self.kiwoom.d2_deposit
+            print("아이템:" + str(item))
+            """
+
+
     #현재가격저장        
     def present_price(self):
         price = self.kiwoom.price
         self.lineEdit_3.setText(str(price))
-        0.
+        
      
     #주식 잔고 
     def check_balance(self):
