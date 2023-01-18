@@ -758,6 +758,8 @@ class Kiwoom(QAxWidget):
             self._opt10004(rqname, trcode)
         elif rqname == "opt10002_req":
             self._opt10002(rqname, trcode)
+        elif rqname == "opt10080_req": #주식분봉차트 조회
+            self._opt10080(rqname, trcode)
 
 
 
@@ -803,6 +805,34 @@ class Kiwoom(QAxWidget):
         self.d2_deposit = Kiwoom.change_format(d2_deposit)
 
 
+    def _opt10080(self, rqname, trcode):
+        data_cnt = self._get_repeat_cnt(trcode, rqname) #데이터 갯수 확인
+
+        print("asdasdas:" + str(data_cnt))
+        for i in range(3): #시고저종 거래량 가져오기
+            date = self._comm_get_data(trcode, "", rqname, i, "체결시간")
+            open = self._comm_get_data(trcode, "", rqname, i, "시가")
+            high = self._comm_get_data(trcode, "", rqname, i, "고가")
+            low = self._comm_get_data(trcode, "", rqname, i, "저가")
+            close = self._comm_get_data(trcode, "", rqname, i, "현재가")
+            volume = self._comm_get_data(trcode, "", rqname, i, "거래량")
+            name = self._comm_get_data(trcode, "", rqname, i, "종목코드")
+            
+            if date[0:8] == "20230118":
+                print('name : ' + str(rqname))
+                print("data : " + str(date))
+                print("open : " + str(open))
+                print("high : " + str(high))
+                print("low : " + str(low))
+                print("close : " + str(close))
+                
+                self.ui.tableWidget_5.setRowCount(1)
+                self.ui.tableWidget_5.setColumnCount(1)
+                self.ui.tableWidget_5.setItem(0,0,QTableWidgetItem(high))
+
+                
+            
+
     def _opt10081(self, rqname, trcode):
         data_cnt = self._get_repeat_cnt(trcode, rqname) #데이터 갯수 확인
 
@@ -813,13 +843,13 @@ class Kiwoom(QAxWidget):
             low = self._comm_get_data(trcode, "", rqname, i, "저가")
             close = self._comm_get_data(trcode, "", rqname, i, "현재가")
             volume = self._comm_get_data(trcode, "", rqname, i, "거래량")
-
-            self.ohlcv['date'].append(date)
-            self.ohlcv['open'].append(int(open))
-            self.ohlcv['high'].append(int(high))
-            self.ohlcv['low'].append(int(low))
-            self.ohlcv['close'].append(int(close))
-            self.ohlcv['volume'].append(int(volume))
+                
+            if date[0:8] == "20230117":
+                print('81시가 : ' + str(date))
+                print("81고가 : " + str(high))
+                print("81저가 : " + str(low))
+                print("81종가 : " + str(close))
+    
             
         
     #호가 가져오기
