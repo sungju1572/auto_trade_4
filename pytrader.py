@@ -42,7 +42,7 @@ class MyWindow(QMainWindow, form_class):
         self.timer2.timeout.connect(self.timeout2)
 
         self.timer3 = QTimer(self)
-        self.timer3.start(15000)
+        self.timer3.start(35000)
         self.timer3.timeout.connect(self.timeout3)
 
 
@@ -127,44 +127,29 @@ class MyWindow(QMainWindow, form_class):
         if self.checkBox.isChecked():
             self.check_balance()
 
-
+    #실시간 검색중 TR요청
     def timeout3(self):
         if self.lineEdit_11.text() != "":
             
             print(self.lineEdit_11)
-            
+
             trcode = self.lineEdit_11.text()
             
-            
-            
             self.kiwoom.set_input_value("종목코드", trcode)
-            self.kiwoom.comm_rq_data("opt10002_req", "opt10002", 0, "3000")
-            
-            print("ddddddddddddddddddddd:" +str(self.kiwoom.last_close))
-            
-            """
-            
-            account_number = self.lineEdit_11.text()
-            
-            
-            self.kiwoom.reset_opw00018_output()
-    
-            self.kiwoom.set_input_value("계좌번호", account_number)
-            self.kiwoom.comm_rq_data("opw00018_req", "opw00018", 0, "2000")
-    
-            while self.kiwoom.remained_data:
-                time.sleep(0.2)
-                self.kiwoom.set_input_value("계좌번호", account_number)
-                self.kiwoom.comm_rq_data("opw00018_req", "opw00018", 2, "2000")
-    
-            # opw00001
-            self.kiwoom.set_input_value("계좌번호", account_number)
-            self.kiwoom.comm_rq_data("opw00001_req", "opw00001", 0, "2000")
-    
-            # balance
-            item = self.kiwoom.d2_deposit
-            print("아이템:" + str(item))
-            """
+            self.kiwoom.set_input_value("틱범위", 5)
+            self.kiwoom.set_input_value("수정주가구분", 0)
+            self.kiwoom.comm_rq_data("opt10080_req", "opt10080", 0, "3000")
+        
+        """
+        if self.kiwoom.stock_held != []:
+            for i in self.kiwoom.stock_held:
+
+                self.kiwoom.set_input_value("종목코드", i)
+                self.kiwoom.set_input_value("틱범위", 5)
+                self.kiwoom.set_input_value("수정주가구분", 0)
+                self.kiwoom.comm_rq_data("opt10080_req", "opt10080", 0, "3000")
+        """      
+
 
 
     #현재가격저장        
