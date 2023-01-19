@@ -39,6 +39,8 @@ class Kiwoom(QAxWidget):
         
         self.stock_held = [] #보유종목리스트
         
+        self.window_number = 0 #tableWidget_5 행 카운트
+        
     #COM오브젝트 생성
     def _create_kiwoom_instance(self):
         self.setControl("KHOPENAPI.KHOpenAPICtrl.1") #고유 식별자 가져옴
@@ -711,6 +713,13 @@ class Kiwoom(QAxWidget):
         #self.pushButton_5.setEnabled(True)
         self.dic[name + "_compare_list"] = []
         self.dic[name + "_price_list"] = []
+        
+        self.dic[name + "_open_5"] = 0 #5분봉 시가
+        self.dic[name + "_low_5"] = 0 #5분봉 시가
+        self.dic[name + "_high_5"] = 0 #5분봉 시가
+        self.dic[name + "_window_count"] = self.window_number #행번호
+        
+        self.window_number += 1
 
         print("ready_trade")
         
@@ -809,26 +818,61 @@ class Kiwoom(QAxWidget):
         data_cnt = self._get_repeat_cnt(trcode, rqname) #데이터 갯수 확인
 
         print("asdasdas:" + str(data_cnt))
-        for i in range(3): #시고저종 거래량 가져오기
-            date = self._comm_get_data(trcode, "", rqname, i, "체결시간")
-            open = self._comm_get_data(trcode, "", rqname, i, "시가")
-            high = self._comm_get_data(trcode, "", rqname, i, "고가")
-            low = self._comm_get_data(trcode, "", rqname, i, "저가")
-            close = self._comm_get_data(trcode, "", rqname, i, "현재가")
-            volume = self._comm_get_data(trcode, "", rqname, i, "거래량")
-            name = self._comm_get_data(trcode, "", rqname, i, "종목코드")
+
+        date = self._get_comm_data(trcode, "주식분봉차트조회", 0, "체결시간")
+        open = self._get_comm_data(trcode, "주식분봉차트조회", 0, "시가")
+        high = self._get_comm_data(trcode, "주식분봉차트조회", 0, "고가")
+        low = self._get_comm_data(trcode, "주식분봉차트조회", 0, "저가")
+        close = self._get_comm_data(trcode, "주식분봉차트조회", 0, "현재가")
+        volume = self._get_comm_data(trcode, "주식분봉차트조회", 0, "거래량")
+        code = self._get_comm_data(trcode, "주식분차트", 0, "종목코드")
             
-            if date[0:8] == "20230118":
-                print('name : ' + str(rqname))
-                print("data : " + str(date))
-                print("open : " + str(open))
-                print("high : " + str(high))
-                print("low : " + str(low))
-                print("close : " + str(close))
-                
-                self.ui.tableWidget_5.setRowCount(1)
-                self.ui.tableWidget_5.setColumnCount(1)
-                self.ui.tableWidget_5.setItem(0,0,QTableWidgetItem(high))
+        name = self.get_master_code_name(code.strip())
+
+
+        list_1 = [k for k in self.dic.keys() if name in k ]
+        
+        open_5 = self.dic[list_1[list_1.index(name+'_open_5')]]
+        low_5 = self.dic[list_1[list_1.index(name+'_low_5')]] 
+        high_5 = self.dic[list_1[list_1.index(name+'_high_5')]] 
+        
+        if low_5 == 0:
+            self.dic[list_1[list_1.index(name+'_low_5')]] = int(low.strip()[1:])
+            low_5 = int(low.strip()[1:])
+        if high_5 == 0 :
+            self.dic[list_1[list_1.index(name+'_high_5')]] = int(high.strip()[1:])
+            high_5 = int(high.strip()[1:])
+            
+        
+        if int(low.strip()[1:]) <= int(low_5):
+            self.dic[list_1[list_1.index(name+'_low_5')]] = int(low.strip()[1:])
+        if int(high.strip()[1:]) >= int(high_5):
+            self.dic[list_1[list_1.index(name+'_high_5')]] = int(high.strip()[1:])
+        
+        self.dic[list_1[list_1.index(name+'_open_5')]] = int(open.strip()[1:])
+        
+        row_number = self.dic[list_1[list_1.index(name+'_window_count')]] 
+            
+        self.dic[list_1[list_1.index(name+'_open_5')]] = open
+        self.dic[list_1[list_1.index(name+'_low_5')]] = low
+        self.dic[list_1[list_1.index(name+'_high_5')]] = high
+        
+
+        div_4 = (int(high_5 )- int(low_5))/4 #4등분 가격
+
+        print("div_4 : " + str(div_4))
+        print("name : " + str(name) + "row_number : " + str(row_number))
+        if date.strip()[0:8] == "20230119":
+            print("row_number : " + str(row_number))
+            self.ui.tableWidget_5.setRowCount(len(self.stock_held))
+            self.ui.tableWidget_5.setColumnCount(7)
+            self.ui.tableWidget_5.setItem(row_number,0,QTableWidgetItem(name.strip()))
+            self.ui.tableWidget_5.setItem(row_number,1,QTableWidgetItem(open.strip()[1:]))
+            self.ui.tableWidget_5.setItem(row_number,2,QTableWidgetItem(low.strip()[1:]))
+            self.ui.tableWidget_5.setItem(row_number,3,QTableWidgetItem(high.strip()[1:]))
+            self.ui.tableWidget_5.setItem(row_number,4,QTableWidgetItem(str(int(low.strip()[1:]) + div_4*3 )))
+            self.ui.tableWidget_5.setItem(row_number,5,QTableWidgetItem(str(int(low.strip()[1:]) + div_4*2 )))
+            self.ui.tableWidget_5.setItem(row_number,6,QTableWidgetItem(str(int(low.strip()[1:]) + div_4 )))
 
                 
             
