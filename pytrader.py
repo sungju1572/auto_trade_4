@@ -42,7 +42,8 @@ class MyWindow(QMainWindow, form_class):
         self.timer2.timeout.connect(self.timeout2)
 
         self.timer3 = QTimer(self)
-        self.timer3.start(35000)
+        self.timer3.start(30000)
+        
         self.timer3.timeout.connect(self.timeout3)
 
 
@@ -129,6 +130,8 @@ class MyWindow(QMainWindow, form_class):
 
     #실시간 검색중 TR요청
     def timeout3(self):
+        
+        """
         if self.lineEdit_11.text() != "":
             
             print(self.lineEdit_11)
@@ -139,16 +142,17 @@ class MyWindow(QMainWindow, form_class):
             self.kiwoom.set_input_value("틱범위", 5)
             self.kiwoom.set_input_value("수정주가구분", 0)
             self.kiwoom.comm_rq_data("opt10080_req", "opt10080", 0, "3000")
-        
         """
+        time.sleep(0.2)
         if self.kiwoom.stock_held != []:
             for i in self.kiwoom.stock_held:
-
+                
+                
                 self.kiwoom.set_input_value("종목코드", i)
                 self.kiwoom.set_input_value("틱범위", 5)
                 self.kiwoom.set_input_value("수정주가구분", 0)
                 self.kiwoom.comm_rq_data("opt10080_req", "opt10080", 0, "3000")
-        """      
+
 
 
 
