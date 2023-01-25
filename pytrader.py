@@ -37,10 +37,6 @@ class MyWindow(QMainWindow, form_class):
         self.timer.timeout.connect(self.timeout)
 
 
-        self.timer2 = QTimer(self)
-        self.timer2.start(1000 *10) #10초
-        self.timer2.timeout.connect(self.timeout2)
-
         self.timer3 = QTimer(self)
         self.timer3.start(30000)
         
@@ -55,7 +51,7 @@ class MyWindow(QMainWindow, form_class):
         
         self.comboBox.addItems(accounts_list) #콤보박스 1에 계좌목록 추가
         #self.lineEdit.textChanged.connect(self.code_changed)
-        self.pushButton.clicked.connect(self.check_balance)
+        #self.pushButton.clicked.connect(self.check_balance)
 
         self.pushButton_5.clicked.connect(self.kiwoom.get_condition_load)
 
@@ -70,8 +66,6 @@ class MyWindow(QMainWindow, form_class):
         self.pushButton_5.setDisabled(True)
         self.pushButton_2.setDisabled(True)
         self.pushButton_3.setDisabled(True)
-        self.pushButton_4.setDisabled(True)
-        self.pushButton_7.setDisabled(True)
         self.pushButton_6.setDisabled(True)
         
         self.lineEdit_9.textChanged.connect(self.price_change)
@@ -123,26 +117,12 @@ class MyWindow(QMainWindow, form_class):
         self.statusbar.showMessage(state_msg + " | " + time_msg)
         
 
-    #잔고 실시간으로 갱신
-    def timeout2(self):
-        if self.checkBox.isChecked():
-            self.check_balance()
+
 
     #실시간 검색중 TR요청
     def timeout3(self):
         
-        """
-        if self.lineEdit_11.text() != "":
-            
-            print(self.lineEdit_11)
-
-            trcode = self.lineEdit_11.text()
-            
-            self.kiwoom.set_input_value("종목코드", trcode)
-            self.kiwoom.set_input_value("틱범위", 5)
-            self.kiwoom.set_input_value("수정주가구분", 0)
-            self.kiwoom.comm_rq_data("opt10080_req", "opt10080", 0, "3000")
-        """
+    
         time.sleep(0.2)
         if self.kiwoom.stock_held != []:
             for i in self.kiwoom.stock_held:
@@ -162,6 +142,7 @@ class MyWindow(QMainWindow, form_class):
         self.lineEdit_3.setText(str(price))
         
      
+    """
     #주식 잔고 
     def check_balance(self):
         self.kiwoom.reset_opw00018_output()
@@ -203,7 +184,7 @@ class MyWindow(QMainWindow, form_class):
                 self.tableWidget_2.setItem(j, i, item)
 
         self.tableWidget_2.resizeRowsToContents()
-        
+    """
      #selectFunction 메서드 정의
     def selectFunction(self):
         #filePath 출력하는 부분 초기화
@@ -298,7 +279,7 @@ class MyWindow(QMainWindow, form_class):
                     
             self.textEdit.append("종목추가 : "+ row_dic['종목이름'])
                 
-            self.pushButton_4.setEnabled(True)
+
                     
                 
     #port 이름넣기(매도)
@@ -310,15 +291,8 @@ class MyWindow(QMainWindow, form_class):
         self.row_count+=1
         #self.tableWidget_3.resizeRowsToContents()
         self.tableWidget_3.resizeColumnsToContents()
-
-    #port 이름넣기(매도)
-    def check_port2(self):
-        port_name = self.comboBox_2.currentText()
-        self.tableWidget_4.setRowCount(1)
-        self.tableWidget_4.setColumnCount(1)
-        self.tableWidget_4.setItem(0,0,QTableWidgetItem(port_name))
-        self.tableWidget_3.resizeColumnsToContents()
         self.pushButton_6.setEnabled(True)
+
 
 
     #주시 종목에 설정한 종목 넣기
@@ -384,7 +358,7 @@ class MyWindow(QMainWindow, form_class):
             self.lineEdit_4.clear()
             self.lineEdit_5.clear()
         
-        self.pushButton_4.setEnabled(True)
+
 
             
 
@@ -401,17 +375,7 @@ class MyWindow(QMainWindow, form_class):
             self.row_count-=1
             #self.plainTextEdit.appendPlainText("선택 종목삭제")
             self.textEdit.append("선택 port 삭제")
-           
-    #제거 버튼 눌렀을때 테이블에서 행삭제(매도)      
-    def delete_row2(self):
-        select = self.tableWidget_4.selectedItems()
-        for i in select:
-            row = i.row()
-            self.tableWidget_4.removeRow(row)
-            #self.plainTextEdit.appendPlainText("선택 종목삭제")
-            self.textEdit.append("선택 port 삭제")
-            
-            
+         
 
     #호가 받아오는 함수
     def get_hoga(self, trcode):
