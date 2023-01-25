@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1221</width>
-    <height>917</height>
+    <width>1256</width>
+    <height>895</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,136 +18,13 @@
     <normaloff>../../../../../auto/icon.png</normaloff>../../../../../auto/icon.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QGroupBox" name="groupBox_2">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>590</y>
-      <width>611</width>
-      <height>281</height>
-     </rect>
-    </property>
-    <property name="title">
-     <string>잔고 및 보유종목현황</string>
-    </property>
-    <widget class="QTableWidget" name="tableWidget">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>20</y>
-       <width>591</width>
-       <height>65</height>
-      </rect>
-     </property>
-     <property name="rowCount">
-      <number>1</number>
-     </property>
-     <row/>
-     <column>
-      <property name="text">
-       <string>예수금 (d+2)</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>총매입</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>총평가</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>총손익</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>총수익률 (%)</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>추정자산</string>
-      </property>
-     </column>
-    </widget>
-    <widget class="QTableWidget" name="tableWidget_2">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>100</y>
-       <width>591</width>
-       <height>141</height>
-      </rect>
-     </property>
-     <column>
-      <property name="text">
-       <string>종목명</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>보유량</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>매입가</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>현재가</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>평가손익</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>수익률 (%)</string>
-      </property>
-     </column>
-    </widget>
-    <widget class="QPushButton" name="pushButton">
-     <property name="geometry">
-      <rect>
-       <x>520</x>
-       <y>250</y>
-       <width>75</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>조회</string>
-     </property>
-    </widget>
-    <widget class="QCheckBox" name="checkBox">
-     <property name="geometry">
-      <rect>
-       <x>420</x>
-       <y>250</y>
-       <width>81</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>실시간 조회</string>
-     </property>
-    </widget>
-   </widget>
    <widget class="QGroupBox" name="groupBox_6">
     <property name="geometry">
      <rect>
       <x>40</x>
       <y>10</y>
       <width>581</width>
-      <height>221</height>
+      <height>201</height>
      </rect>
     </property>
     <property name="title">
@@ -176,7 +53,7 @@
      <property name="geometry">
       <rect>
        <x>100</x>
-       <y>120</y>
+       <y>110</y>
        <width>181</width>
        <height>31</height>
       </rect>
@@ -191,7 +68,7 @@
      <property name="geometry">
       <rect>
        <x>40</x>
-       <y>130</y>
+       <y>120</y>
        <width>31</width>
        <height>16</height>
       </rect>
@@ -245,7 +122,7 @@
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>170</y>
+       <y>150</y>
        <width>71</width>
        <height>31</height>
       </rect>
@@ -263,7 +140,7 @@
      <property name="geometry">
       <rect>
        <x>100</x>
-       <y>170</y>
+       <y>150</y>
        <width>181</width>
        <height>31</height>
       </rect>
@@ -278,9 +155,9 @@
    <widget class="QGroupBox" name="groupBox_4">
     <property name="geometry">
      <rect>
-      <x>660</x>
+      <x>730</x>
       <y>10</y>
-      <width>541</width>
+      <width>501</width>
       <height>861</height>
      </rect>
     </property>
@@ -318,7 +195,7 @@
       <rect>
        <x>30</x>
        <y>50</y>
-       <width>481</width>
+       <width>451</width>
        <height>371</height>
       </rect>
      </property>
@@ -328,7 +205,7 @@
       <rect>
        <x>30</x>
        <y>460</y>
-       <width>481</width>
+       <width>451</width>
        <height>381</height>
       </rect>
      </property>
@@ -338,7 +215,7 @@
     <property name="geometry">
      <rect>
       <x>90</x>
-      <y>300</y>
+      <y>270</y>
       <width>271</width>
       <height>191</height>
      </rect>
@@ -358,7 +235,7 @@
     <property name="geometry">
      <rect>
       <x>60</x>
-      <y>340</y>
+      <y>310</y>
       <width>21</width>
       <height>16</height>
      </rect>
@@ -371,7 +248,7 @@
     <property name="geometry">
      <rect>
       <x>60</x>
-      <y>370</y>
+      <y>340</y>
       <width>21</width>
       <height>16</height>
      </rect>
@@ -384,7 +261,7 @@
     <property name="geometry">
      <rect>
       <x>60</x>
-      <y>400</y>
+      <y>370</y>
       <width>21</width>
       <height>16</height>
      </rect>
@@ -410,7 +287,7 @@
     <property name="geometry">
      <rect>
       <x>190</x>
-      <y>240</y>
+      <y>220</y>
       <width>431</width>
       <height>31</height>
      </rect>
@@ -457,7 +334,7 @@
     <property name="geometry">
      <rect>
       <x>80</x>
-      <y>240</y>
+      <y>220</y>
       <width>91</width>
       <height>21</height>
      </rect>
@@ -475,7 +352,7 @@
     <property name="geometry">
      <rect>
       <x>60</x>
-      <y>430</y>
+      <y>400</y>
       <width>21</width>
       <height>16</height>
      </rect>
@@ -488,7 +365,7 @@
     <property name="geometry">
      <rect>
       <x>60</x>
-      <y>460</y>
+      <y>430</y>
       <width>21</width>
       <height>16</height>
      </rect>
@@ -497,51 +374,50 @@
      <string/>
     </property>
    </widget>
-   <widget class="QTableWidget" name="tableWidget_4">
+   <widget class="QTableWidget" name="tableWidget_5">
     <property name="geometry">
      <rect>
-      <x>90</x>
-      <y>520</y>
-      <width>271</width>
-      <height>51</height>
+      <x>30</x>
+      <y>470</y>
+      <width>691</width>
+      <height>401</height>
      </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>9</pointsize>
-     </font>
     </property>
     <column>
      <property name="text">
-      <string>port 이름</string>
+      <string>종목명</string>
      </property>
     </column>
-   </widget>
-   <widget class="QPushButton" name="pushButton_4">
-    <property name="geometry">
-     <rect>
-      <x>390</x>
-      <y>530</y>
-      <width>101</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>port 추가</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_7">
-    <property name="geometry">
-     <rect>
-      <x>510</x>
-      <y>530</y>
-      <width>101</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>선택port 삭제</string>
-    </property>
+    <column>
+     <property name="text">
+      <string>시가</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>저가</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>고가</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>상단선</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>중단선</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>하단선</string>
+     </property>
+    </column>
    </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
