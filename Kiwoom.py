@@ -9,6 +9,7 @@ import sqlite3
 import datetime
 import numpy as np
 import re
+from datetime import datetime
 
 TR_REQ_TIME_INTERVAL = 0.2
 
@@ -25,7 +26,7 @@ class Kiwoom(QAxWidget):
         self._set_signal_slots()
         self.ui = ui
         
-        
+        self.today = datetime.today().strftime("%Y%m%d")   
         
         self.dic = {}
         
@@ -577,29 +578,7 @@ class Kiwoom(QAxWidget):
                        self.gudoc_count += 1
                        print('구독성공2')
 
-        if cond_name == self.sell_list[0]:
-            
-            print("code : ", code)
-            print("stock_list : ", self.stock_held)
-            if code in self.stock_held:
 
-                name = self.get_master_code_name(code)      
-                list_1 = [k for k in self.dic.keys() if name in k ]
-                
-                trcode = self.dic[list_1[list_1.index(name+'_ticker')]]
-                rebuy_count = self.dic[list_1[list_1.index(name+'_rebuy_count')]]
-                status = self.dic[list_1[list_1.index(name+'_status')]] 
-                self.send_order('send_order', "0101", self.ui.account_number, 2, trcode, rebuy_count,  0 ,"03", "" )
-                self.dic[list_1[list_1.index(name+'_status')]] = "거래끝"
-                self.ui.textEdit.setFontPointSize(13)
-                self.ui.textEdit.setTextColor(QColor(0,0,255))
-                self.ui.textEdit.append("매도 ■ : 조건식 매도")
-                self.ui.textEdit.setFontPointSize(9)
-                self.ui.textEdit.setTextColor(QColor(0,0,0))
-                self.ui.textEdit.append(" | " + "매도 | "+ name + " | 조건식매도")
-                self.ui.textEdit.append(" 매도수량 " + str(rebuy_count) + "주")
-                self.ui.textEdit.append(" ")
-                self.stock_held.remove(code)
                 
 
 
@@ -608,6 +587,7 @@ class Kiwoom(QAxWidget):
     def _handler_real_data(self, trcode, real_type, data):
         
         
+        print(self.dic)
         
         # 체결 시간 
         if real_type == "주식체결":
@@ -630,7 +610,7 @@ class Kiwoom(QAxWidget):
             
 
         #전일대비
-        compare = self.get_comm_real_data(trcode, 12)
+        #compare = self.get_comm_real_data(trcode, 12)
 
 
         # 현재가 
@@ -650,23 +630,22 @@ class Kiwoom(QAxWidget):
                 start_price = self.get_comm_real_data(trcode, 16)
                 price = self.get_comm_real_data(trcode, 10)
                 name = self.get_master_code_name(trcode)
-                compare = self.get_comm_real_data(trcode, 12).strip()
+                #compare = self.get_comm_real_data(trcode, 12).strip()
                     
                     
-                if start_price  == "" or compare == "" :
+                if start_price  == "" :
                     pass
                 #self.ui.textEdit_2.append("시가 입력 대기중 :" + name )
                 else:
                     start_price  = float(start_price[1:])
                     price = float(price[1:])
-                    compare = float(compare)
+                    #compare = float(compare)
                     
                     self.dic[name + '_start_price'] = start_price  
                     self.dic[name + '_price'] = price
-                    self.dic[name + '_compare'] = compare
+                    #self.dic[name + '_compare'] = compare
                     self.dic[name + '_hoga'] = hoga
-                    
-                        
+
                     #print("_handler_real_data :" , name)
                         
                     self.strategy(name, time)
@@ -688,38 +667,24 @@ class Kiwoom(QAxWidget):
         self.dic[name + '_buy_total'] = int(self.ui.lineEdit_9.text())
         
 
-        
-        #매도조건 상태 2가지
-        self.dic[name + '_sell_status1'] = '초기상태'
-        self.dic[name + '_sell_status2'] = '초기상태'
-            
         #재매수시 비율
         self.dic[name + '_sec_percent'] = 0
             
-        #각 시점 최고가
-        self.dic[name + '_price_avg'] = 0 
-        
-        
-        #self.plainTextEdit.appendPlainText("거래준비완료 | 종목 :" + name )
-        self.ui.textEdit.append("거래준비완료 | 종목 :" + name)
-            
-        #2%도달 여부(1매수용) (0도달x / 1 도달o )
-        self.dic[name + '_reach_two_per'] = 0 
-
-            
-        #2%도달 여부(2매수용) (0도달x / 1 도달o )
-        self.dic[name + '_reach_two_per2'] = 0 
-
-        #self.pushButton_5.setEnabled(True)
-        self.dic[name + "_compare_list"] = []
-        self.dic[name + "_price_list"] = []
         
         self.dic[name + "_open_5"] = 0 #5분봉 시가
-        self.dic[name + "_low_5"] = 0 #5분봉 시가
-        self.dic[name + "_high_5"] = 0 #5분봉 시가
+        self.dic[name + "_low_5"] = 0 #5분봉 저가
+        self.dic[name + "_high_5"] = 0 #5분봉 고가
         self.dic[name + "_window_count"] = self.window_number #행번호
         
         self.window_number += 1
+
+        self.dic[name + "_upper"] = 0 #상단선
+        self.dic[name + "_middle"] = 0 #중단선
+        self.dic[name + "_lower"] = 0 #하단선
+
+
+        #self.plainTextEdit.appendPlainText("거래준비완료 | 종목 :" + name )
+        self.ui.textEdit.append("거래준비완료 | 종목 :" + name)
 
         print("ready_trade")
         
@@ -815,6 +780,8 @@ class Kiwoom(QAxWidget):
 
 
     def _opt10080(self, rqname, trcode):
+
+        
         data_cnt = self._get_repeat_cnt(trcode, rqname) #데이터 갯수 확인
 
         print("asdasdas:" + str(data_cnt))
@@ -832,50 +799,127 @@ class Kiwoom(QAxWidget):
 
         list_1 = [k for k in self.dic.keys() if name in k ]
         
-        open_5 = self.dic[list_1[list_1.index(name+'_open_5')]]
-        low_5 = self.dic[list_1[list_1.index(name+'_low_5')]] 
-        high_5 = self.dic[list_1[list_1.index(name+'_high_5')]] 
-        
-        if low_5 == 0:
-            self.dic[list_1[list_1.index(name+'_low_5')]] = int(low.strip()[1:])
-            low_5 = int(low.strip()[1:])
-        if high_5 == 0 :
-            self.dic[list_1[list_1.index(name+'_high_5')]] = int(high.strip()[1:])
-            high_5 = int(high.strip()[1:])
+        if list_1 != []:
             
-        
-        if int(low.strip()[1:]) <= int(low_5):
-            self.dic[list_1[list_1.index(name+'_low_5')]] = int(low.strip()[1:])
-        if int(high.strip()[1:]) >= int(high_5):
-            self.dic[list_1[list_1.index(name+'_high_5')]] = int(high.strip()[1:])
-        
-        self.dic[list_1[list_1.index(name+'_open_5')]] = int(open.strip()[1:])
-        
-        row_number = self.dic[list_1[list_1.index(name+'_window_count')]] 
+            open_5 = self.dic[list_1[list_1.index(name+'_open_5')]]
+            low_5 = self.dic[list_1[list_1.index(name+'_low_5')]] 
+            high_5 = self.dic[list_1[list_1.index(name+'_high_5')]] 
+            row_number = self.dic[list_1[list_1.index(name+'_window_count')]] 
             
-        self.dic[list_1[list_1.index(name+'_open_5')]] = open
-        self.dic[list_1[list_1.index(name+'_low_5')]] = low
-        self.dic[list_1[list_1.index(name+'_high_5')]] = high
-        
-
-        div_4 = (int(high_5 )- int(low_5))/4 #4등분 가격
-
-        print("div_4 : " + str(div_4))
-        print("name : " + str(name) + "row_number : " + str(row_number))
-        if date.strip()[0:8] == "20230119":
-            print("row_number : " + str(row_number))
-            self.ui.tableWidget_5.setRowCount(len(self.stock_held))
-            self.ui.tableWidget_5.setColumnCount(7)
-            self.ui.tableWidget_5.setItem(row_number,0,QTableWidgetItem(name.strip()))
-            self.ui.tableWidget_5.setItem(row_number,1,QTableWidgetItem(open.strip()[1:]))
-            self.ui.tableWidget_5.setItem(row_number,2,QTableWidgetItem(low.strip()[1:]))
-            self.ui.tableWidget_5.setItem(row_number,3,QTableWidgetItem(high.strip()[1:]))
-            self.ui.tableWidget_5.setItem(row_number,4,QTableWidgetItem(str(int(low.strip()[1:]) + div_4*3 )))
-            self.ui.tableWidget_5.setItem(row_number,5,QTableWidgetItem(str(int(low.strip()[1:]) + div_4*2 )))
-            self.ui.tableWidget_5.setItem(row_number,6,QTableWidgetItem(str(int(low.strip()[1:]) + div_4 )))
-
+            #처음 값 저장
+            if low_5 == 0:
+                self.dic[list_1[list_1.index(name+'_low_5')]] = int(low.strip()[1:])
+                low_5 = int(low.strip()[1:])
+            if high_5 == 0 :
+                self.dic[list_1[list_1.index(name+'_high_5')]] = int(high.strip()[1:])
+                high_5 = int(high.strip()[1:])
+            if open_5 == 0 :
+                self.dic[list_1[list_1.index(name+'_open_5')]] = int(open.strip()[1:])
+                open_5 = int(open.strip()[1:])
                 
+            #현재 저가가 초기 시가 보다 낮으면 
+            if int(low.strip()[1:]) <= int(open_5):
+                self.dic[list_1[list_1.index(name+'_low_5')]] = int(low.strip()[1:])
+                low_5 = int(low.strip()[1:])
+                
+                #고가가 갱신되면
+                if int(high.strip()[1:]) >= int(high_5):
+                    self.dic[list_1[list_1.index(name+'_high_5')]] = int(high.strip()[1:])
+                    high_5 = int(high.strip()[1:])
+                    div_4 = (int(high_5)- int(low_5))/4 #4등분 가격
+                    
+                    self.dic[list_1[list_1.index(name+'_upper')]] = low_5 + div_4*3
+                    self.dic[list_1[list_1.index(name+'_middle')]] = low_5 + div_4*2
+                    self.dic[list_1[list_1.index(name+'_lower')]] = low_5 + div_4
+                    
+                    
+                    print("div_4 : " + str(div_4))
+                    print("name : " + str(name) + "row_number : " + str(row_number))
+                    if date.strip()[0:8] == self.today:
+                        print("row_number : " + str(row_number))
+                        self.ui.tableWidget_5.setRowCount(len(self.stock_held))
+                        self.ui.tableWidget_5.setColumnCount(7)
+                        self.ui.tableWidget_5.setItem(row_number,0,QTableWidgetItem(name.strip()))
+                        self.ui.tableWidget_5.setItem(row_number,1,QTableWidgetItem(open.strip()[1:]))
+                        self.ui.tableWidget_5.setItem(row_number,2,QTableWidgetItem(low.strip()[1:]))
+                        self.ui.tableWidget_5.setItem(row_number,3,QTableWidgetItem(high.strip()[1:]))
+                        self.ui.tableWidget_5.setItem(row_number,4,QTableWidgetItem(str(low_5 + div_4*3 )))
+                        self.ui.tableWidget_5.setItem(row_number,5,QTableWidgetItem(str(low_5 + div_4*2 )))
+                        self.ui.tableWidget_5.setItem(row_number,6,QTableWidgetItem(str(low_5 + div_4 )))
+                    
+                else :
+                    div_4 = (int(high_5)- int(low_5))/4 #4등분 가격
+                    print("div_4 : " + str(div_4))
+                    print("name : " + str(name) + "row_number : " + str(row_number))
+                    
+                    self.dic[list_1[list_1.index(name+'_upper')]] = low_5 + div_4*3
+                    self.dic[list_1[list_1.index(name+'_middle')]] = low_5 + div_4*2
+                    self.dic[list_1[list_1.index(name+'_lower')]] = low_5 + div_4
+                    
+                    
+                    if date.strip()[0:8] == self.today:
+                        print("row_number : " + str(row_number))
+                        self.ui.tableWidget_5.setRowCount(len(self.stock_held))
+                        self.ui.tableWidget_5.setColumnCount(7)
+                        self.ui.tableWidget_5.setItem(row_number,0,QTableWidgetItem(name.strip()))
+                        self.ui.tableWidget_5.setItem(row_number,1,QTableWidgetItem(open.strip()[1:]))
+                        self.ui.tableWidget_5.setItem(row_number,2,QTableWidgetItem(low.strip()[1:]))
+                        self.ui.tableWidget_5.setItem(row_number,3,QTableWidgetItem(high.strip()[1:]))
+                        self.ui.tableWidget_5.setItem(row_number,4,QTableWidgetItem(str(low_5 + div_4*3 )))
+                        self.ui.tableWidget_5.setItem(row_number,5,QTableWidgetItem(str(low_5 + div_4*2 )))
+                        self.ui.tableWidget_5.setItem(row_number,6,QTableWidgetItem(str(low_5 + div_4 )))
+     
+            #현재 저가가 초기 시가 보다 높으면 
+            else:
+                #고가가 갱신되면
+                if int(high.strip()[1:]) >= int(high_5):
+                    self.dic[list_1[list_1.index(name+'_high_5')]] = int(high.strip()[1:])
+                    high_5 = int(high.strip()[1:])
+                    div_4 = (int(high_5)- int(open_5))/4 #4등분 가격
+                    
+                    
+                    self.dic[list_1[list_1.index(name+'_upper')]] = low_5 + div_4*3
+                    self.dic[list_1[list_1.index(name+'_middle')]] = low_5 + div_4*2
+                    self.dic[list_1[list_1.index(name+'_lower')]] = low_5 + div_4
+                    
+                    
+                    print("div_4 : " + str(div_4))
+                    print("name : " + str(name) + "row_number : " + str(row_number))
+                    if date.strip()[0:8] == self.today:
+                        print("row_number : " + str(row_number))
+                        self.ui.tableWidget_5.setRowCount(len(self.stock_held))
+                        self.ui.tableWidget_5.setColumnCount(7)
+                        self.ui.tableWidget_5.setItem(row_number,0,QTableWidgetItem(name.strip()))
+                        self.ui.tableWidget_5.setItem(row_number,1,QTableWidgetItem(open.strip()[1:]))
+                        self.ui.tableWidget_5.setItem(row_number,2,QTableWidgetItem(low.strip()[1:]))
+                        self.ui.tableWidget_5.setItem(row_number,3,QTableWidgetItem(high.strip()[1:]))
+                        self.ui.tableWidget_5.setItem(row_number,4,QTableWidgetItem(str(open_5 + div_4*3 )))
+                        self.ui.tableWidget_5.setItem(row_number,5,QTableWidgetItem(str(open_5 + div_4*2 )))
+                        self.ui.tableWidget_5.setItem(row_number,6,QTableWidgetItem(str(open_5 + div_4 )))
+                    
+                else :
+                    div_4 = (int(high_5)- int(open_5))/4 #4등분 가격
+                    print("div_4 : " + str(div_4))
+                    print("name : " + str(name) + "row_number : " + str(row_number))
+                    
+                    self.dic[list_1[list_1.index(name+'_upper')]] = low_5 + div_4*3
+                    self.dic[list_1[list_1.index(name+'_middle')]] = low_5 + div_4*2
+                    self.dic[list_1[list_1.index(name+'_lower')]] = low_5 + div_4
+                    
+                    if date.strip()[0:8] == self.today:
+                        print("row_number : " + str(row_number))
+                        self.ui.tableWidget_5.setRowCount(len(self.stock_held))
+                        self.ui.tableWidget_5.setColumnCount(7)
+                        self.ui.tableWidget_5.setItem(row_number,0,QTableWidgetItem(name.strip()))
+                        self.ui.tableWidget_5.setItem(row_number,1,QTableWidgetItem(open.strip()[1:]))
+                        self.ui.tableWidget_5.setItem(row_number,2,QTableWidgetItem(low.strip()[1:]))
+                        self.ui.tableWidget_5.setItem(row_number,3,QTableWidgetItem(high.strip()[1:]))
+                        self.ui.tableWidget_5.setItem(row_number,4,QTableWidgetItem(str(open_5 + div_4*3 )))
+                        self.ui.tableWidget_5.setItem(row_number,5,QTableWidgetItem(str(open_5 + div_4*2 )))
+                        self.ui.tableWidget_5.setItem(row_number,6,QTableWidgetItem(str(open_5 + div_4 )))
+     
             
+     
 
     def _opt10081(self, rqname, trcode):
         data_cnt = self._get_repeat_cnt(trcode, rqname) #데이터 갯수 확인
@@ -981,220 +1025,69 @@ class Kiwoom(QAxWidget):
         hoga = self.dic[list_1[list_1.index(name+'_hoga')]]                   #호가
         start_price = self.dic[list_1[list_1.index(name+'_start_price')]]     #시가
         price = self.dic[list_1[list_1.index(name+'_price')]]                 #현재가
-        price_list = self.dic[list_1[list_1.index(name+'_price_list')]]       #현재가 매수 리스트
-        compare = self.dic[list_1[list_1.index(name+'_compare')]]             #현재가 전일대비
-        compare_list = self.dic[list_1[list_1.index(name+'_compare_list')]]   #현재가 전일대비 평단가 구하는 리스트
-        sec_percent = self.dic[list_1[list_1.index(name+'_sec_percent')]]     #compare 넣을 변수
-        price_avg = self.dic[list_1[list_1.index(name+'_price_avg')]]       #2차 매수시 초기값 밑으로 내려갔는지
+        upper = self.dic[list_1[list_1.index(name+'_upper')]]                 #상단선
+        middle = self.dic[list_1[list_1.index(name+'_middle')]]               #중단선
+        lower = self.dic[list_1[list_1.index(name+'_lower')]]                 #하단선
+        open_5 = self.dic[list_1[list_1.index(name+'_open_5')]]               #5분봉 매수했을때 시가
         
-        if name+'_sell_status1' in list_1:
-            sell_status_1 = self.dic[list_1[list_1.index(name+'_sell_status1')]]  #매도조건상태1
-       
-        if name+'_sell_status2' in list_1:
-            sell_status_2 = self.dic[list_1[list_1.index(name+'_sell_status2')]]  #매도조건상태2
+        
+        #compare = self.dic[list_1[list_1.index(name+'_compare')]]             #현재가 전일대비       
        
         buy_number = int(int(buy_total_price) / int(price)) #매수할 수량
         
-        div_count = int(buy_number/5) #5호가 나눠서 매수할 수량
-        
+
         format_price = format(int(price), ",")
         
-        reach_two_per = self.dic[list_1[list_1.index(name+'_reach_two_per')]]  
-        reach_two_per2 = self.dic[list_1[list_1.index(name+'_reach_two_per2')]]  
         
         
         #print("이름: " +str(name) + "가격 :" + str(initial))
         
         #초기상태
+        #포트에서 뜨면 매수
         if status == "초기상태" :
-            self.send_order('send_order', "0101", self.ui.account_number, 1, trcode, div_count,  price ,"00", "" )
-            self.dic[list_1[list_1.index(name+'_status')]] = "1매수상태"
+            self.send_order('send_order', "0101", self.ui.account_number, 1, trcode, buy_number,  price ,"00", "" )
+            self.dic[list_1[list_1.index(name+'_status')]] = "매수상태"
             self.dic[list_1[list_1.index(name+'_initial')]] = price
-            self.dic[list_1[list_1.index(name+'_buy_count')]] = buy_number - div_count
-            self.dic[list_1[list_1.index(name+'_rebuy_count')]] = rebuy_count + div_count
-            self.dic[list_1[list_1.index(name+'_compare_list')]].append(compare)
-            self.dic[list_1[list_1.index(name+'_price_list')]].append(price)
-            compare_list.append(compare)
-            price_list.append(price)
-            price_avg = sum(price_list) / len(price_list)
-            self.dic[list_1[list_1.index(name+'_price_avg')]] = price_avg
+            self.dic[list_1[list_1.index(name+'_buy_count')]] = buy_number 
             self.ui.textEdit.setFontPointSize(13)
             self.ui.textEdit.setTextColor(QColor(255,0,0))
-            self.ui.textEdit.append("매수(5호가)")
+            self.ui.textEdit.append("매수")
             self.ui.textEdit.setFontPointSize(9)
             self.ui.textEdit.setTextColor(QColor(0,0,0))
-            self.ui.textEdit.append("시간 : " + str(time) + " | " + "1매수  :"+ name + " 매수가격 :" + format_price + "원 "+ str(compare) + " 매수수량 : " + str(div_count) + " 포트번호 : " + str(self.port_name) )
+            self.ui.textEdit.append("시간 : " + str(time) + " | " + "1매수  :"+ name + " 매수가격 :" + format_price + "원 "+ " 매수수량 : " + str(buy_number) + " 포트번호 : " + str(self.port_name) )
             self.ui.textEdit.append(" ")
-            self.dic[list_1[list_1.index(name+'_sec_percent')]] =  compare
             
-        elif status == "1매수상태":
-            #4호가 진입시 매수
-            if price == initial - hoga :
-                self.send_order('send_order', "0101", self.ui.account_number, 1, trcode, div_count,  initial - hoga ,"00", "" )
-                self.dic[list_1[list_1.index(name+'_status')]] = "2매수상태"
-                self.dic[list_1[list_1.index(name+'_buy_count')]] = buy_number - div_count
-                self.dic[list_1[list_1.index(name+'_rebuy_count')]] = rebuy_count + div_count
-                self.dic[list_1[list_1.index(name+'_compare_list')]].append(compare)
-                self.dic[list_1[list_1.index(name+'_price_list')]].append(price)
-                compare_list.append(compare)
+        #매수 상태일때
+        elif status == "매수상태":
+            #가격이 상단선 밑으로 하락하면
+            if price < upper :
+                self.send_order('send_order', "0101", self.ui.account_number, 2, trcode, buy_count, upper ,"00", "" )
+                self.dic[list_1[list_1.index(name+'_status')]] = "재매수상태"
                 self.ui.textEdit.setFontPointSize(13)
-                self.ui.textEdit.setTextColor(QColor(255,0,0))
-                self.ui.textEdit.append("매수(4호가)")
+                self.ui.textEdit.setTextColor(QColor(0,0,255))
+                self.ui.textEdit.append("매도 ■ : 상단선 하락 매도")
                 self.ui.textEdit.setFontPointSize(9)
                 self.ui.textEdit.setTextColor(QColor(0,0,0))
-                self.ui.textEdit.append("시간 : " + str(time) + " | " + "1매수  :"+ name + " 매수가격 :" + str(initial - hoga) + "원 "+ str(compare) + " 매수수량 : " + str(div_count) + " 포트번호 : " + str(self.port_name) )
-                self.ui.textEdit.append("-------------------------------")
-                self.ui.textEdit.append(" ")
-            """    
-            #안떨어지고 상승시 매수상태로 전환
-            elif price >= initial:
-                #2익절구간 도달시 표시
-                if price >= price_avg + price_avg *0.02 and reach_two_per == 0 :
-                    self.dic[list_1[list_1.index(name+'_reach_two_per')]] = 1
-                    self.ui.textEdit.setFontPointSize(13)
-                    self.ui.textEdit.setTextColor(QColor(0,128,0))
-                    self.ui.textEdit.append("▲ 2%익절구간 도달")  
-                    self.ui.textEdit.setFontPointSize(9)
-                    self.ui.textEdit.setTextColor(QColor(0,0,0))
-                    self.ui.textEdit.append("->시간 : " + str(time) + " | " + name +" | 2% 익절구간 도달 ")
-                    self.ui.textEdit.append(" ")
-                else: 
-                    self.ui.textEdit_2.append("대기중 | 종목 : " + name + " " + str( compare))
-                
-                #3% 찍었을때(상승x)
-                if price >= price_avg + price_avg *0.03 :
-                    self.send_order('send_order', "0101", self.ui.account_number, 2, trcode, rebuy_count,  0 ,"03", "" )
-                    self.dic[list_1[list_1.index(name+'_sell_price')]] = price * rebuy_count
-                    self.dic[list_1[list_1.index(name+'_sell_status1')]] = "초기상태"
-                    self.dic[list_1[list_1.index(name+'_status')]] = "거래끝"
-                    self.ui.textEdit.setFontPointSize(13)
-                    self.ui.textEdit.setTextColor(QColor(0,0,255))
-                    self.ui.textEdit.append("매도 ■ : 3% 도달")
-                    self.ui.textEdit.setFontPointSize(9)
-                    self.ui.textEdit.setTextColor(QColor(0,0,0))
-                    self.ui.textEdit.append("->시간 : " + str(time) + " | " + "1매도 | "+ name + " | 3%익절매도")
-                    self.ui.textEdit.append("매도가격 :" + format_price + " 원 " + str(compare)   + " 매도수량 " + str(rebuy_count) + "주")
-                    self.ui.textEdit.append(" ")
-            """
-            
-        elif status == "2매수상태":
-            #3호가 진입시 매수
-            if price == initial - 2*hoga:
-                self.send_order('send_order', "0101", self.ui.account_number, 1, trcode, div_count,  initial - 2*hoga ,"00", "" )
-                self.dic[list_1[list_1.index(name+'_status')]] = "3매수상태"
-                self.dic[list_1[list_1.index(name+'_buy_count')]] = buy_number - div_count
-                self.dic[list_1[list_1.index(name+'_rebuy_count')]] = rebuy_count + div_count
-                self.dic[list_1[list_1.index(name+'_compare_list')]].append(compare)
-                self.dic[list_1[list_1.index(name+'_price_list')]].append(price)
-                compare_list.append(compare)
-                self.ui.textEdit.setFontPointSize(13)
-                self.ui.textEdit.setTextColor(QColor(255,0,0))
-                self.ui.textEdit.append("매수(3호가)")
-                self.ui.textEdit.setFontPointSize(9)
-                self.ui.textEdit.setTextColor(QColor(0,0,0))
-                self.ui.textEdit.append("시간 : " + str(time) + " | " + "1매수  :"+ name + " 매수가격 :" + str(initial - 2*hoga) + "원 "+ str(compare) + " 매수수량 : " + str(div_count) + " 포트번호 : " + str(self.port_name) )
-                self.ui.textEdit.append("-------------------------------")
+                self.ui.textEdit.append(" | " + "매도 | "+ name + " | 상단선 하락 매도")
+                self.ui.textEdit.append(" 매도수량 " + str(buy_count) + "주")
                 self.ui.textEdit.append(" ")
                 
-            #4호가에서 5호가로 오르면 남은 잔량 매수후 매수 상태로 전환
-            elif price >= initial :
-                self.send_order('send_order', "0101", self.ui.account_number, 1, trcode, div_count,  initial ,"00", "" )
-                self.dic[list_1[list_1.index(name+'_status')]] = "매수상태"
-                self.dic[list_1[list_1.index(name+'_buy_count')]] = 0
-                self.dic[list_1[list_1.index(name+'_rebuy_count')]] = rebuy_count + div_count
-                self.dic[list_1[list_1.index(name+'_compare_list')]].append(compare)
-                self.dic[list_1[list_1.index(name+'_price_list')]].append(price)
-                compare_list.append(compare)
-                price_list.append(price)
-                price_avg = sum(price_list) / len(price_list)
-                self.dic[list_1[list_1.index(name+'_price_avg')]] = price_avg
-                self.ui.textEdit.setFontPointSize(13)
-                self.ui.textEdit.setTextColor(QColor(255,0,0))
-                self.ui.textEdit.append("매수(4호가->5호가)")
-                self.ui.textEdit.setFontPointSize(9)
-                self.ui.textEdit.setTextColor(QColor(0,0,0))
-                self.ui.textEdit.append("시간 : " + str(time) + " | " + "1매수  :"+ name + " 매수가격 :" + str(initial) + "원 "+ str(compare) + " 매수수량 : " + str(div_count) + " 포트번호 : " + str(self.port_name) )
-                self.ui.textEdit.append(" ")
-            
-            
-            
-        elif status == "3매수상태":
-            #2호가 진입시 매수
-            if price == initial - 3*hoga:
-                self.send_order('send_order', "0101", self.ui.account_number, 1, trcode, div_count,  initial - 3*hoga ,"00", "" )
-                self.dic[list_1[list_1.index(name+'_status')]] = "4매수상태"
-                self.dic[list_1[list_1.index(name+'_buy_count')]] = buy_number - div_count
-                self.dic[list_1[list_1.index(name+'_rebuy_count')]] = rebuy_count + div_count
-                self.dic[list_1[list_1.index(name+'_compare_list')]].append(compare)
-                self.dic[list_1[list_1.index(name+'_price_list')]].append(price)
-                compare_list.append(compare)
-                self.ui.textEdit.setFontPointSize(13)
-                self.ui.textEdit.setTextColor(QColor(255,0,0))
-                self.ui.textEdit.append("매수(2호가)")
-                self.ui.textEdit.setFontPointSize(9)
-                self.ui.textEdit.setTextColor(QColor(0,0,0))
-                self.ui.textEdit.append("시간 : " + str(time) + " | " + "1매수  :"+ name + " 매수가격 :" + str(initial - 3*hoga) + "원 "+ str(compare) + " 매수수량 : " + str(div_count) + " 포트번호 : " + str(self.port_name))
-                self.ui.textEdit.append("-------------------------------")
-                self.ui.textEdit.append(" ")
                 
-            #3호가에서 4호가로 오르면 남은 잔량 매수후 매수 상태로 전환
-            elif price >= initial  :
-                self.send_order('send_order', "0101", self.ui.account_number, 1, trcode, div_count,  initial ,"00", "" )
-                self.dic[list_1[list_1.index(name+'_status')]] = "매수상태"
-                self.dic[list_1[list_1.index(name+'_buy_count')]] = 0
-                self.dic[list_1[list_1.index(name+'_rebuy_count')]] = rebuy_count + div_count
-                self.dic[list_1[list_1.index(name+'_compare_list')]].append(compare)
-                self.dic[list_1[list_1.index(name+'_price_list')]].append(price)
-                compare_list.append(compare)
-                price_list.append(price)
-                price_avg = sum(price_list) / len(price_list)
-                self.dic[list_1[list_1.index(name+'_price_avg')]] = price_avg
+            elif price <= open_5 - open_5*0.026 :
+                self.send_order('send_order', "0101", self.ui.account_number, 2, trcode, buy_count, price ,"00", "" )
+                self.dic[list_1[list_1.index(name+'_status')]] = "재매수상태"
                 self.ui.textEdit.setFontPointSize(13)
-                self.ui.textEdit.setTextColor(QColor(255,0,0))
-                self.ui.textEdit.append("매수(3호가->5호가)")
+                self.ui.textEdit.setTextColor(QColor(0,0,255))
+                self.ui.textEdit.append("매도 ■ : 2.6% 하락 매도")
                 self.ui.textEdit.setFontPointSize(9)
                 self.ui.textEdit.setTextColor(QColor(0,0,0))
-                self.ui.textEdit.append("시간 : " + str(time) + " | " + "1매수  :"+ name + " 매수가격 :" + str(initial) + "원 "+ str(compare) + " 매수수량 : " + str(div_count) + " 포트번호 : " + str(self.port_name))
+                self.ui.textEdit.append(" | " + "매도 | "+ name + " | 2.6% 하락 매도")
+                self.ui.textEdit.append(" 매도수량 " + str(buy_count) + "주")
                 self.ui.textEdit.append(" ")
+
                 
-        elif status == "4매수상태":
-            #1호가 진입시 매수
-            if price == initial - 4*hoga:
-                self.send_order('send_order', "0101", self.ui.account_number, 1, trcode, div_count,  initial - 4*hoga ,"00", "" )
-                self.dic[list_1[list_1.index(name+'_status')]] = "매수상태"
-                self.dic[list_1[list_1.index(name+'_buy_count')]] = buy_number - div_count
-                self.dic[list_1[list_1.index(name+'_rebuy_count')]] = rebuy_count + div_count
-                self.dic[list_1[list_1.index(name+'_compare_list')]].append(compare)
-                self.dic[list_1[list_1.index(name+'_price_list')]].append(price)
-                compare_list.append(compare)
-                self.ui.textEdit.setFontPointSize(13)
-                self.ui.textEdit.setTextColor(QColor(255,0,0))
-                self.ui.textEdit.append("매수(1호가)")
-                self.ui.textEdit.setFontPointSize(9)
-                self.ui.textEdit.setTextColor(QColor(0,0,0))
-                self.ui.textEdit.append("시간 : " + str(time) + " | " + "1매수  :"+ name + " 매수가격 :" + str(initial - 4*hoga) + "원 "+ str(compare) + " 매수수량 : " + str(div_count) + " 포트번호 : " + str(self.port_name))
-                self.ui.textEdit.append("-------------------------------")
-                self.ui.textEdit.append(" ")
                 
-            #2호가에서 3호가로 오르면 남은 잔량 매수후 매수 상태로 전환
-            elif price >= initial  :
-                self.send_order('send_order', "0101", self.ui.account_number, 1, trcode, div_count,  initial ,"00", "" )
-                self.dic[list_1[list_1.index(name+'_status')]] = "매수상태"
-                self.dic[list_1[list_1.index(name+'_buy_count')]] = 0
-                self.dic[list_1[list_1.index(name+'_rebuy_count')]] = rebuy_count + div_count
-                self.dic[list_1[list_1.index(name+'_compare_list')]].append(compare)
-                self.dic[list_1[list_1.index(name+'_price_list')]].append(price)
-                compare_list.append(compare)
-                price_list.append(price)
-                price_avg = sum(price_list) / len(price_list)
-                self.dic[list_1[list_1.index(name+'_price_avg')]] = price_avg
-                self.ui.textEdit.setFontPointSize(13)
-                self.ui.textEdit.setTextColor(QColor(255,0,0))
-                self.ui.textEdit.append("매수(2호가->5호가)")
-                self.ui.textEdit.setFontPointSize(9)
-                self.ui.textEdit.setTextColor(QColor(0,0,0))
-                self.ui.textEdit.append("시간 : " + str(time) + " | " + "1매수  :"+ name + " 매수가격 :" + str(initial) + "원 "+ str(compare) + " 매수수량 : " + str(div_count) + " 포트번호 : " + str(self.port_name) )
-                self.ui.textEdit.append(" ")
+
   
         elif status == "거래끝":
             self.ui.textEdit.append("거래종료 | 종목 : " + name )
