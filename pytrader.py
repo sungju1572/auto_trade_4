@@ -123,9 +123,11 @@ class MyWindow(QMainWindow, form_class):
     def timeout3(self):
         
     
-        time.sleep(0.2)
+        
         if self.kiwoom.stock_held != []:
             for i in self.kiwoom.stock_held:
+                
+                time.sleep(0.2)
                 
                 
                 self.kiwoom.set_input_value("종목코드", i)
