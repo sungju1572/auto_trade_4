@@ -23,7 +23,7 @@
      <rect>
       <x>40</x>
       <y>10</y>
-      <width>581</width>
+      <width>661</width>
       <height>201</height>
      </rect>
     </property>
@@ -214,9 +214,9 @@
    <widget class="QTableWidget" name="tableWidget_3">
     <property name="geometry">
      <rect>
-      <x>90</x>
+      <x>50</x>
       <y>270</y>
-      <width>271</width>
+      <width>431</width>
       <height>191</height>
      </rect>
     </property>
@@ -234,7 +234,7 @@
    <widget class="QCheckBox" name="checkBox_2">
     <property name="geometry">
      <rect>
-      <x>60</x>
+      <x>30</x>
       <y>310</y>
       <width>21</width>
       <height>16</height>
@@ -247,7 +247,7 @@
    <widget class="QCheckBox" name="checkBox_3">
     <property name="geometry">
      <rect>
-      <x>60</x>
+      <x>30</x>
       <y>340</y>
       <width>21</width>
       <height>16</height>
@@ -260,7 +260,7 @@
    <widget class="QCheckBox" name="checkBox_4">
     <property name="geometry">
      <rect>
-      <x>60</x>
+      <x>30</x>
       <y>370</y>
       <width>21</width>
       <height>16</height>
@@ -273,7 +273,7 @@
    <widget class="QPushButton" name="pushButton_2">
     <property name="geometry">
      <rect>
-      <x>390</x>
+      <x>490</x>
       <y>310</y>
       <width>101</width>
       <height>31</height>
@@ -301,7 +301,7 @@
    <widget class="QPushButton" name="pushButton_3">
     <property name="geometry">
      <rect>
-      <x>510</x>
+      <x>610</x>
       <y>310</y>
       <width>101</width>
       <height>31</height>
@@ -314,7 +314,7 @@
    <widget class="QPushButton" name="pushButton_6">
     <property name="geometry">
      <rect>
-      <x>390</x>
+      <x>490</x>
       <y>370</y>
       <width>221</width>
       <height>41</height>
@@ -334,7 +334,7 @@
     <property name="geometry">
      <rect>
       <x>80</x>
-      <y>220</y>
+      <y>230</y>
       <width>91</width>
       <height>21</height>
      </rect>
@@ -351,7 +351,7 @@
    <widget class="QCheckBox" name="checkBox_5">
     <property name="geometry">
      <rect>
-      <x>60</x>
+      <x>30</x>
       <y>400</y>
       <width>21</width>
       <height>16</height>
@@ -364,7 +364,7 @@
    <widget class="QCheckBox" name="checkBox_6">
     <property name="geometry">
      <rect>
-      <x>60</x>
+      <x>30</x>
       <y>430</y>
       <width>21</width>
       <height>16</height>
