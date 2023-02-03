@@ -824,7 +824,22 @@ class Kiwoom(QAxWidget):
         
         data_cnt = self._get_repeat_cnt(trcode, rqname) #데이터 갯수 확인
 
-        print("asdasdas:" + str(data_cnt))
+        list_2 = []
+    
+        for i in range(900):
+            date_1 = self._get_comm_data(trcode, "주식분봉차트조회", i, "체결시간")
+            high_1 = self._get_comm_data(trcode, "주식분봉차트조회", i, "고가")
+            if date_1.strip()[0:8] == self.today:
+                list_2.append(int(high_1.strip()[1:]))
+        
+        #print("max" + str(max(list_2)))
+
+        #ValueError: max() arg is an empty sequence
+        
+        print("max" + str(max(list_2)))
+        print("len" + str(len(list_2)))
+        #print(list_2)
+
 
         date = self._get_comm_data(trcode, "주식분봉차트조회", 0, "체결시간")
         open = self._get_comm_data(trcode, "주식분봉차트조회", 0, "시가")
@@ -834,6 +849,8 @@ class Kiwoom(QAxWidget):
         volume = self._get_comm_data(trcode, "주식분봉차트조회", 0, "거래량")
         code = self._get_comm_data(trcode, "주식분차트", 0, "종목코드")
             
+        
+        
         name = self.get_master_code_name(code.strip())
 
 
@@ -851,8 +868,8 @@ class Kiwoom(QAxWidget):
                 self.dic[list_1[list_1.index(name+'_low_5')]] = int(low.strip()[1:])
                 low_5 = int(low.strip()[1:])
             if high_5 == 0 :
-                self.dic[list_1[list_1.index(name+'_high_5')]] = int(high.strip()[1:])
-                high_5 = int(high.strip()[1:])
+                self.dic[list_1[list_1.index(name+'_high_5')]] = max(list_2)
+                high_5 = max(list_2) #최고가
             if open_5 == 0 :
                 self.dic[list_1[list_1.index(name+'_open_5')]] = int(open.strip()[1:])
                 open_5 = int(open.strip()[1:])
@@ -1149,17 +1166,17 @@ class Kiwoom(QAxWidget):
                 self.ui.textEdit.append(" ")
                 
             # 시가가 3%미만에서 시작하고 4호가 하락시 
-            if price <= initial - 4*hoga  and round((int(initial) - int(last_close)) / int(last_close), 2 ) < 3 :
+            if price <= initial - 5*hoga  and round((int(initial) - int(last_close)) / int(last_close), 2 ) < 3 :
                 self.send_order('send_order', "0101", self.ui.account_number, 2, trcode, buy_count, price ,"00", "" )
                 self.dic[list_1[list_1.index(name+'_status')]] = "재매수대기상태"
                 self.dic[list_1[list_1.index(name+'_reach_upper')]] = 0
                 self.dic[list_1[list_1.index(name+'_initial')]] = 0
                 self.ui.textEdit.setFontPointSize(13)
                 self.ui.textEdit.setTextColor(QColor(0,0,255))
-                self.ui.textEdit.append("매도 ■ : 4호가 하락 매도")
+                self.ui.textEdit.append("매도 ■ : 5호가 하락 매도")
                 self.ui.textEdit.setFontPointSize(9)
                 self.ui.textEdit.setTextColor(QColor(0,0,0))
-                self.ui.textEdit.append("시간 : " + str(time) + " | " +  "매도 | "+ name + " | 4호가 하락 매도 | " + "매도가격 : " + str(price) + " 4호가 밑지점 : "+ str(initial - 4*hoga))
+                self.ui.textEdit.append("시간 : " + str(time) + " | " +  "매도 | "+ name + " | 4호가 하락 매도 | " + "매도가격 : " + str(price) + " 5호가 밑지점 : "+ str(initial - 5*hoga))
                 self.ui.textEdit.append(" 매도수량 " + str(buy_count) + "주")
                 self.ui.textEdit.append(" ")
         
