@@ -37,10 +37,9 @@ class MyWindow(QMainWindow, form_class):
         self.timer.timeout.connect(self.timeout)
 
 
-        self.timer3 = QTimer(self)
-        self.timer3.start(30000)
-        
-        self.timer3.timeout.connect(self.timeout3)
+        #self.timer3 = QTimer(self)
+        #self.timer3.start(30000)
+        #self.timer3.timeout.connect(self.timeout3)
 
 
         accouns_num = int(self.kiwoom.get_login_info("ACCOUNT_CNT"))
@@ -118,12 +117,14 @@ class MyWindow(QMainWindow, form_class):
         
 
 
-
+    """
     #실시간 검색중 TR요청
     def timeout3(self):
         
     
-        
+        print("stock_held : " , self.kiwoom.stock_held)    
+    
+    
         if self.kiwoom.stock_held != []:
             for i in self.kiwoom.stock_held:
                 
@@ -136,7 +137,7 @@ class MyWindow(QMainWindow, form_class):
                 self.kiwoom.comm_rq_data("opt10080_req", "opt10080", 0, "3000")
 
 
-
+    """
 
     #현재가격저장        
     def present_price(self):
