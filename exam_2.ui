@@ -315,7 +315,7 @@
     <property name="geometry">
      <rect>
       <x>490</x>
-      <y>370</y>
+      <y>410</y>
       <width>221</width>
       <height>41</height>
      </rect>
@@ -418,6 +418,39 @@
       <string>하단선</string>
      </property>
     </column>
+   </widget>
+   <widget class="QLabel" name="label_7">
+    <property name="geometry">
+     <rect>
+      <x>490</x>
+      <y>370</y>
+      <width>171</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>거래할 종목 수(숫자입력)</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_11">
+    <property name="geometry">
+     <rect>
+      <x>670</x>
+      <y>370</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
    </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
