@@ -195,9 +195,7 @@ class Kiwoom(QAxWidget):
     
     #조건검색 조회
     def _condition_search(self):
-        
 
-        
         self.sec_list = []
         print(self.ui.row_count)
         for i in range(self.ui.row_count):
@@ -241,379 +239,381 @@ class Kiwoom(QAxWidget):
             self.ui.window_count +=1
             self.gudoc_count = 0
 
-        
-        for i in self.sec_list:
-            if len(self.sec_list) == 1:
-                if str(cond_name) == str(i) == self.sec_list[0]:
-                    if self.ui.checkBox_2.isChecked():
-                        continue
-                    else :
-                        self.ui.textEdit_2.append("실시간o: " + str(code))
-                        self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
-                        self.port_name = str(cond_name)
-                        
-                        if code not in self.ui.ticker_list:
-                            self.ui.ticker_list.append(code)
-                
-                        if code not in self.dic.values() and code != "":
-                            self.ready_trade(code)  
-                        
-                        if self.ui.gudoc_status == 0:
-                            self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
-                            self.gudoc_count += 1
-                            self.ui.gudoc_status = 1
-                            print('구독성공')
-                        elif self.ui.gudoc_status != 0 :
-                            self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
-                            self.gudoc_count += 1
-                            print('구독성공2')
-
-            elif len(self.sec_list) == 2:
-                if str(cond_name) == str(i) == self.sec_list[0] :
-                    if self.ui.checkBox_2.isChecked():
-                        continue
-                    else :
-                       self.ui.textEdit_2.append("실시간o: " + str(code))
-                       self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
-                       self.port_name = str(cond_name)
-               
-                       if code not in self.ui.ticker_list:
-                           self.ui.ticker_list.append(code)
-               
-                       if code not in self.dic.values() and code != "":
-                           self.ready_trade(code)  
-                       
-                       if self.ui.gudoc_status == 0:
-                           self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
-                           self.gudoc_count += 1
-                           self.ui.gudoc_status = 1
-                           print('구독성공')
-                       elif self.ui.gudoc_status != 0 :
-                           self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
-                           self.gudoc_count += 1
-                           print('구독성공2')
-
-                       
-                elif str(cond_name) == str(i) == self.sec_list[1]:
-                    if self.ui.checkBox_3.isChecked():
-                        continue
-                    else :
-                       self.ui.textEdit_2.append("실시간o: " + str(code))
-                       self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
-                       self.port_name = str(cond_name)
-               
-                       if code not in self.ui.ticker_list:
-                           self.ui.ticker_list.append(code)
-               
-                       if code not in self.dic.values() and code != "":
-                           self.ready_trade(code)
-                             
-                       if self.ui.gudoc_status == 0:
-                           self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
-                           self.gudoc_count += 1
-                           self.ui.gudoc_status = 1
-                           print('구독성공')
-                       elif self.ui.gudoc_status != 0 :
-                           self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
-                           self.gudoc_count += 1
-                           print('구독성공2')
-                
-            elif len(self.sec_list) == 3:
-                if str(cond_name) == str(i) == self.sec_list[0]:
-                    if self.ui.checkBox_2.isChecked():
-                        continue
-                    else :
-                       self.ui.textEdit_2.append("실시간o: " + str(code))
-                       self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
-                       self.port_name = str(cond_name)
-               
-                       if code not in self.ui.ticker_list:
-                           self.ui.ticker_list.append(code)
-               
-                       if code not in self.dic.values() and code != "":
-                           self.ready_trade(code)  
-                       
-                       if self.ui.gudoc_status == 0:
-                           self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
-                           self.gudoc_count += 1
-                           self.ui.gudoc_status = 1
-                           print('구독성공')
-                       elif self.ui.gudoc_status != 0 :
-                           self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
-                           self.gudoc_count += 1
-                           print('구독성공2')
-
-                       
-                elif str(cond_name) == str(i) == self.sec_list[1]:
-                    if self.ui.checkBox_3.isChecked():
-                        continue
-                    else :
-                       self.ui.textEdit_2.append("실시간o: " + str(code))
-                       self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
-                       self.port_name = str(cond_name)
-               
-                       if code not in self.ui.ticker_list:
-                           self.ui.ticker_list.append(code)
-               
-                       if code not in self.dic.values() and code != "":
-                           self.ready_trade(code)
-                             
-                       if self.ui.gudoc_status == 0:
-                           self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
-                           self.gudoc_count += 1
-                           self.ui.gudoc_status = 1
-                           print('구독성공')
-                       elif self.ui.gudoc_status != 0 :
-                           self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
-                           self.gudoc_count += 1
-                           print('구독성공2')
-
-                       
-                elif str(cond_name) == str(i) == self.sec_list[2]:
-                    if self.ui.checkBox_4.isChecked():
-                        continue
-                    else :
-                       self.ui.textEdit_2.append("실시간o: " + str(code))
-                       self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
-                       self.port_name = str(cond_name)
-               
-                       if code not in self.ui.ticker_list:
-                           self.ui.ticker_list.append(code)
-               
-                       if code not in self.dic.values() and code != "":
-                           self.ready_trade(code)
-                                 
-                       if self.ui.gudoc_status == 0:
-                           self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
-                           self.gudoc_count += 1
-                           self.ui.gudoc_status = 1
-                           print('구독성공')
-                       elif self.ui.gudoc_status != 0 :
-                           self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
-                           self.gudoc_count += 1
-                           print('구독성공2')
+        if len(self.ui.ticker_list) <= int(self.ui.lineEdit_11.text())-1:
+            for i in self.sec_list:
+                if len(self.sec_list) == 1:
+                    if str(cond_name) == str(i) == self.sec_list[0]:
+                        if self.ui.checkBox_2.isChecked():
+                            continue
+                        else :
+                            self.ui.textEdit_2.append("실시간o: " + str(code))
+                            self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
+                            self.port_name = str(cond_name)
+                            
+                            if code not in self.ui.ticker_list:
+                                self.ui.ticker_list.append(code)
+                    
+                            if code not in self.dic.values() and code != "":
+                                self.ready_trade(code)  
+                            
+                            if self.ui.gudoc_status == 0:
+                                self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
+                                self.gudoc_count += 1
+                                self.ui.gudoc_status = 1
+                                print('구독성공')
+                            elif self.ui.gudoc_status != 0 :
+                                self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
+                                self.gudoc_count += 1
+                                print('구독성공2')
+    
+                elif len(self.sec_list) == 2:
+                    if str(cond_name) == str(i) == self.sec_list[0] :
+                        if self.ui.checkBox_2.isChecked():
+                            continue
+                        else :
+                           self.ui.textEdit_2.append("실시간o: " + str(code))
+                           self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
+                           self.port_name = str(cond_name)
                    
-            elif len(self.sec_list) == 4:
-                if str(cond_name) == str(i) == self.sec_list[0]:
-                    if self.ui.checkBox_2.isChecked():
-                        continue
-                    else :
-                       self.ui.textEdit_2.append("실시간o: " + str(code))
-                       self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
-                       self.port_name = str(cond_name)
-               
-                       if code not in self.ui.ticker_list:
-                           self.ui.ticker_list.append(code)
-               
-                       if code not in self.dic.values() and code != "":
-                           self.ready_trade(code)  
-                       
-                       if self.ui.gudoc_status == 0:
-                           self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
-                           self.gudoc_count += 1
-                           self.ui.gudoc_status = 1
-                           print('구독성공')
-                       elif self.ui.gudoc_status != 0 :
-                           self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
-                           self.gudoc_count += 1
-                           print('구독성공2')
-
-                       
-                elif str(cond_name) == str(i) == self.sec_list[1]:
-                    if self.ui.checkBox_3.isChecked():
-                        continue
-                    else :
-                       self.ui.textEdit_2.append("실시간o: " + str(code))
-                       self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
-                       self.port_name = str(cond_name)
-               
-                       if code not in self.ui.ticker_list:
-                           self.ui.ticker_list.append(code)
-               
-                       if code not in self.dic.values() and code != "":
-                           self.ready_trade(code)
-                             
-                       if self.ui.gudoc_status == 0:
-                           self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
-                           self.gudoc_count += 1
-                           self.ui.gudoc_status = 1
-                           print('구독성공')
-                       elif self.ui.gudoc_status != 0 :
-                           self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
-                           self.gudoc_count += 1
-                           print('구독성공2')
-                       
-                elif str(cond_name) == str(i) == self.sec_list[2]:
-                    if self.ui.checkBox_4.isChecked():
-                        continue
-                    else :
-                       self.ui.textEdit_2.append("실시간o: " + str(code))
-                       self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
-                       self.port_name = str(cond_name)
-               
-                       if code not in self.ui.ticker_list:
-                           self.ui.ticker_list.append(code)
-               
-                       if code not in self.dic.values() and code != "":
-                           self.ready_trade(code)
-                                 
-                       if self.ui.gudoc_status == 0:
-                           self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
-                           self.gudoc_count += 1
-                           self.ui.gudoc_status = 1
-                           print('구독성공')
-                       elif self.ui.gudoc_status != 0 :
-                           self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
-                           self.gudoc_count += 1
-                           print('구독성공2')
+                           if code not in self.ui.ticker_list:
+                               self.ui.ticker_list.append(code)
+                   
+                           if code not in self.dic.values() and code != "":
+                               self.ready_trade(code)  
+                           
+                           if self.ui.gudoc_status == 0:
+                               self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
+                               self.gudoc_count += 1
+                               self.ui.gudoc_status = 1
+                               print('구독성공')
+                           elif self.ui.gudoc_status != 0 :
+                               self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
+                               self.gudoc_count += 1
+                               print('구독성공2')
     
-                elif str(cond_name) == str(i) == self.sec_list[3]:
-                    if self.ui.checkBox_5.isChecked():
-                        continue
-                    else :
-                       self.ui.textEdit_2.append("실시간o: " + str(code))
-                       self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
-                       self.port_name = str(cond_name)
-               
-                       if code not in self.ui.ticker_list:
-                           self.ui.ticker_list.append(code)
-               
-                       if code not in self.dic.values() and code != "":
-                           self.ready_trade(code)
-                       
-                 
-                       if self.ui.gudoc_status == 0:
-                           self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
-                           self.gudoc_count += 1
-                           self.ui.gudoc_status = 1
-                           print('구독성공')
-                       elif self.ui.gudoc_status != 0 :
-                           self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
-                           self.gudoc_count += 1
-                           print('구독성공2')
-
-            elif len(self.sec_list) == 5:
-                if str(cond_name) == str(i) == self.sec_list[0]:
-                    if self.ui.checkBox_2.isChecked():
-                        continue
-                    else :
-                       self.ui.textEdit_2.append("실시간o: " + str(code))
-                       self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
-                       self.port_name = str(cond_name)
-               
-                       if code not in self.ui.ticker_list:
-                           self.ui.ticker_list.append(code)
-               
-                       if code not in self.dic.values() and code != "":
-                           self.ready_trade(code)  
-                       
-                       if self.ui.gudoc_status == 0:
-                           self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
-                           self.gudoc_count += 1
-                           self.ui.gudoc_status = 1
-                           print('구독성공')
-                       elif self.ui.gudoc_status != 0 :
-                           self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
-                           self.gudoc_count += 1
-                           print('구독성공2')
-                       
-                elif str(cond_name) == str(i) == self.sec_list[1]:
-                    if self.ui.checkBox_3.isChecked():
-                        continue
-                    else :
-                       self.ui.textEdit_2.append("실시간o: " + str(code))
-                       self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
-                       self.port_name = str(cond_name)
-               
-                       if code not in self.ui.ticker_list:
-                           self.ui.ticker_list.append(code)
-               
-                       if code not in self.dic.values() and code != "":
-                           self.ready_trade(code)
-                             
-                       if self.ui.gudoc_status == 0:
-                           self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
-                           self.gudoc_count += 1
-                           self.ui.gudoc_status = 1
-                           print('구독성공')
-                       elif self.ui.gudoc_status != 0 :
-                           self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
-                           self.gudoc_count += 1
-                           print('구독성공2')
-                       
-                elif str(cond_name) == str(i) == self.sec_list[2]:
-                    if self.ui.checkBox_4.isChecked():
-                        continue
-                    else :
-                       self.ui.textEdit_2.append("실시간o: " + str(code))
-                       self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
-                       self.port_name = str(cond_name)
-               
-                       if code not in self.ui.ticker_list:
-                           self.ui.ticker_list.append(code)
-               
-                       if code not in self.dic.values() and code != "":
-                           self.ready_trade(code)
+                           
+                    elif str(cond_name) == str(i) == self.sec_list[1]:
+                        if self.ui.checkBox_3.isChecked():
+                            continue
+                        else :
+                           self.ui.textEdit_2.append("실시간o: " + str(code))
+                           self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
+                           self.port_name = str(cond_name)
+                   
+                           if code not in self.ui.ticker_list:
+                               self.ui.ticker_list.append(code)
+                   
+                           if code not in self.dic.values() and code != "":
+                               self.ready_trade(code)
                                  
-                       if self.ui.gudoc_status == 0:
-                           self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
-                           self.gudoc_count += 1
-                           self.ui.gudoc_status = 1
-                           print('구독성공')
-                       elif self.ui.gudoc_status != 0 :
-                           self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
-                           self.gudoc_count += 1
-                           print('구독성공2')
+                           if self.ui.gudoc_status == 0:
+                               self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
+                               self.gudoc_count += 1
+                               self.ui.gudoc_status = 1
+                               print('구독성공')
+                           elif self.ui.gudoc_status != 0 :
+                               self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
+                               self.gudoc_count += 1
+                               print('구독성공2')
+                    
+                elif len(self.sec_list) == 3:
+                    if str(cond_name) == str(i) == self.sec_list[0]:
+                        if self.ui.checkBox_2.isChecked():
+                            continue
+                        else :
+                           self.ui.textEdit_2.append("실시간o: " + str(code))
+                           self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
+                           self.port_name = str(cond_name)
+                   
+                           if code not in self.ui.ticker_list:
+                               self.ui.ticker_list.append(code)
+                   
+                           if code not in self.dic.values() and code != "":
+                               self.ready_trade(code)  
+                           
+                           if self.ui.gudoc_status == 0:
+                               self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
+                               self.gudoc_count += 1
+                               self.ui.gudoc_status = 1
+                               print('구독성공')
+                           elif self.ui.gudoc_status != 0 :
+                               self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
+                               self.gudoc_count += 1
+                               print('구독성공2')
     
-                elif str(cond_name) == str(i) == self.sec_list[3]:
-                    if self.ui.checkBox_5.isChecked():
-                        continue
-                    else :
-                       self.ui.textEdit_2.append("실시간o: " + str(code))
-                       self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
-                       self.port_name = str(cond_name)
-               
-                       if code not in self.ui.ticker_list:
-                           self.ui.ticker_list.append(code)
-               
-                       if code not in self.dic.values() and code != "":
-                           self.ready_trade(code)
+                           
+                    elif str(cond_name) == str(i) == self.sec_list[1]:
+                        if self.ui.checkBox_3.isChecked():
+                            continue
+                        else :
+                           self.ui.textEdit_2.append("실시간o: " + str(code))
+                           self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
+                           self.port_name = str(cond_name)
+                   
+                           if code not in self.ui.ticker_list:
+                               self.ui.ticker_list.append(code)
+                   
+                           if code not in self.dic.values() and code != "":
+                               self.ready_trade(code)
+                                 
+                           if self.ui.gudoc_status == 0:
+                               self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
+                               self.gudoc_count += 1
+                               self.ui.gudoc_status = 1
+                               print('구독성공')
+                           elif self.ui.gudoc_status != 0 :
+                               self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
+                               self.gudoc_count += 1
+                               print('구독성공2')
+    
+                           
+                    elif str(cond_name) == str(i) == self.sec_list[2]:
+                        if self.ui.checkBox_4.isChecked():
+                            continue
+                        else :
+                           self.ui.textEdit_2.append("실시간o: " + str(code))
+                           self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
+                           self.port_name = str(cond_name)
+                   
+                           if code not in self.ui.ticker_list:
+                               self.ui.ticker_list.append(code)
+                   
+                           if code not in self.dic.values() and code != "":
+                               self.ready_trade(code)
+                                     
+                           if self.ui.gudoc_status == 0:
+                               self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
+                               self.gudoc_count += 1
+                               self.ui.gudoc_status = 1
+                               print('구독성공')
+                           elif self.ui.gudoc_status != 0 :
+                               self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
+                               self.gudoc_count += 1
+                               print('구독성공2')
                        
-                 
-                       if self.ui.gudoc_status == 0:
-                           self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
-                           self.gudoc_count += 1
-                           self.ui.gudoc_status = 1
-                           print('구독성공')
-                       elif self.ui.gudoc_status != 0 :
-                           self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
-                           self.gudoc_count += 1
-                           print('구독성공2')
-                elif str(cond_name) == str(i) == self.sec_list[4]:
-                    if self.ui.checkBox_6.isChecked():
-                        continue
-                    else :
-                       self.ui.textEdit_2.append("실시간o: " + str(code))
-                       self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
-                       self.port_name = str(cond_name)
-               
-                       if code not in self.ui.ticker_list:
-                           self.ui.ticker_list.append(code)
-               
-                       if code not in self.dic.values() and code != "":
-                           self.ready_trade(code)
-              
-                       if self.ui.gudoc_status == 0:
-                           self.SetRealReg(1000 + self.ui.window_count , code, "20;10", "0")
-                           self.gudoc_count += 1
-                           self.ui.gudoc_status = 1
-                           print('구독성공')
-                       elif self.ui.gudoc_status != 0 :
-                           self.SetRealReg(1000 + self.ui.window_count , code, "20;10", "1")
-                           self.gudoc_count += 1
-                           print('구독성공2')
-
-
+                elif len(self.sec_list) == 4:
+                    if str(cond_name) == str(i) == self.sec_list[0]:
+                        if self.ui.checkBox_2.isChecked():
+                            continue
+                        else :
+                           self.ui.textEdit_2.append("실시간o: " + str(code))
+                           self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
+                           self.port_name = str(cond_name)
+                   
+                           if code not in self.ui.ticker_list:
+                               self.ui.ticker_list.append(code)
+                   
+                           if code not in self.dic.values() and code != "":
+                               self.ready_trade(code)  
+                           
+                           if self.ui.gudoc_status == 0:
+                               self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
+                               self.gudoc_count += 1
+                               self.ui.gudoc_status = 1
+                               print('구독성공')
+                           elif self.ui.gudoc_status != 0 :
+                               self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
+                               self.gudoc_count += 1
+                               print('구독성공2')
+    
+                           
+                    elif str(cond_name) == str(i) == self.sec_list[1]:
+                        if self.ui.checkBox_3.isChecked():
+                            continue
+                        else :
+                           self.ui.textEdit_2.append("실시간o: " + str(code))
+                           self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
+                           self.port_name = str(cond_name)
+                   
+                           if code not in self.ui.ticker_list:
+                               self.ui.ticker_list.append(code)
+                   
+                           if code not in self.dic.values() and code != "":
+                               self.ready_trade(code)
+                                 
+                           if self.ui.gudoc_status == 0:
+                               self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
+                               self.gudoc_count += 1
+                               self.ui.gudoc_status = 1
+                               print('구독성공')
+                           elif self.ui.gudoc_status != 0 :
+                               self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
+                               self.gudoc_count += 1
+                               print('구독성공2')
+                           
+                    elif str(cond_name) == str(i) == self.sec_list[2]:
+                        if self.ui.checkBox_4.isChecked():
+                            continue
+                        else :
+                           self.ui.textEdit_2.append("실시간o: " + str(code))
+                           self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
+                           self.port_name = str(cond_name)
+                   
+                           if code not in self.ui.ticker_list:
+                               self.ui.ticker_list.append(code)
+                   
+                           if code not in self.dic.values() and code != "":
+                               self.ready_trade(code)
+                                     
+                           if self.ui.gudoc_status == 0:
+                               self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
+                               self.gudoc_count += 1
+                               self.ui.gudoc_status = 1
+                               print('구독성공')
+                           elif self.ui.gudoc_status != 0 :
+                               self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
+                               self.gudoc_count += 1
+                               print('구독성공2')
+        
+                    elif str(cond_name) == str(i) == self.sec_list[3]:
+                        if self.ui.checkBox_5.isChecked():
+                            continue
+                        else :
+                           self.ui.textEdit_2.append("실시간o: " + str(code))
+                           self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
+                           self.port_name = str(cond_name)
+                   
+                           if code not in self.ui.ticker_list:
+                               self.ui.ticker_list.append(code)
+                   
+                           if code not in self.dic.values() and code != "":
+                               self.ready_trade(code)
+                           
+                     
+                           if self.ui.gudoc_status == 0:
+                               self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
+                               self.gudoc_count += 1
+                               self.ui.gudoc_status = 1
+                               print('구독성공')
+                           elif self.ui.gudoc_status != 0 :
+                               self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
+                               self.gudoc_count += 1
+                               print('구독성공2')
+    
+                elif len(self.sec_list) == 5:
+                    if str(cond_name) == str(i) == self.sec_list[0]:
+                        if self.ui.checkBox_2.isChecked():
+                            continue
+                        else :
+                           self.ui.textEdit_2.append("실시간o: " + str(code))
+                           self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
+                           self.port_name = str(cond_name)
+                   
+                           if code not in self.ui.ticker_list:
+                               self.ui.ticker_list.append(code)
+                   
+                           if code not in self.dic.values() and code != "":
+                               self.ready_trade(code)  
+                           
+                           if self.ui.gudoc_status == 0:
+                               self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
+                               self.gudoc_count += 1
+                               self.ui.gudoc_status = 1
+                               print('구독성공')
+                           elif self.ui.gudoc_status != 0 :
+                               self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
+                               self.gudoc_count += 1
+                               print('구독성공2')
+                           
+                    elif str(cond_name) == str(i) == self.sec_list[1]:
+                        if self.ui.checkBox_3.isChecked():
+                            continue
+                        else :
+                           self.ui.textEdit_2.append("실시간o: " + str(code))
+                           self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
+                           self.port_name = str(cond_name)
+                   
+                           if code not in self.ui.ticker_list:
+                               self.ui.ticker_list.append(code)
+                   
+                           if code not in self.dic.values() and code != "":
+                               self.ready_trade(code)
+                                 
+                           if self.ui.gudoc_status == 0:
+                               self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
+                               self.gudoc_count += 1
+                               self.ui.gudoc_status = 1
+                               print('구독성공')
+                           elif self.ui.gudoc_status != 0 :
+                               self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
+                               self.gudoc_count += 1
+                               print('구독성공2')
+                           
+                    elif str(cond_name) == str(i) == self.sec_list[2]:
+                        if self.ui.checkBox_4.isChecked():
+                            continue
+                        else :
+                           self.ui.textEdit_2.append("실시간o: " + str(code))
+                           self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
+                           self.port_name = str(cond_name)
+                   
+                           if code not in self.ui.ticker_list:
+                               self.ui.ticker_list.append(code)
+                   
+                           if code not in self.dic.values() and code != "":
+                               self.ready_trade(code)
+                                     
+                           if self.ui.gudoc_status == 0:
+                               self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
+                               self.gudoc_count += 1
+                               self.ui.gudoc_status = 1
+                               print('구독성공')
+                           elif self.ui.gudoc_status != 0 :
+                               self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
+                               self.gudoc_count += 1
+                               print('구독성공2')
+        
+                    elif str(cond_name) == str(i) == self.sec_list[3]:
+                        if self.ui.checkBox_5.isChecked():
+                            continue
+                        else :
+                           self.ui.textEdit_2.append("실시간o: " + str(code))
+                           self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
+                           self.port_name = str(cond_name)
+                   
+                           if code not in self.ui.ticker_list:
+                               self.ui.ticker_list.append(code)
+                   
+                           if code not in self.dic.values() and code != "":
+                               self.ready_trade(code)
+                           
+                     
+                           if self.ui.gudoc_status == 0:
+                               self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
+                               self.gudoc_count += 1
+                               self.ui.gudoc_status = 1
+                               print('구독성공')
+                           elif self.ui.gudoc_status != 0 :
+                               self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
+                               self.gudoc_count += 1
+                               print('구독성공2')
+                    elif str(cond_name) == str(i) == self.sec_list[4]:
+                        if self.ui.checkBox_6.isChecked():
+                            continue
+                        else :
+                           self.ui.textEdit_2.append("실시간o: " + str(code))
+                           self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
+                           self.port_name = str(cond_name)
+                   
+                           if code not in self.ui.ticker_list:
+                               self.ui.ticker_list.append(code)
+                   
+                           if code not in self.dic.values() and code != "":
+                               self.ready_trade(code)
+                  
+                           if self.ui.gudoc_status == 0:
+                               self.SetRealReg(1000 + self.ui.window_count , code, "20;10", "0")
+                               self.gudoc_count += 1
+                               self.ui.gudoc_status = 1
+                               print('구독성공')
+                           elif self.ui.gudoc_status != 0 :
+                               self.SetRealReg(1000 + self.ui.window_count , code, "20;10", "1")
+                               self.gudoc_count += 1
+                               print('구독성공2')
+    
+        else :
+            print("종목수 초과!")
+            print(self.ui.ticker_list)
                 
 
 
@@ -621,84 +621,86 @@ class Kiwoom(QAxWidget):
     #실시간 조회관련 핸들
     def _handler_real_data(self, trcode, real_type, data):
         
-        
-        #print(self.dic)
-        
-        # 체결 시간 
-        if real_type == "주식체결":
-            time =  self.get_comm_real_data(trcode, 20)
-            #date = datetime.datetime.now().strftime("%Y-%m-%d ")
-            #time = datetime.datetime.strptime(time, "%H:%M:%S")
-            time = time[:2] + ":" + time[2:4] + ":" + time[4:6]
+        try:
 
-        #호가
-        hoga_1 = self.get_comm_real_data(trcode, 27)
-        hoga_2 = self.get_comm_real_data(trcode, 28)
-        
-        
-        if hoga_1 != "" and hoga_2 != "":
-            hoga = float(hoga_1[1:]) - float(hoga_2[1:]) 
+            #print(self.dic)
             
-
-
-        for i in range(len(self.ui.ticker_list)):
-            if trcode == self.ui.ticker_list[i]:
-                #print(i, "번째 :", self.ui.stock_list[i])
+            # 체결 시간 
+            if real_type == "주식체결":
+                time =  self.get_comm_real_data(trcode, 20)
+                #date = datetime.datetime.now().strftime("%Y-%m-%d ")
+                #time = datetime.datetime.strptime(time, "%H:%M:%S")
+                time = time[:2] + ":" + time[2:4] + ":" + time[4:6]
+    
+            #호가
+            hoga_1 = self.get_comm_real_data(trcode, 27)
+            hoga_2 = self.get_comm_real_data(trcode, 28)
+            
+            
+            if hoga_1 != "" and hoga_2 != "":
+                hoga = float(hoga_1[1:]) - float(hoga_2[1:]) 
                 
-
-                start_price = self.get_comm_real_data(trcode, 16) #시가
-                price = self.get_comm_real_data(trcode, 10)       #현재가
-                high = self.get_comm_real_data(trcode, 17)        #고가
-                low = self.get_comm_real_data(trcode, 18)         #저가
-                name = self.get_master_code_name(trcode)          #이름
-                #compare = self.get_comm_real_data(trcode, 12).strip()  #전일대비
+    
+    
+            for i in range(len(self.ui.ticker_list)):
+                if trcode == self.ui.ticker_list[i]:
+                    #print(i, "번째 :", self.ui.stock_list[i])
                     
-                    
-                if start_price  == "" or high == "" or low == "" :
-                    pass
-                #self.ui.textEdit_2.append("시가 입력 대기중 :" + name )
-                else:
-                    start_price  = float(start_price[1:])
-                    price = float(price[1:])
-                    high = float(high[1:])
-                    low = float(low[1:])
-                    
-                    #compare = float(compare)
-                    
-                    div_4 = (int(high)- int(low))/4
-                    
-                    
-                    self.dic[name + '_start_price'] = start_price  
-                    self.dic[name + '_price'] = price
-                    #self.dic[name + '_compare'] = compare
-                    self.dic[name + '_hoga'] = hoga
-
-                    if trcode not in self.stock_held:
-                        self.stock_held.append(trcode) 
-                        print(self.stock_held)
-
-                    row_number = self.dic[name+'_window_count'] 
-                    
-                    self.ui.tableWidget_5.setRowCount(len(self.stock_held))
-                    self.ui.tableWidget_5.setColumnCount(7)
-                    self.ui.tableWidget_5.setItem(row_number,0,QTableWidgetItem(name.strip()))
-                    self.ui.tableWidget_5.setItem(row_number,1,QTableWidgetItem(str(start_price)))
-                    self.ui.tableWidget_5.setItem(row_number,2,QTableWidgetItem(str(low)))
-                    self.ui.tableWidget_5.setItem(row_number,3,QTableWidgetItem(str(high)))
-                    self.ui.tableWidget_5.setItem(row_number,4,QTableWidgetItem(str(low + div_4*3 )))
-                    self.ui.tableWidget_5.setItem(row_number,5,QTableWidgetItem(str(low + div_4*2 )))
-                    self.ui.tableWidget_5.setItem(row_number,6,QTableWidgetItem(str(low + div_4 )))
-                    
-
-                    self.dic[name + "_upper"] = low + div_4*3 #상단선
-                    self.dic[name + "_middle"] = low + div_4*2 #중단선
-                    self.dic[name + "_lower"] = low + div_4 #하단선
-
-                    #print("_handler_real_data :" , name)
+    
+                    start_price = self.get_comm_real_data(trcode, 16) #시가
+                    price = self.get_comm_real_data(trcode, 10)       #현재가
+                    high = self.get_comm_real_data(trcode, 17)        #고가
+                    low = self.get_comm_real_data(trcode, 18)         #저가
+                    name = self.get_master_code_name(trcode)          #이름
+                    #compare = self.get_comm_real_data(trcode, 12).strip()  #전일대비
                         
-                    self.strategy(name, time)
                         
-                    
+                    if start_price  == "" or high == "" or low == "" :
+                        pass
+                    #self.ui.textEdit_2.append("시가 입력 대기중 :" + name )
+                    else:
+                        start_price  = float(start_price[1:])
+                        price = float(price[1:])
+                        high = float(high[1:])
+                        low = float(low[1:])
+                        
+                        #compare = float(compare)
+                        
+                        div_4 = (int(high)- int(low))/4
+                        
+                        
+                        self.dic[name + '_start_price'] = start_price  
+                        self.dic[name + '_price'] = price
+                        #self.dic[name + '_compare'] = compare
+                        self.dic[name + '_hoga'] = hoga
+    
+                        if trcode not in self.stock_held:
+                            self.stock_held.append(trcode) 
+                            print(self.stock_held)
+    
+                        row_number = self.dic[name+'_window_count'] 
+                        
+                        self.ui.tableWidget_5.setRowCount(len(self.stock_held))
+                        self.ui.tableWidget_5.setColumnCount(7)
+                        self.ui.tableWidget_5.setItem(row_number,0,QTableWidgetItem(name.strip()))
+                        self.ui.tableWidget_5.setItem(row_number,1,QTableWidgetItem(str(start_price)))
+                        self.ui.tableWidget_5.setItem(row_number,2,QTableWidgetItem(str(low)))
+                        self.ui.tableWidget_5.setItem(row_number,3,QTableWidgetItem(str(high)))
+                        self.ui.tableWidget_5.setItem(row_number,4,QTableWidgetItem(str(low + div_4*3 )))
+                        self.ui.tableWidget_5.setItem(row_number,5,QTableWidgetItem(str(low + div_4*2 )))
+                        self.ui.tableWidget_5.setItem(row_number,6,QTableWidgetItem(str(low + div_4 )))
+                        
+    
+                        self.dic[name + "_upper"] = low + div_4*3 #상단선
+                        self.dic[name + "_middle"] = low + div_4*2 #중단선
+                        self.dic[name + "_lower"] = low + div_4 #하단선
+    
+                        #print("_handler_real_data :" , name)
+                            
+                        self.strategy(name, time)
+                            
+        except Exception as e:    # 모든 예외의 에러 메시지를 출력
+            print('예외가 발생했습니다.', e)
     #초기 리스트 만들기    
     def ready_trade(self, ticker):
         
@@ -1079,111 +1081,78 @@ class Kiwoom(QAxWidget):
 
 
     def strategy(self, name, time):
-        
+        try:
 
-        list_1 = [k for k in self.dic.keys() if name in k ]
-
-        
-        name = self.dic[list_1[list_1.index(name+'_name')]]                   #종목 이름
-        trcode = self.dic[list_1[list_1.index(name+'_ticker')]]               #티커 6자리
-        status = self.dic[list_1[list_1.index(name+'_status')]]               #현재상태
-        rebuy = self.dic[list_1[list_1.index(name+'_rebuy')]]                 #재매수 횟수 확인 상태 (1이면 재매수 상태로 진입)
-        initial = self.dic[list_1[list_1.index(name+'_initial')]]             #처음 매수한 가격
-        buy_count = self.dic[list_1[list_1.index(name+'_buy_count')]]         #살 가격(남은수량)
-        sell_price = self.dic[list_1[list_1.index(name+'_sell_price')]]       #판매 가격
-        rebuy_count = self.dic[list_1[list_1.index(name+'_rebuy_count')]]     #얼마만큼살지
-        buy_total_price = self.dic[list_1[list_1.index(name+'_buy_total')]]   #입력 총금액
-        hoga = self.dic[list_1[list_1.index(name+'_hoga')]]                   #호가
-        start_price = self.dic[list_1[list_1.index(name+'_start_price')]]     #시가
-        price = self.dic[list_1[list_1.index(name+'_price')]]                 #현재가
-        if name+'_upper' in list_1:
-            upper= self.dic[list_1[list_1.index(name+'_upper')]]               #5분봉 매수했을때 시가
-        if name+'_middle' in list_1:
-            middle = self.dic[list_1[list_1.index(name+'_middle')]]               #5분봉 매수했을때 고가
-        if name+'_lower' in list_1:
-            lower = self.dic[list_1[list_1.index(name+'_lower')]]               #5분봉 매수했을때 고가 
-
-        else : return 
-        if name+'_reach_upper' in list_1:
-            reach_upper = self.dic[list_1[list_1.index(name+'_reach_upper')]]     #현재가 상단선 도달여부
-        else : return
-        if name+'_reach_middle' in list_1:
-            reach_middle = self.dic[list_1[list_1.index(name+'_reach_middle')]]   #현재가 중단선 밑으로 떨어졌는지 여부
-        else : return
-        if name + '_reach_low' in list_1 :
-            reach_low = self.dic[list_1[list_1.index(name+'_reach_low')]]   #현재가 하단선 밑으로 떨어졌는지 여부
+            list_1 = [k for k in self.dic.keys() if name in k ]
+    
             
-
-        #compare = self.dic[list_1[list_1.index(name+'_compare')]]             #현재가 전일대비       
-       
-        buy_number = int(int(buy_total_price) / int(price)) #매수할 수량
-        
-
-        format_price = format(int(price), ",")
-        
-        #last_close = self.GetMasterLastPrice(trcode) #전일종가 가져오기
-
-        print("이름: " +str(name) + "가격 :" + str(initial))
-        
-        print("---진행중--- " + str(name) )
-        print("time" + str(time))
-        #초기상태
-        #포트에서 뜨면 매수
-        if status == "초기상태" :
-            self.send_order('send_order', "0101", self.ui.account_number, 1, trcode, buy_number,  price ,"00", "" )
-            self.dic[list_1[list_1.index(name+'_status')]] = "매수상태"
-            self.dic[list_1[list_1.index(name+'_initial')]] = price
-            self.dic[list_1[list_1.index(name+'_buy_count')]] = buy_number 
-            self.ui.textEdit.setFontPointSize(13)
-            self.ui.textEdit.setTextColor(QColor(255,0,0))
-            self.ui.textEdit.append("매수")
-            self.ui.textEdit.setFontPointSize(9)
-            self.ui.textEdit.setTextColor(QColor(0,0,0))
-            self.ui.textEdit.append("시간 : " + str(time) + " | " + "1매수  :"+ name + " 매수가격 :" + format_price + "원 "+ " 매수수량 : " + str(buy_number) + " 포트번호 : " + str(self.port_name) )
-            self.ui.textEdit.append(" ")
-            
-        #매수 상태일때
-        elif status == "매수상태":
-            #9시 5분 이전
-            if int(time[0:2]) == 9 and int(time[0:2]) <= 5  :
-                #3%이익시 청산
-                if price >= initial + initial*0.03 : 
-                    self.send_order('send_order', "0101", self.ui.account_number, 2, trcode, buy_count, price ,"00", "" )
-                    self.dic[list_1[list_1.index(name+'_status')]] = "재매수대기상태"
-                    self.dic[list_1[list_1.index(name+'_reach_upper')]] = 0
-                    self.ui.textEdit.setFontPointSize(13)
-                    self.ui.textEdit.setTextColor(QColor(0,0,255))
-                    self.ui.textEdit.append("매도 ■ : 매수가 대비 3% 이익(1매수)")
-                    self.ui.textEdit.setFontPointSize(9)
-                    self.ui.textEdit.setTextColor(QColor(0,0,0))
-                    self.ui.textEdit.append("시간 : " + str(time) + " | " +  "매도 | "+ name + " | 매수가 대비 3% 이익 | " + "매도가격 : " + str(price))
-                    self.ui.textEdit.append(" 매도수량 " + str(buy_count) + "주")
-                    self.ui.textEdit.append(" ")
+            name = self.dic[list_1[list_1.index(name+'_name')]]                   #종목 이름
+            trcode = self.dic[list_1[list_1.index(name+'_ticker')]]               #티커 6자리
+            status = self.dic[list_1[list_1.index(name+'_status')]]               #현재상태
+            rebuy = self.dic[list_1[list_1.index(name+'_rebuy')]]                 #재매수 횟수 확인 상태 (1이면 재매수 상태로 진입)
+            initial = self.dic[list_1[list_1.index(name+'_initial')]]             #처음 매수한 가격
+            buy_count = self.dic[list_1[list_1.index(name+'_buy_count')]]         #살 가격(남은수량)
+            sell_price = self.dic[list_1[list_1.index(name+'_sell_price')]]       #판매 가격
+            rebuy_count = self.dic[list_1[list_1.index(name+'_rebuy_count')]]     #얼마만큼살지
+            buy_total_price = self.dic[list_1[list_1.index(name+'_buy_total')]]   #입력 총금액
+            hoga = self.dic[list_1[list_1.index(name+'_hoga')]]                   #호가
+            start_price = self.dic[list_1[list_1.index(name+'_start_price')]]     #시가
+            price = self.dic[list_1[list_1.index(name+'_price')]]                 #현재가
+            if name+'_upper' in list_1:
+                upper= self.dic[list_1[list_1.index(name+'_upper')]]               #5분봉 매수했을때 시가
+            if name+'_middle' in list_1:
+                middle = self.dic[list_1[list_1.index(name+'_middle')]]               #5분봉 매수했을때 고가
+            if name+'_lower' in list_1:
+                lower = self.dic[list_1[list_1.index(name+'_lower')]]               #5분봉 매수했을때 고가 
+    
+            else : return 
+            if name+'_reach_upper' in list_1:
+                reach_upper = self.dic[list_1[list_1.index(name+'_reach_upper')]]     #현재가 상단선 도달여부
+            else : return
+            if name+'_reach_middle' in list_1:
+                reach_middle = self.dic[list_1[list_1.index(name+'_reach_middle')]]   #현재가 중단선 밑으로 떨어졌는지 여부
+            else : return
+            if name + '_reach_low' in list_1 :
+                reach_low = self.dic[list_1[list_1.index(name+'_reach_low')]]   #현재가 하단선 밑으로 떨어졌는지 여부
                 
-                #-1.5% 손실시 청산
-                elif price < initial - initial*0.015:
-                    self.send_order('send_order', "0101", self.ui.account_number, 2, trcode, buy_count, price ,"00", "" )
-                    self.dic[list_1[list_1.index(name+'_status')]] = "재매수대기상태"
-                    self.dic[list_1[list_1.index(name+'_reach_upper')]] = 0
-                    self.ui.textEdit.setFontPointSize(13)
-                    self.ui.textEdit.setTextColor(QColor(0,0,255))
-                    self.ui.textEdit.append("매도 ■ : 매수가 대비 -1.5% 손실(1매수)")
-                    self.ui.textEdit.setFontPointSize(9)
-                    self.ui.textEdit.setTextColor(QColor(0,0,0))
-                    self.ui.textEdit.append("시간 : " + str(time) + " | " +  "매도 | "+ name + " | 매수가 대비 -1.5% 손실 | " + "매도가격 : " + str(price))
-                    self.ui.textEdit.append(" 매도수량 " + str(buy_count) + "주")
-                    self.ui.textEdit.append(" ")
-                    
-            #9시 5분이 넘어가면
-            else :
-                #1,2번일때
-                if initial >= middle:
+    
+            #compare = self.dic[list_1[list_1.index(name+'_compare')]]             #현재가 전일대비       
+           
+            buy_number = int(int(buy_total_price) / int(price)) #매수할 수량
+            
+    
+            format_price = format(int(price), ",")
+            
+            #last_close = self.GetMasterLastPrice(trcode) #전일종가 가져오기
+    
+            print("이름: " +str(name) + "가격 :" + str(initial))
+            
+            print("---진행중--- " + str(name) )
+            print("time" + str(time))
+            #초기상태
+            #포트에서 뜨면 매수
+            if status == "초기상태" :
+                self.send_order('send_order', "0101", self.ui.account_number, 1, trcode, buy_number,  price ,"00", "" )
+                self.dic[list_1[list_1.index(name+'_status')]] = "매수상태"
+                self.dic[list_1[list_1.index(name+'_initial')]] = price
+                self.dic[list_1[list_1.index(name+'_buy_count')]] = buy_number 
+                self.ui.textEdit.setFontPointSize(13)
+                self.ui.textEdit.setTextColor(QColor(255,0,0))
+                self.ui.textEdit.append("매수")
+                self.ui.textEdit.setFontPointSize(9)
+                self.ui.textEdit.setTextColor(QColor(0,0,0))
+                self.ui.textEdit.append("시간 : " + str(time) + " | " + "1매수  :"+ name + " 매수가격 :" + format_price + "원 "+ " 매수수량 : " + str(buy_number) + " 포트번호 : " + str(self.port_name) )
+                self.ui.textEdit.append(" ")
+                
+            #매수 상태일때
+            elif status == "매수상태":
+                #9시 5분 이전
+                if int(time[0:2]) == 9 and int(time[3:5]) <= 5  :
                     #3%이익시 청산
                     if price >= initial + initial*0.03 : 
                         self.send_order('send_order', "0101", self.ui.account_number, 2, trcode, buy_count, price ,"00", "" )
                         self.dic[list_1[list_1.index(name+'_status')]] = "재매수대기상태"
                         self.dic[list_1[list_1.index(name+'_reach_upper')]] = 0
-                        self.dic[list_1[list_1.index(name+'_sell_price')]] = price
                         self.ui.textEdit.setFontPointSize(13)
                         self.ui.textEdit.setTextColor(QColor(0,0,255))
                         self.ui.textEdit.append("매도 ■ : 매수가 대비 3% 이익(1매수)")
@@ -1198,7 +1167,6 @@ class Kiwoom(QAxWidget):
                         self.send_order('send_order', "0101", self.ui.account_number, 2, trcode, buy_count, price ,"00", "" )
                         self.dic[list_1[list_1.index(name+'_status')]] = "재매수대기상태"
                         self.dic[list_1[list_1.index(name+'_reach_upper')]] = 0
-                        self.dic[list_1[list_1.index(name+'_sell_price')]] = price
                         self.ui.textEdit.setFontPointSize(13)
                         self.ui.textEdit.setTextColor(QColor(0,0,255))
                         self.ui.textEdit.append("매도 ■ : 매수가 대비 -1.5% 손실(1매수)")
@@ -1207,116 +1175,151 @@ class Kiwoom(QAxWidget):
                         self.ui.textEdit.append("시간 : " + str(time) + " | " +  "매도 | "+ name + " | 매수가 대비 -1.5% 손실 | " + "매도가격 : " + str(price))
                         self.ui.textEdit.append(" 매도수량 " + str(buy_count) + "주")
                         self.ui.textEdit.append(" ")
-                #3,4번일때
-                else:
-                    #현재가 상단선 돌파
-                    if price > upper and reach_upper == 0 and upper != 0:
-                        self.dic[list_1[list_1.index(name+'_reach_upper')]] = 1
-                        self.ui.textEdit.setFontPointSize(13)
-                        self.ui.textEdit.setTextColor(QColor(255,51,153))
-                        self.ui.textEdit.append("현재가 상단선 돌파(1매수) | " )
-                        self.ui.textEdit.setFontPointSize(9)
-                        self.ui.textEdit.setTextColor(QColor(0,0,0))
-                        self.ui.textEdit.append("시간 : " + str(time) + " 종목 ㅣ " + str(name) + " | 현재가격 : " + str(price) + " | 상단선 " + str(upper))
-                        self.ui.textEdit.append(" ")
-                    #가격이 돌파후 하락하면
-                    if price < upper and reach_upper == 1 and upper != 0 :
-                        self.send_order('send_order', "0101", self.ui.account_number, 2, trcode, buy_count, price ,"00", "" )
-                        self.dic[list_1[list_1.index(name+'_status')]] = "재매수대기상태"
-                        self.dic[list_1[list_1.index(name+'_reach_upper')]] = 0
-                        self.dic[list_1[list_1.index(name+'_sell_price')]] = price
-                        self.ui.textEdit.setFontPointSize(13)
-                        self.ui.textEdit.setTextColor(QColor(0,0,255))
-                        self.ui.textEdit.append("매도 ■ : 상단선 하락 매도(1매수)")
-                        self.ui.textEdit.setFontPointSize(9)
-                        self.ui.textEdit.setTextColor(QColor(0,0,0))
-                        self.ui.textEdit.append("시간 : " + str(time) + " | " +  "매도 | "+ name + " | 상단선 하락 매도 | " + "매도가격 : " + str(price)+ " | 상단선 " + str(upper))
-                        self.ui.textEdit.append(" 매도수량 " + str(buy_count) + "주")
-                        self.ui.textEdit.append(" ")
-                    
-                    #-1.5% 손실시 청산
-                    if price < initial - initial*0.015 and reach_upper == 0:
-                        self.send_order('send_order', "0101", self.ui.account_number, 2, trcode, buy_count, price ,"00", "" )
-                        self.dic[list_1[list_1.index(name+'_status')]] = "재매수대기상태"
-                        self.dic[list_1[list_1.index(name+'_reach_upper')]] = 0
-                        self.dic[list_1[list_1.index(name+'_sell_price')]] = price
-                        self.ui.textEdit.setFontPointSize(13)
-                        self.ui.textEdit.setTextColor(QColor(0,0,255))
-                        self.ui.textEdit.append("매도 ■ : 매수가 대비 -1.5% 손실(1매수)")
-                        self.ui.textEdit.setFontPointSize(9)
-                        self.ui.textEdit.setTextColor(QColor(0,0,0))
-                        self.ui.textEdit.append("시간 : " + str(time) + " | " +  "매도 | "+ name + " | 매수가 대비 -1.5% 손실 | " + "매도가격 : " + str(price))
-                        self.ui.textEdit.append(" 매도수량 " + str(buy_count) + "주")
-                        self.ui.textEdit.append(" ")
-                    
-        
-        elif status == "재매수대기상태":
-            #현재가 중단선 밑으로 떨어진 경우
-            if price < middle and sell_price > midlle  and reach_middle == 0 and middle != 0:
-                self.dic[list_1[list_1.index(name+'_reach_middle')]] = 1
-                self.ui.textEdit.setFontPointSize(13)
-                self.ui.textEdit.setTextColor(QColor(0,128,0))
-                self.ui.textEdit.append("현재가 중단선 밑 하락(재매수대기상태) | ")
-                self.ui.textEdit.setFontPointSize(9)
-                self.ui.textEdit.setTextColor(QColor(0,0,0))
-                self.ui.textEdit.append("시간 : " + str(time) + " 종목 ㅣ " + str(name) + " | 현재가격 : " + str(price) + " | 중단선 : " + str(middle))
-                self.ui.textEdit.append(" ")
+                        
+                #9시 5분이 넘어가면
+                else :
+                    #1,2번일때
+                    if initial >= middle:
+                        #3%이익시 청산
+                        if price >= initial + initial*0.03 : 
+                            self.send_order('send_order', "0101", self.ui.account_number, 2, trcode, buy_count, price ,"00", "" )
+                            self.dic[list_1[list_1.index(name+'_status')]] = "재매수대기상태"
+                            self.dic[list_1[list_1.index(name+'_reach_upper')]] = 0
+                            self.dic[list_1[list_1.index(name+'_sell_price')]] = price
+                            self.ui.textEdit.setFontPointSize(13)
+                            self.ui.textEdit.setTextColor(QColor(0,0,255))
+                            self.ui.textEdit.append("매도 ■ : 매수가 대비 3% 이익(1매수)")
+                            self.ui.textEdit.setFontPointSize(9)
+                            self.ui.textEdit.setTextColor(QColor(0,0,0))
+                            self.ui.textEdit.append("시간 : " + str(time) + " | " +  "매도 | "+ name + " | 매수가 대비 3% 이익 | " + "매도가격 : " + str(price))
+                            self.ui.textEdit.append(" 매도수량 " + str(buy_count) + "주")
+                            self.ui.textEdit.append(" ")
+                        
+                        #-1.5% 손실시 청산
+                        elif price < initial - initial*0.015:
+                            self.send_order('send_order', "0101", self.ui.account_number, 2, trcode, buy_count, price ,"00", "" )
+                            self.dic[list_1[list_1.index(name+'_status')]] = "재매수대기상태"
+                            self.dic[list_1[list_1.index(name+'_reach_upper')]] = 0
+                            self.dic[list_1[list_1.index(name+'_sell_price')]] = price
+                            self.ui.textEdit.setFontPointSize(13)
+                            self.ui.textEdit.setTextColor(QColor(0,0,255))
+                            self.ui.textEdit.append("매도 ■ : 매수가 대비 -1.5% 손실(1매수)")
+                            self.ui.textEdit.setFontPointSize(9)
+                            self.ui.textEdit.setTextColor(QColor(0,0,0))
+                            self.ui.textEdit.append("시간 : " + str(time) + " | " +  "매도 | "+ name + " | 매수가 대비 -1.5% 손실 | " + "매도가격 : " + str(price))
+                            self.ui.textEdit.append(" 매도수량 " + str(buy_count) + "주")
+                            self.ui.textEdit.append(" ")
+                    #3,4번일때
+                    else:
+                        #현재가 상단선 돌파
+                        if price > upper and reach_upper == 0 and upper != 0:
+                            self.dic[list_1[list_1.index(name+'_reach_upper')]] = 1
+                            self.ui.textEdit.setFontPointSize(13)
+                            self.ui.textEdit.setTextColor(QColor(255,51,153))
+                            self.ui.textEdit.append("현재가 상단선 돌파(1매수) | " )
+                            self.ui.textEdit.setFontPointSize(9)
+                            self.ui.textEdit.setTextColor(QColor(0,0,0))
+                            self.ui.textEdit.append("시간 : " + str(time) + " 종목 ㅣ " + str(name) + " | 현재가격 : " + str(price) + " | 상단선 " + str(upper))
+                            self.ui.textEdit.append(" ")
+                        #가격이 돌파후 하락하면
+                        if price < upper and reach_upper == 1 and upper != 0 :
+                            self.send_order('send_order', "0101", self.ui.account_number, 2, trcode, buy_count, price ,"00", "" )
+                            self.dic[list_1[list_1.index(name+'_status')]] = "재매수대기상태"
+                            self.dic[list_1[list_1.index(name+'_reach_upper')]] = 0
+                            self.dic[list_1[list_1.index(name+'_sell_price')]] = price
+                            self.ui.textEdit.setFontPointSize(13)
+                            self.ui.textEdit.setTextColor(QColor(0,0,255))
+                            self.ui.textEdit.append("매도 ■ : 상단선 하락 매도(1매수)")
+                            self.ui.textEdit.setFontPointSize(9)
+                            self.ui.textEdit.setTextColor(QColor(0,0,0))
+                            self.ui.textEdit.append("시간 : " + str(time) + " | " +  "매도 | "+ name + " | 상단선 하락 매도 | " + "매도가격 : " + str(price)+ " | 상단선 " + str(upper))
+                            self.ui.textEdit.append(" 매도수량 " + str(buy_count) + "주")
+                            self.ui.textEdit.append(" ")
+                        
+                        #-1.5% 손실시 청산
+                        if price < initial - initial*0.015 and reach_upper == 0:
+                            self.send_order('send_order', "0101", self.ui.account_number, 2, trcode, buy_count, price ,"00", "" )
+                            self.dic[list_1[list_1.index(name+'_status')]] = "재매수대기상태"
+                            self.dic[list_1[list_1.index(name+'_reach_upper')]] = 0
+                            self.dic[list_1[list_1.index(name+'_sell_price')]] = price
+                            self.ui.textEdit.setFontPointSize(13)
+                            self.ui.textEdit.setTextColor(QColor(0,0,255))
+                            self.ui.textEdit.append("매도 ■ : 매수가 대비 -1.5% 손실(1매수)")
+                            self.ui.textEdit.setFontPointSize(9)
+                            self.ui.textEdit.setTextColor(QColor(0,0,0))
+                            self.ui.textEdit.append("시간 : " + str(time) + " | " +  "매도 | "+ name + " | 매수가 대비 -1.5% 손실 | " + "매도가격 : " + str(price))
+                            self.ui.textEdit.append(" 매도수량 " + str(buy_count) + "주")
+                            self.ui.textEdit.append(" ")
+                        
             
-            
+            elif status == "재매수대기상태":
+                #현재가 중단선 밑으로 떨어진 경우
+                if price < middle and sell_price > middle  and reach_middle == 0 and middle != 0:
+                    self.dic[list_1[list_1.index(name+'_reach_middle')]] = 1
+                    self.ui.textEdit.setFontPointSize(13)
+                    self.ui.textEdit.setTextColor(QColor(0,128,0))
+                    self.ui.textEdit.append("현재가 중단선 밑 하락(재매수대기상태) | ")
+                    self.ui.textEdit.setFontPointSize(9)
+                    self.ui.textEdit.setTextColor(QColor(0,0,0))
+                    self.ui.textEdit.append("시간 : " + str(time) + " 종목 ㅣ " + str(name) + " | 현재가격 : " + str(price) + " | 중단선 : " + str(middle))
+                    self.ui.textEdit.append(" ")
                 
-            
-            #현재가 중단선 밑으로 떨어졌다가 다시 상승하는 경우
-            if price >= middle and reach_middle == 1 and middle != 0:
-                self.send_order('send_order', "0101", self.ui.account_number, 1, trcode, buy_number,  price ,"00", "" )
-                self.dic[list_1[list_1.index(name+'_status')]] = "재매수상태"
-                self.dic[list_1[list_1.index(name+'_initial')]] = price
-                self.dic[list_1[list_1.index(name+'_buy_count')]] = buy_number 
-                self.ui.textEdit.setFontPointSize(13)
-                self.ui.textEdit.setTextColor(QColor(255,0,0))
-                self.ui.textEdit.append("중단선 도달 : 재매수")
-                self.ui.textEdit.setFontPointSize(9)
-                self.ui.textEdit.setTextColor(QColor(0,0,0))
-                self.ui.textEdit.append("시간 : " + str(time) + " | " + "재매수  :"+ name + " 매수가격 :" + format_price + "원 "+ " 매수수량 : " + str(buy_number) + " 포트번호 : " + str(self.port_name) )
-                self.ui.textEdit.append(" ")
                 
-        
-        elif status == "재매수상태":
-            #3%이익시 청산
-            if price >= initial + initial*0.03 : 
-                self.send_order('send_order', "0101", self.ui.account_number, 2, trcode, buy_count, price ,"00", "" )
-                self.dic[list_1[list_1.index(name+'_status')]] = "거래끝"
-                self.dic[list_1[list_1.index(name+'_reach_upper')]] = 0
-                self.ui.textEdit.setFontPointSize(13)
-                self.ui.textEdit.setTextColor(QColor(0,0,255))
-                self.ui.textEdit.append("매도 ■ : 매수가 대비 3% 이익(재매수)")
-                self.ui.textEdit.setFontPointSize(9)
-                self.ui.textEdit.setTextColor(QColor(0,0,0))
-                self.ui.textEdit.append("시간 : " + str(time) + " | " +  "매도 | "+ name + " | 매수가 대비 3% 이익 | " + "매도가격 : " + str(price))
-                self.ui.textEdit.append(" 매도수량 " + str(buy_count) + "주")
-                self.ui.textEdit.append(" ")
+                    
+                
+                #현재가 중단선 밑으로 떨어졌다가 다시 상승하는 경우
+                if price >= middle and reach_middle == 1 and middle != 0:
+                    self.send_order('send_order', "0101", self.ui.account_number, 1, trcode, buy_number,  price ,"00", "" )
+                    self.dic[list_1[list_1.index(name+'_status')]] = "재매수상태"
+                    self.dic[list_1[list_1.index(name+'_initial')]] = price
+                    self.dic[list_1[list_1.index(name+'_buy_count')]] = buy_number 
+                    self.ui.textEdit.setFontPointSize(13)
+                    self.ui.textEdit.setTextColor(QColor(255,0,0))
+                    self.ui.textEdit.append("중단선 도달 : 재매수")
+                    self.ui.textEdit.setFontPointSize(9)
+                    self.ui.textEdit.setTextColor(QColor(0,0,0))
+                    self.ui.textEdit.append("시간 : " + str(time) + " | " + "재매수  :"+ name + " 매수가격 :" + format_price + "원 "+ " 매수수량 : " + str(buy_number) + " 포트번호 : " + str(self.port_name) )
+                    self.ui.textEdit.append(" ")
+                    
             
-            #-1.5% 손실시 청산
-            elif price < initial - initial*0.015:
-                self.send_order('send_order', "0101", self.ui.account_number, 2, trcode, buy_count, price ,"00", "" )
-                self.dic[list_1[list_1.index(name+'_status')]] = "거래끝"
-                self.dic[list_1[list_1.index(name+'_reach_upper')]] = 0
-                self.ui.textEdit.setFontPointSize(13)
-                self.ui.textEdit.setTextColor(QColor(0,0,255))
-                self.ui.textEdit.append("매도 ■ : 매수가 대비 -1.5% 손실(재매수)")
-                self.ui.textEdit.setFontPointSize(9)
-                self.ui.textEdit.setTextColor(QColor(0,0,0))
-                self.ui.textEdit.append("시간 : " + str(time) + " | " +  "매도 | "+ name + " | 매수가 대비 -1.5% 손실 | " + "매도가격 : " + str(price))
-                self.ui.textEdit.append(" 매도수량 " + str(buy_count) + "주")
+            elif status == "재매수상태":
+                #3%이익시 청산
+                if price >= initial + initial*0.03 : 
+                    self.send_order('send_order', "0101", self.ui.account_number, 2, trcode, buy_count, price ,"00", "" )
+                    self.dic[list_1[list_1.index(name+'_status')]] = "거래끝"
+                    self.dic[list_1[list_1.index(name+'_reach_upper')]] = 0
+                    self.ui.textEdit.setFontPointSize(13)
+                    self.ui.textEdit.setTextColor(QColor(0,0,255))
+                    self.ui.textEdit.append("매도 ■ : 매수가 대비 3% 이익(재매수)")
+                    self.ui.textEdit.setFontPointSize(9)
+                    self.ui.textEdit.setTextColor(QColor(0,0,0))
+                    self.ui.textEdit.append("시간 : " + str(time) + " | " +  "매도 | "+ name + " | 매수가 대비 3% 이익 | " + "매도가격 : " + str(price))
+                    self.ui.textEdit.append(" 매도수량 " + str(buy_count) + "주")
+                    self.ui.textEdit.append(" ")
+                
+                #-1.5% 손실시 청산
+                elif price < initial - initial*0.015:
+                    self.send_order('send_order', "0101", self.ui.account_number, 2, trcode, buy_count, price ,"00", "" )
+                    self.dic[list_1[list_1.index(name+'_status')]] = "거래끝"
+                    self.dic[list_1[list_1.index(name+'_reach_upper')]] = 0
+                    self.ui.textEdit.setFontPointSize(13)
+                    self.ui.textEdit.setTextColor(QColor(0,0,255))
+                    self.ui.textEdit.append("매도 ■ : 매수가 대비 -1.5% 손실(재매수)")
+                    self.ui.textEdit.setFontPointSize(9)
+                    self.ui.textEdit.setTextColor(QColor(0,0,0))
+                    self.ui.textEdit.append("시간 : " + str(time) + " | " +  "매도 | "+ name + " | 매수가 대비 -1.5% 손실 | " + "매도가격 : " + str(price))
+                    self.ui.textEdit.append(" 매도수량 " + str(buy_count) + "주")
+                    self.ui.textEdit.append(" ")
+            
+      
+            elif status == "거래끝":
+                self.ui.textEdit.append("거래종료 | 종목 : " + name )
                 self.ui.textEdit.append(" ")
-        
-  
-        elif status == "거래끝":
-            self.ui.textEdit.append("거래종료 | 종목 : " + name )
-            self.ui.textEdit.append(" ")
-            self.dic[list_1[list_1.index(name+'_status')]] = ""
+                self.dic[list_1[list_1.index(name+'_status')]] = ""
 
 
-
+        except Exception as e:    # 모든 예외의 에러 메시지를 출력
+            print('예외가 발생했습니다.', e)
 
 
 if __name__ == "__main__":
