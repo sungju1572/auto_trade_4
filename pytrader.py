@@ -9,6 +9,7 @@ from PyQt5.QtGui import *
 import openpyxl as op
 import re
 
+
 form_class = uic.loadUiType("exam_2.ui")[0]
 
 
@@ -70,6 +71,7 @@ class MyWindow(QMainWindow, form_class):
         self.lineEdit_9.textChanged.connect(self.price_change)
         self.pushButton_6.clicked.connect(self.kiwoom._condition_search)
         
+        self.lineEdit_11.textChanged.connect(self.enable_pushButton_6)
         
         self.gudoc_status = 0
         self.ticker_list = []
@@ -294,8 +296,11 @@ class MyWindow(QMainWindow, form_class):
         self.row_count+=1
         #self.tableWidget_3.resizeRowsToContents()
         self.tableWidget_3.resizeColumnsToContents()
-        self.pushButton_6.setEnabled(True)
+        
 
+    #거래할 종목수 입력시 거래시작 활성화
+    def enable_pushButton_6(self):
+        self.pushButton_6.setEnabled(True)
 
 
     #주시 종목에 설정한 종목 넣기
