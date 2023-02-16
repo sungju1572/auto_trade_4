@@ -78,6 +78,7 @@ class MyWindow(QMainWindow, form_class):
         
         
         
+        
         #self.lineEdit_8.textChanged.connect(self.profit_percent)# 익절 기준
         
     
