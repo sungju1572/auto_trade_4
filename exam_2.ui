@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1256</width>
+    <width>1253</width>
     <height>895</height>
    </rect>
   </property>
@@ -274,7 +274,7 @@
     <property name="geometry">
      <rect>
       <x>490</x>
-      <y>310</y>
+      <y>280</y>
       <width>101</width>
       <height>31</height>
      </rect>
@@ -302,7 +302,7 @@
     <property name="geometry">
      <rect>
       <x>610</x>
-      <y>310</y>
+      <y>280</y>
       <width>101</width>
       <height>31</height>
      </rect>
@@ -423,7 +423,7 @@
     <property name="geometry">
      <rect>
       <x>490</x>
-      <y>370</y>
+      <y>330</y>
       <width>171</width>
       <height>21</height>
      </rect>
@@ -441,8 +441,41 @@
     <property name="geometry">
      <rect>
       <x>670</x>
-      <y>370</y>
+      <y>320</y>
       <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_8">
+    <property name="geometry">
+     <rect>
+      <x>490</x>
+      <y>370</y>
+      <width>161</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>청산 비율(%수치 입력)</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_12">
+    <property name="geometry">
+     <rect>
+      <x>660</x>
+      <y>360</y>
+      <width>41</width>
       <height>31</height>
      </rect>
     </property>
