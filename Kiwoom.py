@@ -227,27 +227,6 @@ class Kiwoom(QAxWidget):
             
         print("실시간x:" , self.code_list)
 
-        for i in self.code_list:
-            
-            if i not in self.ui.ticker_list:
-                self.ui.ticker_list.append(i)
-                
-                print("----------------")
-                print(self.ui.ticker_list)
-                
-            if i not in self.dic.values() and i != "":
-                self.ready_trade(i)  
-            
-            if self.ui.gudoc_status == 0:
-                self.SetRealReg(1000 +self.ui.window_count , i, "20;10", "0")
-                self.gudoc_count += 1
-                self.ui.gudoc_status = 1
-                print('구독성공')
-            elif self.ui.gudoc_status != 0 :
-                self.SetRealReg(1000 +self.ui.window_count , i, "20;10", "1")
-                self.gudoc_count += 1
-                print('구독성공2')
-
     
     #실시간 조건검색 응답(실시간으로 들어왔을때 전략에 들어가게끔만들기)
     def _handler_real_condition(self, code, type, cond_name, cond_index):
@@ -266,7 +245,7 @@ class Kiwoom(QAxWidget):
                     if str(cond_name) == str(i) == self.sec_list[0]:
                         if self.ui.checkBox_2.isChecked():
                             continue
-                        else :
+                        else :100
                             self.ui.textEdit_2.append("실시간o: " + str(code))
                             self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
                             self.port_name = str(cond_name)
