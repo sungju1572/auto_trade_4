@@ -1128,7 +1128,8 @@ class Kiwoom(QAxWidget):
             format_price = format(int(price), ",")
         
             last_close = self.GetMasterLastPrice(trcode) #전일종가 가져오기
-        
+            
+            #print("종목이름 : " + str(name) + "전일종가:" + str(last_close))
     
             #compare = self.dic[list_1[list_1.index(name+'_compare')]]             #현재가 전일대비       
            
@@ -1162,13 +1163,13 @@ class Kiwoom(QAxWidget):
                 #9시 5분 이전
                 if int(time[0:2]) == 9 and int(time[3:5]) <= 5  :
                     #3%이익시 청산
-                    if (price - initial)/last_close >= 0.03 : 
+                    if (price - initial)/float(last_close)>= 0.03 : 
                         self.send_order('send_order', "0101", self.ui.account_number, 2, trcode, buy_count, price ,"00", "" )
                         self.dic[list_1[list_1.index(name+'_status')]] = "재매수대기상태"
                         self.dic[list_1[list_1.index(name+'_reach_upper')]] = 0
                         self.ui.textEdit.setFontPointSize(13)
-                        self.ui.textEdit.setTextColor(QColor(0,0,255))
-                        self.ui.textEdit.append("매도 ■ : 매수가 대비 3% 이익(1매수)")
+                        self.ui.textEdit.setTextColor(QColor(255,0,0))
+                        self.ui.textEdit.append("매도 ▲ : 매수 익절(1매수)")
                         self.ui.textEdit.setFontPointSize(9)
                         self.ui.textEdit.setTextColor(QColor(0,0,0))
                         self.ui.textEdit.append("시간 : " + str(time) + " | " +  "매도 | "+ name + " | 매수가 대비 3% 이익 | " + "매도가격 : " + str(price))
@@ -1176,13 +1177,13 @@ class Kiwoom(QAxWidget):
                         self.ui.textEdit.append(" ")
                     
                     #-1.5% 손실시 청산
-                    elif (price - initial)/last_close < (self.sell_percent/100):
+                    elif (price - initial)/float(last_close) < -(self.sell_percent/100):
                         self.send_order('send_order', "0101", self.ui.account_number, 2, trcode, buy_count, price ,"00", "" )
                         self.dic[list_1[list_1.index(name+'_status')]] = "재매수대기상태"
                         self.dic[list_1[list_1.index(name+'_reach_upper')]] = 0
                         self.ui.textEdit.setFontPointSize(13)
                         self.ui.textEdit.setTextColor(QColor(0,0,255))
-                        self.ui.textEdit.append("매도 ■ : 매수가 대비 손실(1매수)")
+                        self.ui.textEdit.append("매도 ▼ : 매수 손실(1매수)")
                         self.ui.textEdit.setFontPointSize(9)
                         self.ui.textEdit.setTextColor(QColor(0,0,0))
                         self.ui.textEdit.append("시간 : " + str(time) + " | " +  "매도 | "+ name + " | 매수가 대비 손실 | " + "매도가격 : " + str(price))
@@ -1194,14 +1195,14 @@ class Kiwoom(QAxWidget):
                     #1,2번일때
                     if initial >= middle:
                         #3%이익시 청산
-                        if (price - initial)/last_close >= 0.03  : 
+                        if (price - initial)/float(last_close) >= 0.03  : 
                             self.send_order('send_order', "0101", self.ui.account_number, 2, trcode, buy_count, price ,"00", "" )
                             self.dic[list_1[list_1.index(name+'_status')]] = "재매수대기상태"
                             self.dic[list_1[list_1.index(name+'_reach_upper')]] = 0
                             self.dic[list_1[list_1.index(name+'_sell_price')]] = price
                             self.ui.textEdit.setFontPointSize(13)
-                            self.ui.textEdit.setTextColor(QColor(0,0,255))
-                            self.ui.textEdit.append("매도 ■ : 매수가 대비 3% 이익(1매수)")
+                            self.ui.textEdit.setTextColor(QColor(255,0,0))
+                            self.ui.textEdit.append("매도 ▲ : 매수 익절(1매수)")
                             self.ui.textEdit.setFontPointSize(9)
                             self.ui.textEdit.setTextColor(QColor(0,0,0))
                             self.ui.textEdit.append("시간 : " + str(time) + " | " +  "매도 | "+ name + " | 매수가 대비 3% 이익 | " + "매도가격 : " + str(price))
@@ -1209,14 +1210,14 @@ class Kiwoom(QAxWidget):
                             self.ui.textEdit.append(" ")
                         
                         #-1.5% 손실시 청산
-                        elif (price - initial)/last_close < (self.sell_percent/100):
+                        elif (price - initial)/float(last_close) < -(self.sell_percent/100):
                             self.send_order('send_order', "0101", self.ui.account_number, 2, trcode, buy_count, price ,"00", "" )
                             self.dic[list_1[list_1.index(name+'_status')]] = "재매수대기상태"
                             self.dic[list_1[list_1.index(name+'_reach_upper')]] = 0
                             self.dic[list_1[list_1.index(name+'_sell_price')]] = price
                             self.ui.textEdit.setFontPointSize(13)
                             self.ui.textEdit.setTextColor(QColor(0,0,255))
-                            self.ui.textEdit.append("매도 ■ : 매수가 대비 손실(1매수)")
+                            self.ui.textEdit.append("매도 ▼ : 매수 손실(1매수)")
                             self.ui.textEdit.setFontPointSize(9)
                             self.ui.textEdit.setTextColor(QColor(0,0,0))
                             self.ui.textEdit.append("시간 : " + str(time) + " | " +  "매도 | "+ name + " | 매수가 대비 손실 | " + "매도가격 : " + str(price))
@@ -1250,14 +1251,14 @@ class Kiwoom(QAxWidget):
                             self.ui.textEdit.append(" ")
                         
                         #-1.5% 손실시 청산
-                        if (price - initial)/last_close < (self.sell_percent/100) and reach_upper == 0:
+                        if (price - initial)/float(last_close) < -(self.sell_percent/100) and reach_upper == 0:
                             self.send_order('send_order', "0101", self.ui.account_number, 2, trcode, buy_count, price ,"00", "" )
                             self.dic[list_1[list_1.index(name+'_status')]] = "재매수대기상태"
                             self.dic[list_1[list_1.index(name+'_reach_upper')]] = 0
                             self.dic[list_1[list_1.index(name+'_sell_price')]] = price
                             self.ui.textEdit.setFontPointSize(13)
                             self.ui.textEdit.setTextColor(QColor(0,0,255))
-                            self.ui.textEdit.append("매도 ■ : 매수가 손실(1매수)")
+                            self.ui.textEdit.append("매도 ▼ : 매수 손실(1매수)")
                             self.ui.textEdit.setFontPointSize(9)
                             self.ui.textEdit.setTextColor(QColor(0,0,0))
                             self.ui.textEdit.append("시간 : " + str(time) + " | " +  "매도 | "+ name + " | 매수가 대비 손실 | " + "매도가격 : " + str(price))
@@ -1281,7 +1282,7 @@ class Kiwoom(QAxWidget):
                     
                 
                 #현재가 중단선 밑으로 떨어졌다가 다시 상승하는 경우
-                if price >= middle and reach_middle == 1 and middle != 0:
+                if price > middle and reach_middle == 1 and middle != 0:
                     self.send_order('send_order', "0101", self.ui.account_number, 1, trcode, buy_number,  price ,"00", "" )
                     self.dic[list_1[list_1.index(name+'_status')]] = "재매수상태"
                     self.dic[list_1[list_1.index(name+'_initial')]] = price
@@ -1297,13 +1298,13 @@ class Kiwoom(QAxWidget):
             
             elif status == "재매수상태":
                 #3%이익시 청산
-                if (price - initial)/last_close >= 0.03  : 
+                if (price - initial)/float(last_close) >= 0.03  : 
                     self.send_order('send_order', "0101", self.ui.account_number, 2, trcode, buy_count, price ,"00", "" )
                     self.dic[list_1[list_1.index(name+'_status')]] = "거래끝"
                     self.dic[list_1[list_1.index(name+'_reach_upper')]] = 0
                     self.ui.textEdit.setFontPointSize(13)
-                    self.ui.textEdit.setTextColor(QColor(0,0,255))
-                    self.ui.textEdit.append("매도 ■ : 매수가 대비 3% 이익(재매수)")
+                    self.ui.textEdit.setTextColor(QColor(255,0,0))
+                    self.ui.textEdit.append("매도 ▲ : 매수 익절(재매수)")
                     self.ui.textEdit.setFontPointSize(9)
                     self.ui.textEdit.setTextColor(QColor(0,0,0))
                     self.ui.textEdit.append("시간 : " + str(time) + " | " +  "매도 | "+ name + " | 매수가 대비 3% 이익 | " + "매도가격 : " + str(price))
@@ -1311,13 +1312,13 @@ class Kiwoom(QAxWidget):
                     self.ui.textEdit.append(" ")
                 
                 #-1.5% 손실시 청산
-                elif (price - initial)/last_close < (self.sell_percent/100):
+                elif (price - initial)/float(last_close) < -(self.sell_percent/100):
                     self.send_order('send_order', "0101", self.ui.account_number, 2, trcode, buy_count, price ,"00", "" )
                     self.dic[list_1[list_1.index(name+'_status')]] = "거래끝"
                     self.dic[list_1[list_1.index(name+'_reach_upper')]] = 0
                     self.ui.textEdit.setFontPointSize(13)
                     self.ui.textEdit.setTextColor(QColor(0,0,255))
-                    self.ui.textEdit.append("매도 ■ : 매수가 대비 손실(재매수)")
+                    self.ui.textEdit.append("매도 ▼ : 매수 손실(재매수)")
                     self.ui.textEdit.setFontPointSize(9)
                     self.ui.textEdit.setTextColor(QColor(0,0,0))
                     self.ui.textEdit.append("시간 : " + str(time) + " | " +  "매도 | "+ name + " | 매수가 대비 손실 | " + "매도가격 : " + str(price))
