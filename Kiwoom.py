@@ -153,6 +153,7 @@ class Kiwoom(QAxWidget):
             
         price = format(int(self.ui.lineEdit_9.text()), ",")    
         self.ui.lineEdit_10.setText(str(price))   
+        self.ui.pushButton_5.setDisabled(True)
         
     #로컬에 사용자 조건식 저장 성공 여부 확인
     def _on_receive_condition_ver(self):
