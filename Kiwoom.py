@@ -247,381 +247,381 @@ class Kiwoom(QAxWidget):
 
 
         self.dic[name+'_port_name'] = str(cond_name)
-        if len(self.ui.ticker_list) <= int(self.ui.lineEdit_11.text())-1:
-            for i in self.sec_list:
-                if len(self.sec_list) == 1:
-                    if str(cond_name) == str(i) == self.sec_list[0]:
-                        if self.ui.checkBox_2.isChecked():
-                            continue
-                        else :
-                            self.ui.textEdit_2.append("실시간o: " + str(code))
-                            self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
-                            self.port_name = str(cond_name)
-                            
-                            if code not in self.ui.ticker_list:
-                                self.ui.ticker_list.append(code)
-                    
-                            if code not in self.dic.values() and code != "":
-                                self.ready_trade(code)  
-                            
-                            if self.ui.gudoc_status == 0:
-                                self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
-                                self.gudoc_count += 1
-                                self.ui.gudoc_status = 1
-                                print('구독성공')
-                            elif self.ui.gudoc_status != 0 :
-                                self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
-                                self.gudoc_count += 1
-                                print('구독성공2')
-    
-                elif len(self.sec_list) == 2:
-                    if str(cond_name) == str(i) == self.sec_list[0] :
-                        if self.ui.checkBox_2.isChecked():
-                            continue
-                        else :
-                           self.ui.textEdit_2.append("실시간o: " + str(code))
-                           self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
-                           self.port_name = str(cond_name)
-                   
-                           if code not in self.ui.ticker_list:
-                               self.ui.ticker_list.append(code)
-                   
-                           if code not in self.dic.values() and code != "":
-                               self.ready_trade(code)  
-                           
-                           if self.ui.gudoc_status == 0:
-                               self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
-                               self.gudoc_count += 1
-                               self.ui.gudoc_status = 1
-                               print('구독성공')
-                           elif self.ui.gudoc_status != 0 :
-                               self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
-                               self.gudoc_count += 1
-                               print('구독성공2')
-    
-                           
-                    elif str(cond_name) == str(i) == self.sec_list[1]:
-                        if self.ui.checkBox_3.isChecked():
-                            continue
-                        else :
-                           self.ui.textEdit_2.append("실시간o: " + str(code))
-                           self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
-                           self.port_name = str(cond_name)
-                   
-                           if code not in self.ui.ticker_list:
-                               self.ui.ticker_list.append(code)
-                   
-                           if code not in self.dic.values() and code != "":
-                               self.ready_trade(code)
-                                 
-                           if self.ui.gudoc_status == 0:
-                               self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
-                               self.gudoc_count += 1
-                               self.ui.gudoc_status = 1
-                               print('구독성공')
-                           elif self.ui.gudoc_status != 0 :
-                               self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
-                               self.gudoc_count += 1
-                               print('구독성공2')
-                    
-                elif len(self.sec_list) == 3:
-                    if str(cond_name) == str(i) == self.sec_list[0]:
-                        if self.ui.checkBox_2.isChecked():
-                            continue
-                        else :
-                           self.ui.textEdit_2.append("실시간o: " + str(code))
-                           self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
-                           self.port_name = str(cond_name)
-                   
-                           if code not in self.ui.ticker_list:
-                               self.ui.ticker_list.append(code)
-                   
-                           if code not in self.dic.values() and code != "":
-                               self.ready_trade(code)  
-                           
-                           if self.ui.gudoc_status == 0:
-                               self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
-                               self.gudoc_count += 1
-                               self.ui.gudoc_status = 1
-                               print('구독성공')
-                           elif self.ui.gudoc_status != 0 :
-                               self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
-                               self.gudoc_count += 1
-                               print('구독성공2')
-    
-                           
-                    elif str(cond_name) == str(i) == self.sec_list[1]:
-                        if self.ui.checkBox_3.isChecked():
-                            continue
-                        else :
-                           self.ui.textEdit_2.append("실시간o: " + str(code))
-                           self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
-                           self.port_name = str(cond_name)
-                   
-                           if code not in self.ui.ticker_list:
-                               self.ui.ticker_list.append(code)
-                   
-                           if code not in self.dic.values() and code != "":
-                               self.ready_trade(code)
-                                 
-                           if self.ui.gudoc_status == 0:
-                               self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
-                               self.gudoc_count += 1
-                               self.ui.gudoc_status = 1
-                               print('구독성공')
-                           elif self.ui.gudoc_status != 0 :
-                               self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
-                               self.gudoc_count += 1
-                               print('구독성공2')
-    
-                           
-                    elif str(cond_name) == str(i) == self.sec_list[2]:
-                        if self.ui.checkBox_4.isChecked():
-                            continue
-                        else :
-                           self.ui.textEdit_2.append("실시간o: " + str(code))
-                           self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
-                           self.port_name = str(cond_name)
-                   
-                           if code not in self.ui.ticker_list:
-                               self.ui.ticker_list.append(code)
-                   
-                           if code not in self.dic.values() and code != "":
-                               self.ready_trade(code)
-                                     
-                           if self.ui.gudoc_status == 0:
-                               self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
-                               self.gudoc_count += 1
-                               self.ui.gudoc_status = 1
-                               print('구독성공')
-                           elif self.ui.gudoc_status != 0 :
-                               self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
-                               self.gudoc_count += 1
-                               print('구독성공2')
+        #if len(self.ui.ticker_list) <= int(self.ui.lineEdit_11.text())-1:
+        for i in self.sec_list:
+            if len(self.sec_list) == 1:
+                if str(cond_name) == str(i) == self.sec_list[0]:
+                    if self.ui.checkBox_2.isChecked():
+                        continue
+                    else :
+                        #self.ui.textEdit_2.append("실시간o: " + str(code))
+                        #self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
+                        self.port_name = str(cond_name)
+                        
+                        if code not in self.ui.ticker_list:
+                            self.ui.ticker_list.append(code)
+                
+                        if code not in self.dic.values() and code != "":
+                            self.ready_trade(code)  
+                        
+                        if self.ui.gudoc_status == 0:
+                            self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
+                            self.gudoc_count += 1
+                            self.ui.gudoc_status = 1
+                            print('구독성공')
+                        elif self.ui.gudoc_status != 0 :
+                            self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
+                            self.gudoc_count += 1
+                            print('구독성공2')
+
+            elif len(self.sec_list) == 2:
+                if str(cond_name) == str(i) == self.sec_list[0] :
+                    if self.ui.checkBox_2.isChecked():
+                        continue
+                    else :
+                       #self.ui.textEdit_2.append("실시간o: " + str(code))
+                       #self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
+                       self.port_name = str(cond_name)
+               
+                       if code not in self.ui.ticker_list:
+                           self.ui.ticker_list.append(code)
+               
+                       if code not in self.dic.values() and code != "":
+                           self.ready_trade(code)  
                        
-                elif len(self.sec_list) == 4:
-                    if str(cond_name) == str(i) == self.sec_list[0]:
-                        if self.ui.checkBox_2.isChecked():
-                            continue
-                        else :
-                           self.ui.textEdit_2.append("실시간o: " + str(code))
-                           self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
-                           self.port_name = str(cond_name)
-                   
-                           if code not in self.ui.ticker_list:
-                               self.ui.ticker_list.append(code)
-                   
-                           if code not in self.dic.values() and code != "":
-                               self.ready_trade(code)  
-                           
-                           if self.ui.gudoc_status == 0:
-                               self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
-                               self.gudoc_count += 1
-                               self.ui.gudoc_status = 1
-                               print('구독성공')
-                           elif self.ui.gudoc_status != 0 :
-                               self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
-                               self.gudoc_count += 1
-                               print('구독성공2')
-    
-                           
-                    elif str(cond_name) == str(i) == self.sec_list[1]:
-                        if self.ui.checkBox_3.isChecked():
-                            continue
-                        else :
-                           self.ui.textEdit_2.append("실시간o: " + str(code))
-                           self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
-                           self.port_name = str(cond_name)
-                   
-                           if code not in self.ui.ticker_list:
-                               self.ui.ticker_list.append(code)
-                   
-                           if code not in self.dic.values() and code != "":
-                               self.ready_trade(code)
+                       if self.ui.gudoc_status == 0:
+                           self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
+                           self.gudoc_count += 1
+                           self.ui.gudoc_status = 1
+                           print('구독성공')
+                       elif self.ui.gudoc_status != 0 :
+                           self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
+                           self.gudoc_count += 1
+                           print('구독성공2')
+
+                       
+                elif str(cond_name) == str(i) == self.sec_list[1]:
+                    if self.ui.checkBox_3.isChecked():
+                        continue
+                    else :
+                       #self.ui.textEdit_2.append("실시간o: " + str(code))
+                       #self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
+                       self.port_name = str(cond_name)
+               
+                       if code not in self.ui.ticker_list:
+                           self.ui.ticker_list.append(code)
+               
+                       if code not in self.dic.values() and code != "":
+                           self.ready_trade(code)
+                             
+                       if self.ui.gudoc_status == 0:
+                           self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
+                           self.gudoc_count += 1
+                           self.ui.gudoc_status = 1
+                           print('구독성공')
+                       elif self.ui.gudoc_status != 0 :
+                           self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
+                           self.gudoc_count += 1
+                           print('구독성공2')
+                
+            elif len(self.sec_list) == 3:
+                if str(cond_name) == str(i) == self.sec_list[0]:
+                    if self.ui.checkBox_2.isChecked():
+                        continue
+                    else :
+                       #self.ui.textEdit_2.append("실시간o: " + str(code))
+                       #self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
+                       self.port_name = str(cond_name)
+               
+                       if code not in self.ui.ticker_list:
+                           self.ui.ticker_list.append(code)
+               
+                       if code not in self.dic.values() and code != "":
+                           self.ready_trade(code)  
+                       
+                       if self.ui.gudoc_status == 0:
+                           self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
+                           self.gudoc_count += 1
+                           self.ui.gudoc_status = 1
+                           print('구독성공')
+                       elif self.ui.gudoc_status != 0 :
+                           self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
+                           self.gudoc_count += 1
+                           print('구독성공2')
+
+                       
+                elif str(cond_name) == str(i) == self.sec_list[1]:
+                    if self.ui.checkBox_3.isChecked():
+                        continue
+                    else :
+                       #self.ui.textEdit_2.append("실시간o: " + str(code))
+                       #self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
+                       self.port_name = str(cond_name)
+               
+                       if code not in self.ui.ticker_list:
+                           self.ui.ticker_list.append(code)
+               
+                       if code not in self.dic.values() and code != "":
+                           self.ready_trade(code)
+                             
+                       if self.ui.gudoc_status == 0:
+                           self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
+                           self.gudoc_count += 1
+                           self.ui.gudoc_status = 1
+                           print('구독성공')
+                       elif self.ui.gudoc_status != 0 :
+                           self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
+                           self.gudoc_count += 1
+                           print('구독성공2')
+
+                       
+                elif str(cond_name) == str(i) == self.sec_list[2]:
+                    if self.ui.checkBox_4.isChecked():
+                        continue
+                    else :
+                       #self.ui.textEdit_2.append("실시간o: " + str(code))
+                       #self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
+                       self.port_name = str(cond_name)
+               
+                       if code not in self.ui.ticker_list:
+                           self.ui.ticker_list.append(code)
+               
+                       if code not in self.dic.values() and code != "":
+                           self.ready_trade(code)
                                  
-                           if self.ui.gudoc_status == 0:
-                               self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
-                               self.gudoc_count += 1
-                               self.ui.gudoc_status = 1
-                               print('구독성공')
-                           elif self.ui.gudoc_status != 0 :
-                               self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
-                               self.gudoc_count += 1
-                               print('구독성공2')
-                           
-                    elif str(cond_name) == str(i) == self.sec_list[2]:
-                        if self.ui.checkBox_4.isChecked():
-                            continue
-                        else :
-                           self.ui.textEdit_2.append("실시간o: " + str(code))
-                           self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
-                           self.port_name = str(cond_name)
+                       if self.ui.gudoc_status == 0:
+                           self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
+                           self.gudoc_count += 1
+                           self.ui.gudoc_status = 1
+                           print('구독성공')
+                       elif self.ui.gudoc_status != 0 :
+                           self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
+                           self.gudoc_count += 1
+                           print('구독성공2')
                    
-                           if code not in self.ui.ticker_list:
-                               self.ui.ticker_list.append(code)
-                   
-                           if code not in self.dic.values() and code != "":
-                               self.ready_trade(code)
-                                     
-                           if self.ui.gudoc_status == 0:
-                               self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
-                               self.gudoc_count += 1
-                               self.ui.gudoc_status = 1
-                               print('구독성공')
-                           elif self.ui.gudoc_status != 0 :
-                               self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
-                               self.gudoc_count += 1
-                               print('구독성공2')
-        
-                    elif str(cond_name) == str(i) == self.sec_list[3]:
-                        if self.ui.checkBox_5.isChecked():
-                            continue
-                        else :
-                           self.ui.textEdit_2.append("실시간o: " + str(code))
-                           self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
-                           self.port_name = str(cond_name)
-                   
-                           if code not in self.ui.ticker_list:
-                               self.ui.ticker_list.append(code)
-                   
-                           if code not in self.dic.values() and code != "":
-                               self.ready_trade(code)
-                           
-                     
-                           if self.ui.gudoc_status == 0:
-                               self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
-                               self.gudoc_count += 1
-                               self.ui.gudoc_status = 1
-                               print('구독성공')
-                           elif self.ui.gudoc_status != 0 :
-                               self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
-                               self.gudoc_count += 1
-                               print('구독성공2')
-    
-                elif len(self.sec_list) == 5:
-                    if str(cond_name) == str(i) == self.sec_list[0]:
-                        if self.ui.checkBox_2.isChecked():
-                            continue
-                        else :
-                           self.ui.textEdit_2.append("실시간o: " + str(code))
-                           self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
-                           self.port_name = str(cond_name)
-                   
-                           if code not in self.ui.ticker_list:
-                               self.ui.ticker_list.append(code)
-                   
-                           if code not in self.dic.values() and code != "":
-                               self.ready_trade(code)  
-                           
-                           if self.ui.gudoc_status == 0:
-                               self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
-                               self.gudoc_count += 1
-                               self.ui.gudoc_status = 1
-                               print('구독성공')
-                           elif self.ui.gudoc_status != 0 :
-                               self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
-                               self.gudoc_count += 1
-                               print('구독성공2')
-                           
-                    elif str(cond_name) == str(i) == self.sec_list[1]:
-                        if self.ui.checkBox_3.isChecked():
-                            continue
-                        else :
-                           self.ui.textEdit_2.append("실시간o: " + str(code))
-                           self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
-                           self.port_name = str(cond_name)
-                   
-                           if code not in self.ui.ticker_list:
-                               self.ui.ticker_list.append(code)
-                   
-                           if code not in self.dic.values() and code != "":
-                               self.ready_trade(code)
+            elif len(self.sec_list) == 4:
+                if str(cond_name) == str(i) == self.sec_list[0]:
+                    if self.ui.checkBox_2.isChecked():
+                        continue
+                    else :
+                       #self.ui.textEdit_2.append("실시간o: " + str(code))
+                       #self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
+                       self.port_name = str(cond_name)
+               
+                       if code not in self.ui.ticker_list:
+                           self.ui.ticker_list.append(code)
+               
+                       if code not in self.dic.values() and code != "":
+                           self.ready_trade(code)  
+                       
+                       if self.ui.gudoc_status == 0:
+                           self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
+                           self.gudoc_count += 1
+                           self.ui.gudoc_status = 1
+                           print('구독성공')
+                       elif self.ui.gudoc_status != 0 :
+                           self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
+                           self.gudoc_count += 1
+                           print('구독성공2')
+
+                       
+                elif str(cond_name) == str(i) == self.sec_list[1]:
+                    if self.ui.checkBox_3.isChecked():
+                        continue
+                    else :
+                       #self.ui.textEdit_2.append("실시간o: " + str(code))
+                       #self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
+                       self.port_name = str(cond_name)
+               
+                       if code not in self.ui.ticker_list:
+                           self.ui.ticker_list.append(code)
+               
+                       if code not in self.dic.values() and code != "":
+                           self.ready_trade(code)
+                             
+                       if self.ui.gudoc_status == 0:
+                           self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
+                           self.gudoc_count += 1
+                           self.ui.gudoc_status = 1
+                           print('구독성공')
+                       elif self.ui.gudoc_status != 0 :
+                           self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
+                           self.gudoc_count += 1
+                           print('구독성공2')
+                       
+                elif str(cond_name) == str(i) == self.sec_list[2]:
+                    if self.ui.checkBox_4.isChecked():
+                        continue
+                    else :
+                       #self.ui.textEdit_2.append("실시간o: " + str(code))
+                       #self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
+                       self.port_name = str(cond_name)
+               
+                       if code not in self.ui.ticker_list:
+                           self.ui.ticker_list.append(code)
+               
+                       if code not in self.dic.values() and code != "":
+                           self.ready_trade(code)
                                  
-                           if self.ui.gudoc_status == 0:
-                               self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
-                               self.gudoc_count += 1
-                               self.ui.gudoc_status = 1
-                               print('구독성공')
-                           elif self.ui.gudoc_status != 0 :
-                               self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
-                               self.gudoc_count += 1
-                               print('구독성공2')
-                           
-                    elif str(cond_name) == str(i) == self.sec_list[2]:
-                        if self.ui.checkBox_4.isChecked():
-                            continue
-                        else :
-                           self.ui.textEdit_2.append("실시간o: " + str(code))
-                           self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
-                           self.port_name = str(cond_name)
-                   
-                           if code not in self.ui.ticker_list:
-                               self.ui.ticker_list.append(code)
-                   
-                           if code not in self.dic.values() and code != "":
-                               self.ready_trade(code)
-                                     
-                           if self.ui.gudoc_status == 0:
-                               self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
-                               self.gudoc_count += 1
-                               self.ui.gudoc_status = 1
-                               print('구독성공')
-                           elif self.ui.gudoc_status != 0 :
-                               self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
-                               self.gudoc_count += 1
-                               print('구독성공2')
-        
-                    elif str(cond_name) == str(i) == self.sec_list[3]:
-                        if self.ui.checkBox_5.isChecked():
-                            continue
-                        else :
-                           self.ui.textEdit_2.append("실시간o: " + str(code))
-                           self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
-                           self.port_name = str(cond_name)
-                   
-                           if code not in self.ui.ticker_list:
-                               self.ui.ticker_list.append(code)
-                   
-                           if code not in self.dic.values() and code != "":
-                               self.ready_trade(code)
-                           
-                     
-                           if self.ui.gudoc_status == 0:
-                               self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
-                               self.gudoc_count += 1
-                               self.ui.gudoc_status = 1
-                               print('구독성공')
-                           elif self.ui.gudoc_status != 0 :
-                               self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
-                               self.gudoc_count += 1
-                               print('구독성공2')
-                    elif str(cond_name) == str(i) == self.sec_list[4]:
-                        if self.ui.checkBox_6.isChecked():
-                            continue
-                        else :
-                           self.ui.textEdit_2.append("실시간o: " + str(code))
-                           self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
-                           self.port_name = str(cond_name)
-                   
-                           if code not in self.ui.ticker_list:
-                               self.ui.ticker_list.append(code)
-                   
-                           if code not in self.dic.values() and code != "":
-                               self.ready_trade(code)
-                  
-                           if self.ui.gudoc_status == 0:
-                               self.SetRealReg(1000 + self.ui.window_count , code, "20;10", "0")
-                               self.gudoc_count += 1
-                               self.ui.gudoc_status = 1
-                               print('구독성공')
-                           elif self.ui.gudoc_status != 0 :
-                               self.SetRealReg(1000 + self.ui.window_count , code, "20;10", "1")
-                               self.gudoc_count += 1
-                               print('구독성공2')
+                       if self.ui.gudoc_status == 0:
+                           self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
+                           self.gudoc_count += 1
+                           self.ui.gudoc_status = 1
+                           print('구독성공')
+                       elif self.ui.gudoc_status != 0 :
+                           self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
+                           self.gudoc_count += 1
+                           print('구독성공2')
     
-        else :
-            print("종목수 초과!")
-            print(self.ui.ticker_list)
+                elif str(cond_name) == str(i) == self.sec_list[3]:
+                    if self.ui.checkBox_5.isChecked():
+                        continue
+                    else :
+                       #self.ui.textEdit_2.append("실시간o: " + str(code))
+                       #self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
+                       self.port_name = str(cond_name)
+               
+                       if code not in self.ui.ticker_list:
+                           self.ui.ticker_list.append(code)
+               
+                       if code not in self.dic.values() and code != "":
+                           self.ready_trade(code)
+                       
+                 
+                       if self.ui.gudoc_status == 0:
+                           self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
+                           self.gudoc_count += 1
+                           self.ui.gudoc_status = 1
+                           print('구독성공')
+                       elif self.ui.gudoc_status != 0 :
+                           self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
+                           self.gudoc_count += 1
+                           print('구독성공2')
+
+            elif len(self.sec_list) == 5:
+                if str(cond_name) == str(i) == self.sec_list[0]:
+                    if self.ui.checkBox_2.isChecked():
+                        continue
+                    else :
+                       #self.ui.textEdit_2.append("실시간o: " + str(code))
+                       #self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
+                       self.port_name = str(cond_name)
+               
+                       if code not in self.ui.ticker_list:
+                           self.ui.ticker_list.append(code)
+               
+                       if code not in self.dic.values() and code != "":
+                           self.ready_trade(code)  
+                       
+                       if self.ui.gudoc_status == 0:
+                           self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
+                           self.gudoc_count += 1
+                           self.ui.gudoc_status = 1
+                           print('구독성공')
+                       elif self.ui.gudoc_status != 0 :
+                           self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
+                           self.gudoc_count += 1
+                           print('구독성공2')
+                       
+                elif str(cond_name) == str(i) == self.sec_list[1]:
+                    if self.ui.checkBox_3.isChecked():
+                        continue
+                    else :
+                       #self.ui.textEdit_2.append("실시간o: " + str(code))
+                       #self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
+                       self.port_name = str(cond_name)
+               
+                       if code not in self.ui.ticker_list:
+                           self.ui.ticker_list.append(code)
+               
+                       if code not in self.dic.values() and code != "":
+                           self.ready_trade(code)
+                             
+                       if self.ui.gudoc_status == 0:
+                           self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
+                           self.gudoc_count += 1
+                           self.ui.gudoc_status = 1
+                           print('구독성공')
+                       elif self.ui.gudoc_status != 0 :
+                           self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
+                           self.gudoc_count += 1
+                           print('구독성공2')
+                       
+                elif str(cond_name) == str(i) == self.sec_list[2]:
+                    if self.ui.checkBox_4.isChecked():
+                        continue
+                    else :
+                       #self.ui.textEdit_2.append("실시간o: " + str(code))
+                       #self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
+                       self.port_name = str(cond_name)
+               
+                       if code not in self.ui.ticker_list:
+                           self.ui.ticker_list.append(code)
+               
+                       if code not in self.dic.values() and code != "":
+                           self.ready_trade(code)
+                                 
+                       if self.ui.gudoc_status == 0:
+                           self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
+                           self.gudoc_count += 1
+                           self.ui.gudoc_status = 1
+                           print('구독성공')
+                       elif self.ui.gudoc_status != 0 :
+                           self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
+                           self.gudoc_count += 1
+                           print('구독성공2')
+    
+                elif str(cond_name) == str(i) == self.sec_list[3]:
+                    if self.ui.checkBox_5.isChecked():
+                        continue
+                    else :
+                       #self.ui.textEdit_2.append("실시간o: " + str(code))
+                       #self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
+                       self.port_name = str(cond_name)
+               
+                       if code not in self.ui.ticker_list:
+                           self.ui.ticker_list.append(code)
+               
+                       if code not in self.dic.values() and code != "":
+                           self.ready_trade(code)
+                       
+                 
+                       if self.ui.gudoc_status == 0:
+                           self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "0")
+                           self.gudoc_count += 1
+                           self.ui.gudoc_status = 1
+                           print('구독성공')
+                       elif self.ui.gudoc_status != 0 :
+                           self.SetRealReg(1000 +self.ui.window_count , code, "20;10", "1")
+                           self.gudoc_count += 1
+                           print('구독성공2')
+                elif str(cond_name) == str(i) == self.sec_list[4]:
+                    if self.ui.checkBox_6.isChecked():
+                        continue
+                    else :
+                       #self.ui.textEdit_2.append("실시간o: " + str(code))
+                       #self.ui.textEdit_2.append("실시간o포트번호: " + str(cond_name))
+                       self.port_name = str(cond_name)
+               
+                       if code not in self.ui.ticker_list:
+                           self.ui.ticker_list.append(code)
+               
+                       if code not in self.dic.values() and code != "":
+                           self.ready_trade(code)
+              
+                       if self.ui.gudoc_status == 0:
+                           self.SetRealReg(1000 + self.ui.window_count , code, "20;10", "0")
+                           self.gudoc_count += 1
+                           self.ui.gudoc_status = 1
+                           print('구독성공')
+                       elif self.ui.gudoc_status != 0 :
+                           self.SetRealReg(1000 + self.ui.window_count , code, "20;10", "1")
+                           self.gudoc_count += 1
+                           print('구독성공2')
+    
+        #else :
+            #print("종목수 초과!")
+            #print(self.ui.ticker_list)
                 
 
 
@@ -1140,9 +1140,9 @@ class Kiwoom(QAxWidget):
             format_price = format(int(price), ",")
             
             #last_close = self.GetMasterLastPrice(trcode) #전일종가 가져오기
-            self.ui.textEdit_2.append("이름: " +str(name) + "가격 :" + str(initial))
-            self.ui.textEdit_2.append("time" + str(time))
-            self.ui.textEdit_2.append("")
+            #self.ui.textEdit_2.append("이름: " +str(name) + "가격 :" + str(initial))
+            #self.ui.textEdit_2.append("time" + str(time))
+            #self.ui.textEdit_2.append("")
 
             #초기상태
             #포트에서 뜨면 매수
