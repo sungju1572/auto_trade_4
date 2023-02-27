@@ -71,7 +71,7 @@ class MyWindow(QMainWindow, form_class):
         self.lineEdit_9.textChanged.connect(self.price_change)
         self.pushButton_6.clicked.connect(self.kiwoom._condition_search)
         
-        self.lineEdit_11.textChanged.connect(self.enable_pushButton_6)
+        self.lineEdit_12.textChanged.connect(self.enable_pushButton_6)
         
         self.gudoc_status = 0
         self.ticker_list = []
@@ -490,6 +490,7 @@ class MyWindow(QMainWindow, form_class):
     #익절기준 변경점
    # def profit_percent(self):
         #self.take_profit = float(self.lineEdit_8.text())
+
 
 
 
