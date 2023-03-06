@@ -1175,13 +1175,13 @@ class Kiwoom(QAxWidget):
                     if (price - initial)/float(last_close)>= (self.watch_percent /100): 
                         self.dic[list_1[list_1.index(name+'_status')]] = "감시상태"
                         self.dic[list_1[list_1.index(name+'_reach_upper')]] = 0
-                        self.dic[list_1[list_1.index(name+'_watch_high')]] = upper
+                        self.dic[list_1[list_1.index(name+'_watch_high')]] = price
                         self.ui.textEdit.setFontPointSize(13)
                         self.ui.textEdit.setTextColor(QColor(128,0,128))
                         self.ui.textEdit.append("감시상태 진입")
                         self.ui.textEdit.setFontPointSize(9)
                         self.ui.textEdit.setTextColor(QColor(0,0,0))
-                        self.ui.textEdit.append("시간 : " + str(time) + " | " +  "감시상태 | "+ name )
+                        self.ui.textEdit.append("시간 : " + str(time) + " | " +  "감시상태 | "+ name + "현재가 : " + str(price))
                         self.ui.textEdit.append(" ")
                     
                     #청산비율까지 떨어지면 청산
@@ -1206,13 +1206,13 @@ class Kiwoom(QAxWidget):
                     if (price - initial)/float(last_close)>= (self.watch_percent /100): 
                         self.dic[list_1[list_1.index(name+'_status')]] = "감시상태"
                         self.dic[list_1[list_1.index(name+'_reach_upper')]] = 0
-                        self.dic[list_1[list_1.index(name+'_watch_high')]] = upper
+                        self.dic[list_1[list_1.index(name+'_watch_high')]] = price
                         self.ui.textEdit.setFontPointSize(13)
                         self.ui.textEdit.setTextColor(QColor(128,0,128))
                         self.ui.textEdit.append("감시상태 진입")
                         self.ui.textEdit.setFontPointSize(9)
                         self.ui.textEdit.setTextColor(QColor(0,0,0))
-                        self.ui.textEdit.append("시간 : " + str(time) + " | " +  "감시상태 | "+ name )
+                        self.ui.textEdit.append("시간 : " + str(time) + " | " +  "감시상태 | "+ name + "현재가 : " + str(price) )
                         self.ui.textEdit.append(" ")
                     
                     #청산비율까지 떨어지면 청산
@@ -1233,13 +1233,13 @@ class Kiwoom(QAxWidget):
                    
             elif status == "감시상태":
                 
-                if upper >= watch_high:
-                    self.dic[list_1[list_1.index(name+'_watch_high')]] = upper
-                    watch_high = upper
+                if price >= watch_high:
+                    self.dic[list_1[list_1.index(name+'_watch_high')]] = price
+                    watch_high = price
                     
             
                 #고점대비 하락비율 이하로 떨어지면 매도
-                if (watch_high - price)/float(last_close) < -(self.profit_percent /100)  : 
+                if (price - watch_high)/float(last_close) < -(self.profit_percent /100)  : 
                     self.send_order('send_order', "0101", self.ui.account_number, 2, trcode, buy_count, price ,"00", "" )
                     self.dic[list_1[list_1.index(name+'_status')]] = "거래끝"
                     self.dic[list_1[list_1.index(name+'_reach_upper')]] = 0
