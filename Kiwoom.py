@@ -1172,7 +1172,7 @@ class Kiwoom(QAxWidget):
                 #9시 5분 이전
                 if int(time[0:2]) == 9 and int(time[3:5]) <= 5  :
                     #감시 비율 도달하면 트레일링 감시 시작
-                    if (price - initial)/float(last_close)>= (self.watch_percent /100): 
+                    if (price - initial)/float(initial)>= (self.watch_percent /100): 
                         self.dic[list_1[list_1.index(name+'_status')]] = "감시상태"
                         self.dic[list_1[list_1.index(name+'_reach_upper')]] = 0
                         self.dic[list_1[list_1.index(name+'_watch_high')]] = price
@@ -1185,7 +1185,7 @@ class Kiwoom(QAxWidget):
                         self.ui.textEdit.append(" ")
                     
                     #청산비율까지 떨어지면 청산
-                    elif (price - initial)/float(last_close) < -(self.sell_percent/100):
+                    elif (price - initial)/float(initial) < -(self.sell_percent/100):
                         self.send_order('send_order', "0101", self.ui.account_number, 2, trcode, buy_count, price ,"00", "" )
                         self.dic[list_1[list_1.index(name+'_status')]] = "거래끝"
                         self.dic[list_1[list_1.index(name+'_reach_upper')]] = 0
@@ -1203,7 +1203,7 @@ class Kiwoom(QAxWidget):
                     #1,2번일때
                     #if initial >= middle:
                     #감시 비율 도달하면 트레일링 감시 시작
-                    if (price - initial)/float(last_close)>= (self.watch_percent /100): 
+                    if (price - initial)/float(initial)>= (self.watch_percent /100): 
                         self.dic[list_1[list_1.index(name+'_status')]] = "감시상태"
                         self.dic[list_1[list_1.index(name+'_reach_upper')]] = 0
                         self.dic[list_1[list_1.index(name+'_watch_high')]] = price
@@ -1216,7 +1216,7 @@ class Kiwoom(QAxWidget):
                         self.ui.textEdit.append(" ")
                     
                     #청산비율까지 떨어지면 청산
-                    elif (price - initial)/float(last_close) < -(self.sell_percent/100):
+                    elif (price - initial)/float(initial) < -(self.sell_percent/100):
                         self.send_order('send_order', "0101", self.ui.account_number, 2, trcode, buy_count, price ,"00", "" )
                         self.dic[list_1[list_1.index(name+'_status')]] = "거래끝"
                         self.dic[list_1[list_1.index(name+'_reach_upper')]] = 0
@@ -1239,7 +1239,7 @@ class Kiwoom(QAxWidget):
                     
             
                 #고점대비 하락비율 이하로 떨어지면 매도
-                if (price - watch_high)/float(last_close) < -(self.profit_percent /100)  : 
+                if (price - watch_high)/float(initial) < -(self.profit_percent /100)  : 
                     self.send_order('send_order', "0101", self.ui.account_number, 2, trcode, buy_count, price ,"00", "" )
                     self.dic[list_1[list_1.index(name+'_status')]] = "거래끝"
                     self.dic[list_1[list_1.index(name+'_reach_upper')]] = 0
@@ -1248,7 +1248,7 @@ class Kiwoom(QAxWidget):
                     self.ui.textEdit.append("매도 ▲ : 고점대비 하락")
                     self.ui.textEdit.setFontPointSize(9)
                     self.ui.textEdit.setTextColor(QColor(0,0,0))
-                    self.ui.textEdit.append("시간 : " + str(time) + " | " +  "매도 | "+ name + " | 트레일링 스탑 | " + "매도가격 : " + str(price))
+                    self.ui.textEdit.append("시간 : " + str(time) + " | " +  "매도 | "+ name + " | "+ "고가 : " + str(watch_high) +  "| " + "매도가격 : " + str(price))
                     self.ui.textEdit.append(" 매도수량 " + str(buy_count) + "주")
                     self.ui.textEdit.append(" ")
                 
