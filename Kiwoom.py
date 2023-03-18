@@ -50,6 +50,7 @@ class Kiwoom(QAxWidget):
     def _set_signal_slots(self):
         self.OnEventConnect.connect(self._event_connect) # 로그인 관련 이벤트 (.connect()는 이벤트와 슬롯을 연결하는 역할)
         self.OnReceiveTrData.connect(self._receive_tr_data) # 트랜잭션 요청 관련 이벤트
+        self.OnReceiveMsg.connect(self._receive_msg) #서버 메세지 처리 함수
         self.OnReceiveChejanData.connect(self._receive_chejan_data) #체결잔고 요청 이벤트
         self.OnReceiveRealData.connect(self._handler_real_data) #실시간 데이터 처리
         self.OnReceiveRealCondition.connect(self._handler_real_condition) # 실시간 조건검색 조회 응답 이벤트
@@ -810,6 +811,12 @@ class Kiwoom(QAxWidget):
             self.tr_event_loop.exit()
         except AttributeError:
             pass
+
+
+    def _receive_msg(self, screen_no, rqname, trcode, sMsg):
+        print("smsg : " , sMsg)
+
+
 
     @staticmethod
     #입력받은데이터 정제    
