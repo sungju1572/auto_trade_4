@@ -413,7 +413,6 @@ class MyWindow(QMainWindow, form_class):
                 
     
     
-    
     def ready_trade(self, ticker):
         
         name = self.kiwoom.get_master_code_name(ticker)
