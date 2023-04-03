@@ -1142,8 +1142,7 @@ class Kiwoom(QAxWidget):
             port_name = self.dic[list_1[list_1.index(name+'_port_name')]]  #포트이름
             
             
-            buy_total_price = int(self.ui.lineEdit_9.text())
-            
+            buy_total_price = int(self.ui.lineEdit_10.text().replace(',',''))
             
             format_price = format(int(price), ",")
         
