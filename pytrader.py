@@ -54,6 +54,7 @@ class MyWindow(QMainWindow, form_class):
         #self.pushButton.clicked.connect(self.check_balance)
 
         self.pushButton_5.clicked.connect(self.kiwoom.get_condition_load)
+        self.pushButton_7.clicked.connect(self.change_total_price)
 
         self.row_count = 0 #tableWidget_3 에서 행 카운트하는용
         self.window_count = 0 #tableWidget_3 화면번호 만드는용
@@ -147,6 +148,10 @@ class MyWindow(QMainWindow, form_class):
         price = self.kiwoom.price
         self.lineEdit_3.setText(str(price))
         
+        
+    def change_total_price(self):
+        price = format(int(self.lineEdit_11.text()), ",")    
+        self.lineEdit_10.setText(str(price))   
      
     """
     #주식 잔고 
