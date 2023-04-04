@@ -1167,6 +1167,8 @@ class Kiwoom(QAxWidget):
                 
             port_name = self.dic[list_1[list_1.index(name+'_port_name')]]  #포트이름
             
+            not_concluded_count = int(self.dic[list_1[list_1.index(name+'_not_concluded_count')]])  #미체결 수량  
+            
             
             buy_total_price = int(self.ui.lineEdit_10.text().replace(',',''))
             
@@ -1319,6 +1321,7 @@ class Kiwoom(QAxWidget):
                 #고점대비 하락비율 이하로 떨어지면 매도
                 if (price - watch_high)/float(initial) < -(self.profit_percent /100)  : 
                     if self.ui.comboBox_4.currentText() == "지정가":
+                            
                         self.send_order('send_order', "0101", self.ui.account_number, 2, trcode, buy_count, price ,"00", "" )
                         self.dic[list_1[list_1.index(name+'_status')]] = "거래끝"
                         self.dic[list_1[list_1.index(name+'_reach_upper')]] = 0
