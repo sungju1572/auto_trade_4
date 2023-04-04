@@ -753,6 +753,8 @@ class Kiwoom(QAxWidget):
         
         self.dic[name + "_watch_high"] = 0
 
+        self.dic[name + "_not_concluded_count"] = 0
+
 
         #self.plainTextEdit.appendPlainText("거래준비완료 | 종목 :" + name )
         self.ui.textEdit.append("거래준비완료 | 종목 :" + name)
@@ -776,6 +778,7 @@ class Kiwoom(QAxWidget):
         ret = self.dynamicCall("KOA_Functions(QString, QString)", "GetServerGubun", "")
         return ret
 
+    #미체결 수량 및 전체 리스트에 티커 번호 넣기
     def _receive_chejan_data(self, gubun, item_cnt, fid_list):
          
         if gubun == "0":
@@ -784,6 +787,29 @@ class Kiwoom(QAxWidget):
             if stock_ticker[1:] not in self.stock_held:
                 self.stock_held.append(stock_ticker[1:])   
                 #self.window_number += 1
+            
+            
+            print("dic", self.dic)
+            
+            
+            print("st", stock_ticker[1:])
+            
+                  
+            name = self.get_master_code_name(stock_ticker[1:])
+            
+            print("name", name)
+            
+            list_1 = [k for k in self.dic.keys() if name in k ]
+            
+            print("1" ,list_1)
+            
+            
+            
+            self.dic[list_1[list_1.index(name+'_not_concluded_count')]] = int(self.get_chejan_data(902))
+            
+            print("미체결수량")
+            print(list_1)
+
 
 
     #받은 tr데이터가 무엇인지, 연속조회 할수있는지
@@ -1316,6 +1342,7 @@ class Kiwoom(QAxWidget):
                         self.ui.textEdit.append("시간 : " + str(time) + " | " +  "매도 | "+ name + " | "+ "고가 : " + str(watch_high) +  "| " + "매도가격 : " + str(price)+"원(시장가)")
                         self.ui.textEdit.append(" 매도수량 " + str(buy_count) + "주")
                         self.ui.textEdit.append(" ")
+
                 
                 
       
