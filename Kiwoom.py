@@ -755,6 +755,7 @@ class Kiwoom(QAxWidget):
 
         self.dic[name + "_not_concluded_count"] = 0
 
+        self.dic[name + "_order_number"] = ""
 
         #self.plainTextEdit.appendPlainText("거래준비완료 | 종목 :" + name )
         self.ui.textEdit.append("거래준비완료 | 종목 :" + name)
@@ -807,6 +808,7 @@ class Kiwoom(QAxWidget):
             
             self.dic[list_1[list_1.index(name+'_not_concluded_count')]] = int(self.get_chejan_data(902))
             
+            self.dic[list_1[list_1.index(name+"_order_number")]] = self.get_chejan_data(9203)
             print("미체결수량")
             print(list_1)
 
@@ -1169,6 +1171,8 @@ class Kiwoom(QAxWidget):
             
             not_concluded_count = int(self.dic[list_1[list_1.index(name+'_not_concluded_count')]])  #미체결 수량  
             
+            order_number = int(self.dic[list_1[list_1.index(name+'_order_number')]])  #주문번호
+            
             
             buy_total_price = int(self.ui.lineEdit_10.text().replace(',',''))
             
@@ -1182,8 +1186,10 @@ class Kiwoom(QAxWidget):
            
             buy_number = int(int(buy_total_price) / int(price)) #매수할 수량
             
-    
             format_price = format(int(price), ",")
+            
+            
+            
             
             #last_close = self.GetMasterLastPrice(trcode) #전일종가 가져오기
             #self.ui.textEdit_2.append("이름: " +str(name) + "가격 :" + str(initial))
@@ -1321,34 +1327,62 @@ class Kiwoom(QAxWidget):
                 #고점대비 하락비율 이하로 떨어지면 매도
                 if (price - watch_high)/float(initial) < -(self.profit_percent /100)  : 
                     if self.ui.comboBox_4.currentText() == "지정가":
-                            
-                        self.send_order('send_order', "0101", self.ui.account_number, 2, trcode, buy_count, price ,"00", "" )
-                        self.dic[list_1[list_1.index(name+'_status')]] = "거래끝"
-                        self.dic[list_1[list_1.index(name+'_reach_upper')]] = 0
-                        self.ui.textEdit.setFontPointSize(13)
-                        self.ui.textEdit.setTextColor(QColor(255,0,0))
-                        self.ui.textEdit.append("매도 ▲ : 고점대비 하락")
-                        self.ui.textEdit.setFontPointSize(9)
-                        self.ui.textEdit.setTextColor(QColor(0,0,0))
-                        self.ui.textEdit.append("시간 : " + str(time) + " | " +  "매도 | "+ name + " | "+ "고가 : " + str(watch_high) +  "| " + "매도가격 : " + str(price)+"원(지정가)")
-                        self.ui.textEdit.append(" 매도수량 " + str(buy_count) + "주")
-                        self.ui.textEdit.append(" ")
-                    elif self.ui.comboBox_4.currentText() == "시장가":
-                        self.send_order('send_order', "0101", self.ui.account_number, 2, trcode, buy_count, 0 ,"03", "" )
-                        self.dic[list_1[list_1.index(name+'_status')]] = "거래끝"
-                        self.dic[list_1[list_1.index(name+'_reach_upper')]] = 0
-                        self.ui.textEdit.setFontPointSize(13)
-                        self.ui.textEdit.setTextColor(QColor(255,0,0))
-                        self.ui.textEdit.append("매도 ▲ : 고점대비 하락")
-                        self.ui.textEdit.setFontPointSize(9)
-                        self.ui.textEdit.setTextColor(QColor(0,0,0))
-                        self.ui.textEdit.append("시간 : " + str(time) + " | " +  "매도 | "+ name + " | "+ "고가 : " + str(watch_high) +  "| " + "매도가격 : " + str(price)+"원(시장가)")
-                        self.ui.textEdit.append(" 매도수량 " + str(buy_count) + "주")
-                        self.ui.textEdit.append(" ")
+                        #미체결 수량이 남아있을때 매수 취소
+                        if not_concluded_count != 0 :
+                            self.send_order('send_order', "0101", self.ui.account_number, 4, trcode, not_concluded_count, 0 ,"00", order_number )
+                            self.dic[list_1[list_1.index(name+'_status')]] = "거래끝"
+                            self.dic[list_1[list_1.index(name+'_reach_upper')]] = 0
+                            self.ui.textEdit.setFontPointSize(13)
+                            self.ui.textEdit.setTextColor(QColor(255,0,0))
+                            self.ui.textEdit.append("매수 취소 : 미체결 수량 존재")
+                            self.ui.textEdit.setFontPointSize(9)
+                            self.ui.textEdit.setTextColor(QColor(0,0,0))
+                            self.ui.textEdit.append("시간 : " + str(time) + " | " +  "매수 취소 | "+ name + " | "+ "미체결 수량 : " + str(not_concluded_count))
+                            self.ui.textEdit.append(" ")
 
-                
-                
-      
+                        #미체결 수량이 없으면 전량 매도
+                        elif not_concluded_count == 0 :
+                            self.send_order('send_order', "0101", self.ui.account_number, 2, trcode, buy_count, price ,"00", "" )
+                            self.dic[list_1[list_1.index(name+'_status')]] = "거래끝"
+                            self.dic[list_1[list_1.index(name+'_reach_upper')]] = 0
+                            self.ui.textEdit.setFontPointSize(13)
+                            self.ui.textEdit.setTextColor(QColor(255,0,0))
+                            self.ui.textEdit.append("매도 ▲ : 고점대비 하락")
+                            self.ui.textEdit.setFontPointSize(9)
+                            self.ui.textEdit.setTextColor(QColor(0,0,0))
+                            self.ui.textEdit.append("시간 : " + str(time) + " | " +  "매도 | "+ name + " | "+ "고가 : " + str(watch_high) +  "| " + "매도가격 : " + str(price)+"원(지정가)")
+                            self.ui.textEdit.append(" 매도수량 " + str(buy_count) + "주")
+                            self.ui.textEdit.append(" ")
+                        
+                        
+                    elif self.ui.comboBox_4.currentText() == "시장가":
+                        #미체결 수량이 남아있을때 매수 취소
+                        if not_concluded_count != 0 :
+                            self.send_order('send_order', "0101", self.ui.account_number, 4, trcode, not_concluded_count, 0 ,"00", order_number )
+                            self.dic[list_1[list_1.index(name+'_status')]] = "거래끝"
+                            self.dic[list_1[list_1.index(name+'_reach_upper')]] = 0
+                            self.ui.textEdit.setFontPointSize(13)
+                            self.ui.textEdit.setTextColor(QColor(255,0,0))
+                            self.ui.textEdit.append("매수 취소 : 미체결 수량 존재")
+                            self.ui.textEdit.setFontPointSize(9)
+                            self.ui.textEdit.setTextColor(QColor(0,0,0))
+                            self.ui.textEdit.append("시간 : " + str(time) + " | " +  "매수 취소 | "+ name + " | "+ "미체결 수량 : " + str(not_concluded_count))
+                            self.ui.textEdit.append(" ")
+
+                        elif not_concluded_count == 0 :
+                            self.send_order('send_order', "0101", self.ui.account_number, 2, trcode, buy_count, 0 ,"03", "" )
+                            self.dic[list_1[list_1.index(name+'_status')]] = "거래끝"
+                            self.dic[list_1[list_1.index(name+'_reach_upper')]] = 0
+                            self.ui.textEdit.setFontPointSize(13)
+                            self.ui.textEdit.setTextColor(QColor(255,0,0))
+                            self.ui.textEdit.append("매도 ▲ : 고점대비 하락")
+                            self.ui.textEdit.setFontPointSize(9)
+                            self.ui.textEdit.setTextColor(QColor(0,0,0))
+                            self.ui.textEdit.append("시간 : " + str(time) + " | " +  "매도 | "+ name + " | "+ "고가 : " + str(watch_high) +  "| " + "매도가격 : " + str(price)+"원(시장가)")
+                            self.ui.textEdit.append(" 매도수량 " + str(buy_count) + "주")
+                            self.ui.textEdit.append(" ")
+                        
+
             elif status == "거래끝":
                 self.ui.textEdit.append("거래종료 | 종목 : " + name )
                 self.ui.textEdit.append(" ")
