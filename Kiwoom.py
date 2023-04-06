@@ -1169,9 +1169,14 @@ class Kiwoom(QAxWidget):
                 
             port_name = self.dic[list_1[list_1.index(name+'_port_name')]]  #포트이름
             
-            not_concluded_count = int(self.dic[list_1[list_1.index(name+'_not_concluded_count')]])  #미체결 수량  
+        
             
-            order_number = int(self.dic[list_1[list_1.index(name+'_order_number')]])  #주문번호
+            not_concluded_count = (self.dic[list_1[list_1.index(name+'_not_concluded_count')]])  #미체결 수량  
+            
+            
+            
+            
+            order_number = (self.dic[list_1[list_1.index(name+'_order_number')]])  #주문번호
             
             
             buy_total_price = int(self.ui.lineEdit_10.text().replace(',',''))
