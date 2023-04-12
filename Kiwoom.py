@@ -693,6 +693,8 @@ class Kiwoom(QAxWidget):
     
                         row_number = self.dic[name+'_window_count'] 
                         
+                        """
+                        tableWidget_5 기능 제거
                         self.ui.tableWidget_5.setRowCount(len(self.stock_held))
                         self.ui.tableWidget_5.setColumnCount(7)
                         self.ui.tableWidget_5.setItem(row_number,0,QTableWidgetItem(name.strip()))
@@ -702,7 +704,7 @@ class Kiwoom(QAxWidget):
                         self.ui.tableWidget_5.setItem(row_number,4,QTableWidgetItem(str(low + div_4*3 )))
                         self.ui.tableWidget_5.setItem(row_number,5,QTableWidgetItem(str(low + div_4*2 )))
                         self.ui.tableWidget_5.setItem(row_number,6,QTableWidgetItem(str(low + div_4 )))
-                        
+                        """
     
                         self.dic[name + "_upper"] = low + div_4*3 #상단선
                         self.dic[name + "_middle"] = low + div_4*2 #중단선
@@ -790,27 +792,29 @@ class Kiwoom(QAxWidget):
                 #self.window_number += 1
             
             
-            print("dic", self.dic)
+     
             
-            
-            print("st", stock_ticker[1:])
+
             
                   
             name = self.get_master_code_name(stock_ticker[1:])
             
-            print("name", name)
+           
             
             list_1 = [k for k in self.dic.keys() if name in k ]
             
-            print("1" ,list_1)
             
             
             
-            self.dic[list_1[list_1.index(name+'_not_concluded_count')]] = int(self.get_chejan_data(902))
+            try:
+                self.dic[list_1[list_1.index(name+'_not_concluded_count')]] = int(self.get_chejan_data(902))
             
-            self.dic[list_1[list_1.index(name+"_order_number")]] = self.get_chejan_data(9203)
-            print("미체결수량")
-            print(list_1)
+                self.dic[list_1[list_1.index(name+"_order_number")]] = self.get_chejan_data(9203)
+            
+            except Exception as e:    # 모든 예외의 에러 메시지를 출력
+                print('예외가 발생했습니다.', e)
+            
+
 
 
 
