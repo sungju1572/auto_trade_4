@@ -384,51 +384,6 @@
      <string/>
     </property>
    </widget>
-   <widget class="QTableWidget" name="tableWidget_5">
-    <property name="geometry">
-     <rect>
-      <x>440</x>
-      <y>530</y>
-      <width>711</width>
-      <height>341</height>
-     </rect>
-    </property>
-    <column>
-     <property name="text">
-      <string>종목명</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>시가</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>저가</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>고가</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>상단선</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>중단선</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>하단선</string>
-     </property>
-    </column>
-   </widget>
    <widget class="QGroupBox" name="groupBox">
     <property name="geometry">
      <rect>
@@ -526,25 +481,6 @@
        <string>지정가</string>
       </property>
      </item>
-    </widget>
-    <widget class="QPushButton" name="pushButton_6">
-     <property name="geometry">
-      <rect>
-       <x>60</x>
-       <y>270</y>
-       <width>221</width>
-       <height>41</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>조건검색 시작</string>
-     </property>
     </widget>
     <widget class="QLineEdit" name="lineEdit_14">
      <property name="geometry">
@@ -645,6 +581,25 @@
       <string>청산 비율(%수치 입력)</string>
      </property>
     </widget>
+   </widget>
+   <widget class="QPushButton" name="pushButton_6">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>540</y>
+      <width>221</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>조건검색 시작</string>
+    </property>
    </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
