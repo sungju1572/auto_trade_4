@@ -12,8 +12,8 @@ ____________________
 
 
 # 실시간 거래 사용 파일
-1. pytrader_2.py (ui부분 코드)
-2. Kiwoom_2.py (키움증권 연결부분 코드)
+1. pytrader.py (ui부분 코드)
+2. Kiwoom.py (키움증권 연결부분 코드)
 3. pytrader.ui (ui 디자인)
 
 
